@@ -13,14 +13,14 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,12 +54,12 @@ public class LunarisCactusBlock extends Block {
 	}
 
 	@Override
-	protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+	protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
 		if (ESPlatform.INSTANCE.isShears(itemStack) && blockState.getValue(FRUIT)) {
 			level.setBlockAndUpdate(blockPos, ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get().defaultBlockState());
 			itemStack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(itemStack));
 			level.playSound(null, blockPos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			return InteractionResult.SUCCESS;
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		}
 		return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
 	}
@@ -75,21 +75,20 @@ public class LunarisCactusBlock extends Block {
 	protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
 		BlockPos blockPos2 = blockPos.above();
 		if (serverLevel.isEmptyBlock(blockPos2) && !blockState.getValue(FRUIT)) {
-			int i = 1;
+			int i;
 
-			while (serverLevel.getBlockState(blockPos.below(i)).is(this)) {
-				i++;
+			for (i = 1; serverLevel.getBlockState(blockPos.below(i)).is(this); ++i) {
 			}
 
-			if (i < 3) {
+			if (i <= 3) {
 				int j = blockState.getValue(AGE);
 				if (j == 15) {
 					serverLevel.setBlockAndUpdate(blockPos2, this.defaultBlockState().setValue(FRUIT, i == 3));
 					BlockState blockState2 = blockState.setValue(AGE, 0);
 					serverLevel.setBlock(blockPos, blockState2, 4);
-					serverLevel.neighborChanged(blockState2, blockPos2, this, null, false);
+					serverLevel.neighborChanged(blockState2, blockPos2, this, blockPos, false);
 				} else {
-					serverLevel.setBlock(blockPos, blockState.setValue(AGE, Integer.valueOf(j + 1)), 4);
+					serverLevel.setBlock(blockPos, blockState.setValue(AGE, j + 1), 4);
 				}
 			}
 		}
@@ -106,11 +105,12 @@ public class LunarisCactusBlock extends Block {
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		if (!state.canSurvive(level, pos)) {
-			tickAccess.scheduleTick(pos, this, 1);
+	protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+		if (!blockState.canSurvive(levelAccessor, blockPos)) {
+			levelAccessor.scheduleTick(blockPos, this, 1);
 		}
-		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+
+		return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
 	}
 
 	@Override

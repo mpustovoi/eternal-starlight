@@ -59,8 +59,8 @@ public class WorldGenProvider {
 	public void setRegistryAccess(RegistryAccess access) {
 		if (!(access == this.registryAccess)) {
 			this.registryAccess = access;
-			this.biomeDataRegistry = registryAccess.lookupOrThrow(ESRegistries.BIOME_DATA);
-			this.dataTransformerRegistry = registryAccess.lookupOrThrow(ESRegistries.DATA_TRANSFORMER);
+			this.biomeDataRegistry = registryAccess.registryOrThrow(ESRegistries.BIOME_DATA);
+			this.dataTransformerRegistry = registryAccess.registryOrThrow(ESRegistries.DATA_TRANSFORMER);
 		}
 	}
 

@@ -203,13 +203,13 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 	public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor levelHeightAccessor, RandomState randomState) {
 		BlockState[] states = new BlockState[generatorSettings().value().noiseSettings().clampToHeightAccessor(levelHeightAccessor).height()];
 		iterateTerrainColumn(x, z, states, null, levelHeightAccessor);
-		return new NoiseColumn(levelHeightAccessor.getMinY(), states);
+		return new NoiseColumn(levelHeightAccessor.getMinBuildHeight(), states);
 	}
 
 	private int iterateTerrainColumn(int x, int z, BlockState[] states, @Nullable Predicate<BlockState> statePredicate, LevelHeightAccessor level) {
 		int surfaceHeight = getSurfaceHeight(x, z);
-		int maxHeight = level.getMaxY();
-		int height = level.getMinY();
+		int maxHeight = level.getMaxBuildHeight();
+		int height = level.getMinBuildHeight();
 		BiomeData data = getBiomeDataAt(x, z);
 		int index = 0;
 		while (height < maxHeight) {

@@ -1,12 +1,42 @@
 package cn.leolezury.eternalstarlight.common.client.shader;
 
-import cn.leolezury.eternalstarlight.common.EternalStarlight;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import net.minecraft.client.renderer.ShaderDefines;
-import net.minecraft.client.renderer.ShaderProgram;
+import net.minecraft.client.renderer.ShaderInstance;
 
 public class ESShaders {
-	public static final ShaderProgram RENDERTYPE_GUI_CREST_SELECTION = new ShaderProgram(EternalStarlight.id("core/rendertype_gui_crest_selection"), DefaultVertexFormat.POSITION_TEX, ShaderDefines.EMPTY);
-	public static final ShaderProgram RENDERTYPE_STARLIGHT_PORTAL = new ShaderProgram(EternalStarlight.id("core/rendertype_starlight_portal"), DefaultVertexFormat.BLOCK, ShaderDefines.EMPTY);
-	public static final ShaderProgram RENDERTYPE_ECLIPSE = new ShaderProgram(EternalStarlight.id("core/rendertype_eclipse"), DefaultVertexFormat.BLOCK, ShaderDefines.EMPTY);
+	private static ShaderInstance crestSelectionGui;
+	private static ShaderInstance renderTypeLaserBeam;
+	private static ShaderInstance renderTypeStarlightPortal;
+	private static ShaderInstance renderTypeEclipse;
+
+	public static ShaderInstance getCrestSelectionGui() {
+		return crestSelectionGui;
+	}
+
+	public static void setCrestSelectionGui(ShaderInstance crestSelectionGui) {
+		ESShaders.crestSelectionGui = crestSelectionGui;
+	}
+
+	public static ShaderInstance getRenderTypeLaserBeam() {
+		return renderTypeLaserBeam;
+	}
+
+	public static void setRenderTypeLaserBeam(ShaderInstance renderTypeLaserBeam) {
+		ESShaders.renderTypeLaserBeam = renderTypeLaserBeam;
+	}
+
+	public static ShaderInstance getRenderTypeStarlightPortal() {
+		return renderTypeStarlightPortal;
+	}
+
+	public static void setRenderTypeStarlightPortal(ShaderInstance renderTypeStarlightPortal) {
+		ESShaders.renderTypeStarlightPortal = renderTypeStarlightPortal;
+	}
+
+	public static ShaderInstance getRenderTypeEclipse() {
+		return renderTypeEclipse;
+	}
+
+	public static void setRenderTypeEclipse(ShaderInstance renderTypeEclipse) {
+		ESShaders.renderTypeEclipse = renderTypeEclipse;
+	}
 }

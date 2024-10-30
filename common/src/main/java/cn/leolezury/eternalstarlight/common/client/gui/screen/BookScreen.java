@@ -6,7 +6,6 @@ import cn.leolezury.eternalstarlight.common.client.book.component.BookComponentD
 import cn.leolezury.eternalstarlight.common.client.gui.screen.widget.ESPageButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
@@ -117,7 +116,7 @@ public class BookScreen extends Screen {
 	public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
 		super.renderBackground(guiGraphics, i, j, f);
 		if (bookOpened()) {
-			guiGraphics.blit(RenderType::guiTextured, book.background(), getBaseX(), getBaseY(), 0, 0, book.width(), book.height(), book.width(), book.height());
+			guiGraphics.blit(book.background(), getBaseX(), getBaseY(), 0, 0, book.width(), book.height(), book.width(), book.height());
 			BookComponentDefinition left = getCurrentComponent(true);
 			BookComponentDefinition right = getCurrentComponent(false);
 			if (left != null) {
@@ -133,9 +132,9 @@ public class BookScreen extends Screen {
 					mouseX, mouseY);
 			}
 		} else if (currentPage < 0) {
-			guiGraphics.blit(RenderType::guiTextured, book.cover(), getBaseX() + book.width() / 2, getBaseY(), 0, 0, book.width() / 2, book.height(), book.width() / 2, book.height());
+			guiGraphics.blit(book.cover(), getBaseX() + book.width() / 2, getBaseY(), 0, 0, book.width() / 2, book.height(), book.width() / 2, book.height());
 		} else {
-			guiGraphics.blit(RenderType::guiTextured, book.backCover(), getBaseX(), getBaseY(), 0, 0, book.width() / 2, book.height(), book.width() / 2, book.height());
+			guiGraphics.blit(book.backCover(), getBaseX(), getBaseY(), 0, 0, book.width() / 2, book.height(), book.width() / 2, book.height());
 		}
 	}
 

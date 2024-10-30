@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.SnowGolem;
@@ -25,14 +24,14 @@ import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
 public class CarvedLunarisCactusFruitBlock extends HorizontalDirectionalBlock {
 	public static final MapCodec<CarvedLunarisCactusFruitBlock> CODEC = simpleCodec(CarvedLunarisCactusFruitBlock::new);
-	public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	@Nullable
 	private BlockPattern snowGolemBase;
 	@Nullable
@@ -74,18 +73,18 @@ public class CarvedLunarisCactusFruitBlock extends HorizontalDirectionalBlock {
 		BlockPattern.BlockPatternMatch ironGolemMatch = this.getOrCreateIronGolemFull().find(level, blockPos);
 		BlockPattern.BlockPatternMatch grimstoneGolemMatch = this.getOrCreateGrimstoneGolemFull().find(level, blockPos);
 		if (snowGolemMatch != null) {
-			SnowGolem snowGolem = EntityType.SNOW_GOLEM.create(level, EntitySpawnReason.TRIGGERED);
+			SnowGolem snowGolem = EntityType.SNOW_GOLEM.create(level);
 			if (snowGolem != null) {
 				spawnGolemInWorld(level, snowGolemMatch, snowGolem, snowGolemMatch.getBlock(0, 2, 0).getPos());
 			}
 		} else if (ironGolemMatch != null) {
-			IronGolem ironGolem = EntityType.IRON_GOLEM.create(level, EntitySpawnReason.TRIGGERED);
+			IronGolem ironGolem = EntityType.IRON_GOLEM.create(level);
 			if (ironGolem != null) {
 				ironGolem.setPlayerCreated(true);
 				spawnGolemInWorld(level, ironGolemMatch, ironGolem, ironGolemMatch.getBlock(1, 2, 0).getPos());
 			}
 		} else if (grimstoneGolemMatch != null) {
-			GrimstoneGolem grimstoneGolem = ESEntities.GRIMSTONE_GOLEM.get().create(level, EntitySpawnReason.TRIGGERED);
+			GrimstoneGolem grimstoneGolem = ESEntities.GRIMSTONE_GOLEM.get().create(level);
 			if (grimstoneGolem != null) {
 				spawnGolemInWorld(level, grimstoneGolemMatch, grimstoneGolem, grimstoneGolemMatch.getBlock(0, 1, 0).getPos());
 			}

@@ -1,18 +1,21 @@
 package cn.leolezury.eternalstarlight.common.client.gui.screen;
 
-import cn.leolezury.eternalstarlight.common.client.ESRenderType;
 import cn.leolezury.eternalstarlight.common.client.gui.screen.widget.CrestButton;
 import cn.leolezury.eternalstarlight.common.client.gui.screen.widget.CrestPageButton;
+import cn.leolezury.eternalstarlight.common.client.shader.ESShaders;
 import cn.leolezury.eternalstarlight.common.crest.Crest;
 import cn.leolezury.eternalstarlight.common.network.UpdateCrestsPacket;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import com.mojang.blaze3d.platform.Window;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.shaders.Uniform;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.network.chat.Component;
 import org.joml.Matrix4f;
 
@@ -135,13 +138,27 @@ public class CrestSelectionScreen extends Screen {
 	public void render(GuiGraphics guiGraphics, int i, int j, float f) {
 		Minecraft client = Minecraft.getInstance();
 		Window window = client.getWindow();
-		int vertexCoord = Math.max(window.getGuiScaledWidth(), window.getGuiScaledHeight());
+		int x = window.getGuiScaledWidth();
+		int y = window.getGuiScaledHeight();
 		Matrix4f matrix4f = guiGraphics.pose().last().pose();
-		VertexConsumer consumer = guiGraphics.bufferSource.getBuffer(ESRenderType.GUI_CREST_SELECTION);
-		consumer.addVertex(matrix4f, 0, 0, 0).setUv(0, 0).setColor(-1);
-		consumer.addVertex(matrix4f, 0, vertexCoord, 0).setUv(0, 1).setColor(-1);
-		consumer.addVertex(matrix4f, vertexCoord, vertexCoord, 0).setUv(1, 1).setColor(-1);
-		consumer.addVertex(matrix4f, vertexCoord, 0, 0).setUv(1, 0).setColor(-1);
+		ShaderInstance instance = ESShaders.getCrestSelectionGui();
+		if (instance != null) {
+			Uniform tickUniform = instance.getUniform("TickCount");
+			Uniform ratioUniform = instance.getUniform("Ratio");
+			if (tickUniform != null) {
+				tickUniform.set((float) tickCount + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()));
+			}
+			if (ratioUniform != null) {
+				ratioUniform.set((float) y / x);
+			}
+		}
+		RenderSystem.setShader(ESShaders::getCrestSelectionGui);
+		BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferBuilder.addVertex(matrix4f, 0, 0, 0).setUv(0, 0);
+		bufferBuilder.addVertex(matrix4f, 0, y, 0).setUv(0, 1);
+		bufferBuilder.addVertex(matrix4f, x, y, 0).setUv(1, 1);
+		bufferBuilder.addVertex(matrix4f, x, 0, 0).setUv(1, 0);
+		BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 		super.render(guiGraphics, i, j, f);
 	}
 

@@ -14,10 +14,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -29,7 +31,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.border.WorldBorder;
-import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -82,7 +84,7 @@ public class ESPortalBlock extends BaseEntityBlock implements Portal {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 		Direction.Axis axis = state.getValue(AXIS);
 		Direction leftDir, rightDir;
 		if (axis == Direction.Axis.X) {
@@ -93,8 +95,8 @@ public class ESPortalBlock extends BaseEntityBlock implements Portal {
 			rightDir = Direction.SOUTH;
 		}
 		List<Direction> directions = List.of(leftDir, rightDir, Direction.UP, Direction.DOWN);
-		for (Direction dir : directions) {
-			if (!level.getBlockState(pos.relative(dir)).is(ESTags.Blocks.PORTAL_FRAME_BLOCKS) && !(level.getBlockState(pos.relative(dir)).is(this) && level.getBlockState(pos.relative(dir)).getValue(AXIS) == axis)) {
+		for (Direction direction : directions) {
+			if (!level.getBlockState(currentPos.relative(direction)).is(ESTags.Blocks.PORTAL_FRAME_BLOCKS) && !(level.getBlockState(currentPos.relative(direction)).is(this) && level.getBlockState(currentPos.relative(direction)).getValue(AXIS) == axis)) {
 				return Blocks.AIR.defaultBlockState();
 			}
 		}
@@ -192,8 +194,9 @@ public class ESPortalBlock extends BaseEntityBlock implements Portal {
 		return true;
 	}
 
+	@Nullable
 	@Override
-	public TeleportTransition getPortalDestination(ServerLevel serverLevel, Entity entity, BlockPos blockPos) {
+	public DimensionTransition getPortalDestination(ServerLevel serverLevel, Entity entity, BlockPos blockPos) {
 		Level entityLevel = entity.level();
 		MinecraftServer server = entityLevel.getServer();
 		ResourceKey<Level> destination = entity.level().dimension() == ESDimensions.STARLIGHT_KEY

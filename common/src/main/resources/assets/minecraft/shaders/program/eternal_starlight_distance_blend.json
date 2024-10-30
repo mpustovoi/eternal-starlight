@@ -1,9 +1,17 @@
 {
-  "vertex": "minecraft:post/blit",
-  "fragment": "eternal_starlight:post/distance_blend",
+  "blend": {
+    "func": "add",
+    "srcrgb": "one",
+    "dstrgb": "zero"
+  },
+  "vertex": "sobel",
+  "fragment": "eternal_starlight_distance_blend",
+  "attributes": [
+    "Position"
+  ],
   "samplers": [
     {
-      "name": "InSampler"
+      "name": "DiffuseSampler"
     },
     {
       "name": "BlendSampler"
@@ -34,6 +42,15 @@
       ]
     },
     {
+      "name": "ScreenSize",
+      "type": "float",
+      "count": 2,
+      "values": [
+        1.0,
+        1.0
+      ]
+    },
+    {
       "name": "InSize",
       "type": "float",
       "count": 2,
@@ -44,15 +61,6 @@
     },
     {
       "name": "OutSize",
-      "type": "float",
-      "count": 2,
-      "values": [
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "name": "ScreenSize",
       "type": "float",
       "count": 2,
       "values": [

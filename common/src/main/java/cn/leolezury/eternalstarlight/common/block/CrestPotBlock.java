@@ -34,7 +34,7 @@ public class CrestPotBlock extends Block {
 
 	@Override
 	public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-		Registry<Crest> registry = level.registryAccess().lookupOrThrow(ESRegistries.CREST);
+		Registry<Crest> registry = level.registryAccess().registryOrThrow(ESRegistries.CREST);
 		registry.getRandomElementOf(ESTags.Crests.IS_IN_CREST_POT, player.getRandom()).ifPresent(holder -> {
 			if (holder.isBound()) {
 				Optional<ResourceKey<Crest>> key = registry.getResourceKey(holder.value());

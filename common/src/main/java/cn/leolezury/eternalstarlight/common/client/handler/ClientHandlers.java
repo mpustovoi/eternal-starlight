@@ -22,6 +22,7 @@ import cn.leolezury.eternalstarlight.common.network.NoParametersPacket;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.*;
 import cn.leolezury.eternalstarlight.common.spell.SpellCastData;
+import cn.leolezury.eternalstarlight.common.util.ESBlockUtil;
 import cn.leolezury.eternalstarlight.common.util.ESEntityUtil;
 import cn.leolezury.eternalstarlight.common.util.ESGuiUtil;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -38,7 +39,6 @@ import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -47,10 +47,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
@@ -191,7 +191,7 @@ public class ClientHandlers {
 				entry.getValue().shouldShow = false;
 			}
 			if (component != null && component.crest().isBound()) {
-				Registry<Crest> registry = Minecraft.getInstance().player.registryAccess().lookupOrThrow(ESRegistries.CREST);
+				Registry<Crest> registry = Minecraft.getInstance().player.registryAccess().registryOrThrow(ESRegistries.CREST);
 				Optional<ResourceKey<Crest>> key = registry.getResourceKey(component.crest().value());
 				if (key.isPresent()) {
 					if (!GUI_CRESTS.containsKey(key.get())) {
@@ -345,20 +345,22 @@ public class ClientHandlers {
 			FluidState fluidState = camera.getEntity().level().getFluidState(camera.getBlockPosition());
 			if (fluidState.is(ESFluids.ETHER_STILL.get()) || fluidState.is(ESFluids.ETHER_FLOWING.get())) {
 				if (camera.getPosition().y < (double) ((float) camera.getBlockPosition().getY() + fluidState.getHeight(camera.getEntity().level(), camera.getBlockPosition()))) {
-					FogParameters fog = RenderSystem.getShaderFog();
-					RenderSystem.setShaderFog(new FogParameters(0.0F, 3.0F, FogShape.SPHERE, 232 / 255F, 255 / 255F, 222 / 255F, fog.alpha()));
+					RenderSystem.setShaderFogStart(0.0F);
+					RenderSystem.setShaderFogEnd(3.0F);
+					RenderSystem.setShaderFogColor(232 / 255F, 255 / 255F, 222 / 255F);
+					RenderSystem.setShaderFogShape(FogShape.SPHERE);
 				}
 			}
 		}
 
 		if (player.level().dimension() == ESDimensions.STARLIGHT_KEY && camera.getFluidInCamera() == FogType.NONE && player.level().getBlockState(camera.getBlockPosition()).getFluidState().isEmpty() && fogMode == FogRenderer.FogMode.FOG_TERRAIN) {
-			FogParameters fog = RenderSystem.getShaderFog();
-			fog = new FogParameters(fog.start() - Mth.clamp(fogStartDecrement, 0, fog.start() + 5), fog.end() - Mth.clamp(fogEndDecrement, 0, fog.end() - 50), fog.shape(), fog.red(), fog.green(), fog.blue(), fog.alpha());
+			RenderSystem.setShaderFogStart(RenderSystem.getShaderFogStart() - Mth.clamp(fogStartDecrement, 0, RenderSystem.getShaderFogStart() + 5));
+			RenderSystem.setShaderFogEnd(RenderSystem.getShaderFogEnd() - Mth.clamp(fogEndDecrement, 0, RenderSystem.getShaderFogEnd() - 50));
+
 			Holder<Biome> biomeHolder = player.level().getBiome(player.blockPosition());
 			if (biomeHolder.is(ESBiomes.STARLIGHT_PERMAFROST_FOREST)) {
-				fog = new FogParameters(fog.start(), fog.end(), FogShape.SPHERE, fog.red(), fog.green(), fog.blue(), fog.alpha());
+				RenderSystem.setShaderFogShape(FogShape.SPHERE);
 			}
-			RenderSystem.setShaderFog(fog);
 		}
 	}
 
@@ -397,34 +399,29 @@ public class ClientHandlers {
 		if (k > 0) {
 			drawBar(guiGraphics, x, y, event, k, BAR_PROGRESS_SPRITES, OVERLAY_PROGRESS_SPRITES);
 		}
-		guiGraphics.blit(RenderType::guiTextured, barLocation, x - 1, y - 5, 0.0F, 0.0F, 184, 16, 184, 16);
+		guiGraphics.blit(barLocation, x - 1, y - 5, 0.0F, 0.0F, 184, 16, 184, 16);
 	}
 
 	private static void drawBar(GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent, int progress, ResourceLocation[] bars, ResourceLocation[] overlays) {
-		guiGraphics.blitSprite(RenderType::guiTextured, bars[bossEvent.getColor().ordinal()], 182, 5, 0, 0, x, y, progress, 5);
+		guiGraphics.blitSprite(bars[bossEvent.getColor().ordinal()], 182, 5, 0, 0, x, y, progress, 5);
 		if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
 			RenderSystem.enableBlend();
-			guiGraphics.blitSprite(RenderType::guiTextured, overlays[bossEvent.getOverlay().ordinal() - 1], 182, 5, 0, 0, x, y, progress, 5);
+			guiGraphics.blitSprite(overlays[bossEvent.getOverlay().ordinal() - 1], 182, 5, 0, 0, x, y, progress, 5);
 			RenderSystem.disableBlend();
 		}
 	}
 
-	// copy from Gui
+	// copied from Gui
 	public static void renderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f) {
-		int i = ARGB.white(f);
-		guiGraphics.blit(
-			RenderType::guiTexturedOverlay,
-			resourceLocation,
-			0,
-			0,
-			0.0F,
-			0.0F,
-			guiGraphics.guiWidth(),
-			guiGraphics.guiHeight(),
-			guiGraphics.guiWidth(),
-			guiGraphics.guiHeight(),
-			i
-		);
+		RenderSystem.disableDepthTest();
+		RenderSystem.depthMask(false);
+		RenderSystem.enableBlend();
+		guiGraphics.setColor(1.0F, 1.0F, 1.0F, f);
+		guiGraphics.blit(resourceLocation, 0, 0, -90, 0.0F, 0.0F, guiGraphics.guiWidth(), guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight());
+		RenderSystem.disableBlend();
+		RenderSystem.depthMask(true);
+		RenderSystem.enableDepthTest();
+		guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public static void renderSpellCrosshair(GuiGraphics guiGraphics, int screenWidth, int screenHeight) {
@@ -444,8 +441,8 @@ public class ClientHandlers {
 					int k = screenWidth / 2 - 8;
 
 					int l = (int) (f * 17.0F);
-					guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_SPRITE, k, j, 16, 4);
-					guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_ATTACK_INDICATOR_PROGRESS_SPRITE, 16, 4, 0, 0, k, j, l, 4);
+					guiGraphics.blitSprite(CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_SPRITE, k, j, 16, 4);
+					guiGraphics.blitSprite(CROSSHAIR_ATTACK_INDICATOR_PROGRESS_SPRITE, 16, 4, 0, 0, k, j, l, 4);
 				}
 
 				RenderSystem.defaultBlendFunc();
@@ -455,30 +452,38 @@ public class ClientHandlers {
 
 	public static void renderEtherErosion(GuiGraphics guiGraphics) {
 		float clientEtherTicksRaw = ESEntityUtil.getPersistentData(Minecraft.getInstance().player).getInt(CommonHandlers.TAG_CLIENT_IN_ETHER_TICKS);
-		float clientEtherTicks = Math.min(clientEtherTicksRaw + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), 140f);
+		float clientEtherTicks = Math.min(clientEtherTicksRaw + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), 140f);
 		float erosionProgress = Math.min(clientEtherTicks, 140f) / 140f;
 		if (clientEtherTicksRaw > 0) {
 			renderTextureOverlay(guiGraphics, ETHER_EROSION_OVERLAY, erosionProgress);
 		}
 	}
 
-	public static void renderEtherArmor(GuiGraphics guiGraphics, int y, int heartRows, int height, int x) {
+	public static void renderEtherArmor(GuiGraphics guiGraphics, int screenWidth, int screenHeight) {
 		Minecraft minecraft = Minecraft.getInstance();
-		LocalPlayer player = minecraft.player;
-		if (player != null && ESEntityUtil.getPersistentData(player).getBoolean(CommonHandlers.TAG_IN_ETHER)) {
-			int armorValue = player.getArmorValue();
-			if (armorValue > 0) {
-				int renderY = y - (heartRows - 1) * height - 10;
-				for (int count = 0; count < 10; count++) {
-					int renderX = x + count * 8;
-					if (count * 2 + 1 < armorValue) {
-						guiGraphics.blitSprite(RenderType::guiTextured, ETHER_ARMOR_FULL, 0, 0, renderX, renderY, 9, 9, 9, 9);
+		if (ESBlockUtil.isEntityInBlock(minecraft.player, ESBlocks.ETHER.get())) {
+			minecraft.getProfiler().push("armor");
+			int initialX = screenWidth / 2 - 91;
+			int initialY = screenHeight - 39;
+			float maxHealth = (float) Math.max(minecraft.player.getAttributeValue(Attributes.MAX_HEALTH), Mth.ceil(minecraft.player.getHealth()));
+			int absorptionAmount = Mth.ceil(minecraft.player.getAbsorptionAmount());
+			int q = Mth.ceil((maxHealth + (float) absorptionAmount) / 2.0F / 10.0F);
+			int r = Math.max(10 - (q - 2), 3);
+			int armorValue = minecraft.player.getArmorValue();
+			int y = initialY - (q - 1) * r - 10;
+			for (int i = 0; i < 10; ++i) {
+				if (armorValue > 0) {
+					int x = initialX + i * 8;
+					if (i * 2 + 1 < armorValue) {
+						guiGraphics.blit(ETHER_ARMOR_FULL, x, y, 0f, 0f, 9, 9, 9, 9);
 					}
-					if (count * 2 + 1 == armorValue) {
-						guiGraphics.blitSprite(RenderType::guiTextured, ETHER_ARMOR_HALF, 0, 0, renderX, renderY, 9, 9, 9, 9);
+
+					if (i * 2 + 1 == armorValue) {
+						guiGraphics.blit(ETHER_ARMOR_HALF, x, y, 0f, 0f, 9, 9, 9, 9);
 					}
-					if (count * 2 + 1 > armorValue) {
-						guiGraphics.blitSprite(RenderType::guiTextured, ETHER_ARMOR_EMPTY, 0, 0, renderX, renderY, 9, 9, 9, 9);
+
+					if (i * 2 + 1 > armorValue) {
+						guiGraphics.blit(ETHER_ARMOR_EMPTY, x, y, 0f, 0f, 9, 9, 9, 9);
 					}
 				}
 			}
@@ -489,7 +494,7 @@ public class ClientHandlers {
 		LocalPlayer player = Minecraft.getInstance().player;
 		if (player != null && player.isUsingItem() && player.getUseItem().is(ESItems.ORB_OF_PROPHECY.get()) && !player.getUseItem().has(ESDataComponents.CURRENT_CREST.get())) {
 			int usingTicks = player.getTicksUsingItem();
-			float ticks = Math.min(usingTicks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), 150f);
+			float ticks = Math.min(usingTicks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), 150f);
 			float progress = Math.min(ticks, 150f) / 150f;
 			if (usingTicks < 150) {
 				renderTextureOverlay(guiGraphics, ORB_OF_PROPHECY_USE, progress);
@@ -499,13 +504,13 @@ public class ClientHandlers {
 
 	public static void renderCurrentCrest(GuiGraphics guiGraphics) {
 		if (Minecraft.getInstance().player != null) {
-			Registry<Crest> registry = Minecraft.getInstance().player.registryAccess().lookupOrThrow(ESRegistries.CREST);
-			float partialTicks = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally());
+			Registry<Crest> registry = Minecraft.getInstance().player.registryAccess().registryOrThrow(ESRegistries.CREST);
+			float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally());
 			for (Map.Entry<ResourceKey<Crest>, GuiCrest> entry : GUI_CRESTS.entrySet()) {
 				GuiCrest guiCrest = entry.getValue();
-				Optional<Holder.Reference<Crest>> crest = registry.get(entry.getKey());
-				if (crest.isPresent() && crest.get().isBound()) {
-					ESGuiUtil.blit(guiGraphics, RenderType::guiTextured, crest.get().value().texture(), guiCrest.getX(partialTicks), guiCrest.getY(partialTicks), 72, 72, 72, 72, -1);
+				Crest crest = registry.get(entry.getKey());
+				if (crest != null) {
+					ESGuiUtil.blit(guiGraphics, crest.texture(), guiCrest.getX(partialTicks), guiCrest.getY(partialTicks), 72, 72, 72, 72);
 				}
 			}
 		}

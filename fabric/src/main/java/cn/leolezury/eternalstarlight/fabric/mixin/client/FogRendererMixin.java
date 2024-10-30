@@ -18,3 +18,4 @@ public abstract class FogRendererMixin {
 		ClientHandlers.onRenderFog(camera, fogMode);
 	}
 }
+

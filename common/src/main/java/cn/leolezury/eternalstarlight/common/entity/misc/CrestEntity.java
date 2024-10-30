@@ -120,9 +120,9 @@ public class CrestEntity extends Entity implements TrailOwner {
 		}
 
 		if (!level().isClientSide && level() instanceof ServerLevel serverLevel) {
-			registryAccess().lookupOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), new Vec3(xo, yo, zo)).send(serverLevel));
-			registryAccess().lookupOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), position()).send(serverLevel));
-			registryAccess().lookupOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), position().add(position().subtract(xo, yo, zo))).send(serverLevel));
+			registryAccess().registryOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), new Vec3(xo, yo, zo)).send(serverLevel));
+			registryAccess().registryOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), position()).send(serverLevel));
+			registryAccess().registryOrThrow(ESRegistries.CREST).getOptional(crest).ifPresent(value -> ManaCrystalParticleVfx.createInstance(value.type(), position().add(position().subtract(xo, yo, zo))).send(serverLevel));
 		}
 	}
 

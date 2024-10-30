@@ -22,16 +22,16 @@ public abstract class ESSpreadingSnowyDirtBlock extends SnowyDirtBlock {
 		this.spreadsOn = spreadsOn;
 	}
 
-	private static boolean canBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-		BlockPos blockPos2 = blockPos.above();
-		BlockState blockState2 = levelReader.getBlockState(blockPos2);
-		if (blockState2.is(Blocks.SNOW) && blockState2.getValue(SnowLayerBlock.LAYERS) == 1) {
+	private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
+		BlockPos blockpos = pos.above();
+		BlockState blockstate = levelReader.getBlockState(blockpos);
+		if (blockstate.is(Blocks.SNOW) && blockstate.getValue(SnowLayerBlock.LAYERS) == 1) {
 			return true;
-		} else if (blockState2.getFluidState().getAmount() == 8) {
+		} else if (blockstate.getFluidState().getAmount() == 8) {
 			return false;
 		} else {
-			int i = LightEngine.getLightBlockInto(blockState, blockState2, Direction.UP, blockState2.getLightBlock());
-			return i < 15;
+			int i = LightEngine.getLightBlockInto(levelReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(levelReader, blockpos));
+			return i < levelReader.getMaxLightLevel();
 		}
 	}
 

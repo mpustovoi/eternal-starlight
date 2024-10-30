@@ -22,6 +22,16 @@ public class ESDimensionSpecialEffects extends DimensionSpecialEffects {
 
 	@Override
 	public boolean isFoggyAt(int x, int y) {
+		// nope
+		// at least for now
+        /*
+        Player player = Minecraft.getInstance().player;
+
+        if (player != null) {
+            Holder<Biome> biomeHolder = player.level().getBiome(player.blockPosition());
+            return biomeHolder.is(ESTags.Biomes.PERMAFROST_FOREST_VARIANT) || biomeHolder.is(ESTags.Biomes.DARK_SWAMP_VARIANT);
+        }
+        */
 		return false;
 	}
 

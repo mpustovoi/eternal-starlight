@@ -61,7 +61,6 @@ import java.util.Locale;
 import java.util.Optional;
 
 public class CommonHandlers {
-	public static final String TAG_IN_ETHER = "in_ether";
 	private static final String TAG_IN_ETHER_TICKS = "in_ether_ticks";
 	public static final String TAG_CLIENT_IN_ETHER_TICKS = "client_in_ether_ticks";
 	private static final String TAG_OBTAINED_BLOSSOM_OF_STARS = "obtained_blossom_of_stars";
@@ -265,7 +264,6 @@ public class CommonHandlers {
 			int inEtherTicks = persistentData.getInt(TAG_IN_ETHER_TICKS);
 			AttributeInstance armorInstance = livingEntity.getAttributes().getInstance(Attributes.ARMOR);
 			boolean inEther = ESBlockUtil.isEntityInBlock(livingEntity, ESBlocks.ETHER.get());
-			persistentData.putBoolean(TAG_IN_ETHER, inEther);
 			if (!livingEntity.level().isClientSide) {
 				if (inEther) {
 					float factor = 0;

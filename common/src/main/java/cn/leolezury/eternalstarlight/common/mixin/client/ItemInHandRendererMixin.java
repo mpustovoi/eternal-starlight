@@ -143,25 +143,26 @@ public abstract class ItemInHandRendererMixin {
 	@Unique
 	public void renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int light, boolean mainHand, AbstractClientPlayer abstractClientPlayer) {
 		PlayerRenderer playerRenderer = (PlayerRenderer) entityRenderDispatcher.getRenderer(abstractClientPlayer);
-		PlayerModel playerModel = playerRenderer.getModel();
+		PlayerModel<AbstractClientPlayer> playerModel = playerRenderer.getModel();
 		renderHand(poseStack, buffer, light, mainHand, false, abstractClientPlayer, playerModel.rightArm, playerModel.rightSleeve);
 	}
 
 	@Unique
 	public void renderLeftHand(PoseStack poseStack, MultiBufferSource buffer, int light, boolean mainHand, AbstractClientPlayer abstractClientPlayer) {
 		PlayerRenderer playerRenderer = (PlayerRenderer) entityRenderDispatcher.getRenderer(abstractClientPlayer);
-		PlayerModel playerModel = playerRenderer.getModel();
+		PlayerModel<AbstractClientPlayer> playerModel = playerRenderer.getModel();
 		renderHand(poseStack, buffer, light, mainHand, true, abstractClientPlayer, playerModel.leftArm, playerModel.leftSleeve);
 	}
 
 	@Unique
 	private void renderHand(PoseStack poseStack, MultiBufferSource buffer, int light, boolean mainHand, boolean leftHand, AbstractClientPlayer abstractClientPlayer, ModelPart modelPart, ModelPart modelPart2) {
 		PlayerRenderer playerRenderer = (PlayerRenderer) entityRenderDispatcher.getRenderer(abstractClientPlayer);
-		PlayerModel playerModel = playerRenderer.getModel();
-		modelPart.resetPose();
-		modelPart.visible = true;
-		modelPart2.resetPose();
-		modelPart2.visible = true;
+		PlayerModel<AbstractClientPlayer> playerModel = playerRenderer.getModel();
+		playerRenderer.setModelProperties(abstractClientPlayer);
+		playerModel.attackTime = 0.0F;
+		playerModel.crouching = false;
+		playerModel.swimAmount = 0.0F;
+		playerModel.setupAnim(abstractClientPlayer, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
 		ResourceLocation resourceLocation = abstractClientPlayer.getSkin().texture();
 		modelPart.render(poseStack, buffer.getBuffer(RenderType.entitySolid(resourceLocation)), light, OverlayTexture.NO_OVERLAY);
 		modelPart2.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(resourceLocation)), light, OverlayTexture.NO_OVERLAY);

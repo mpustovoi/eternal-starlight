@@ -25,18 +25,22 @@ public class YetiFurBlock extends HalfTransparentBlock {
 
 	@Override
 	public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
-		if (!entity.isSuppressingBounce()) {
+		if (entity.isSuppressingBounce()) {
+			super.fallOn(level, blockState, blockPos, entity, f);
+		} else {
 			entity.causeFallDamage(f, 0.0F, level.damageSources().fall());
 		}
+
 	}
 
 	@Override
-	public void updateEntityMovementAfterFallOn(BlockGetter blockGetter, Entity entity) {
+	public void updateEntityAfterFallOn(BlockGetter blockGetter, Entity entity) {
 		if (entity.isSuppressingBounce()) {
-			super.updateEntityMovementAfterFallOn(blockGetter, entity);
+			super.updateEntityAfterFallOn(blockGetter, entity);
 		} else {
 			this.bounceUp(entity);
 		}
+
 	}
 
 	private void bounceUp(Entity entity) {

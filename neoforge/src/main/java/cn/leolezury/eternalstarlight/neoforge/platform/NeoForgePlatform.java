@@ -45,7 +45,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -292,7 +291,7 @@ public class NeoForgePlatform implements ESPlatform {
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void renderBlock(BlockRenderDispatcher dispatcher, PoseStack stack, MultiBufferSource multiBufferSource, BlockAndTintGetter level, BlockState state, BlockPos pos, long seed) {
+	public void renderBlock(BlockRenderDispatcher dispatcher, PoseStack stack, MultiBufferSource multiBufferSource, Level level, BlockState state, BlockPos pos, long seed) {
 		var model = dispatcher.getBlockModel(state);
 		for (var renderType : model.getRenderTypes(state, RandomSource.create(seed), ModelData.EMPTY))
 			dispatcher.getModelRenderer().tesselateBlock(level, model, state, pos, stack, multiBufferSource.getBuffer(renderType), false, RandomSource.create(), seed, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);

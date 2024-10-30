@@ -38,10 +38,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.nio.file.Path;
@@ -84,7 +81,7 @@ public class FabricPlatform implements ESPlatform {
 				return new RegistryObject<>() {
 					@Override
 					public Holder<T> asHolder() {
-						return registry.getOrThrow((ResourceKey<T>) this.getResourceKey());
+						return registry.getHolderOrThrow((ResourceKey<T>) this.getResourceKey());
 					}
 
 					@Override

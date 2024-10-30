@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -41,7 +40,7 @@ public class RedstoneDoomedenKeyholeBlock extends HorizontalAxisBlock {
 	}
 
 	@Override
-	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean isMoving) {
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
 		boolean lit = state.getValue(LIT);
 		if (!lit && Arrays.stream(Direction.values()).filter(direction -> direction.getAxis() == state.getValue(AXIS)).anyMatch(direction -> hasInputSignal(level, pos, direction))) {
 			level.setBlockAndUpdate(pos, state.setValue(LIT, true));

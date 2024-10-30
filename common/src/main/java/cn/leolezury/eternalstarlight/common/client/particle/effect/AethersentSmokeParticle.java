@@ -1,6 +1,5 @@
 package cn.leolezury.eternalstarlight.common.client.particle.effect;
 
-import cn.leolezury.eternalstarlight.common.client.handler.ClientHandlers;
 import cn.leolezury.eternalstarlight.common.util.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -65,13 +64,8 @@ public class AethersentSmokeParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	public int getLightColor(float f) {
-		return ClientHandlers.FULL_BRIGHT;
-	}
-
-	@Override
 	public ParticleRenderType getRenderType() {
-		return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+		return ParticleRenderType.PARTICLE_SHEET_LIT;
 	}
 
 	public static class Provider implements ParticleProvider<SimpleParticleType> {

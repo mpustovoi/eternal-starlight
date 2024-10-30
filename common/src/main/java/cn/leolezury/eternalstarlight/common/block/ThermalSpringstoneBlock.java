@@ -6,8 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BubbleColumnBlock;
@@ -31,11 +30,12 @@ public class ThermalSpringstoneBlock extends Block {
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		if (direction == Direction.UP && neighborState.is(Blocks.WATER)) {
-			tickAccess.scheduleTick(pos, this, 20);
+	public BlockState updateShape(BlockState state, Direction direction, BlockState newState, LevelAccessor level, BlockPos pos, BlockPos pos1) {
+		if (direction == Direction.UP && newState.is(Blocks.WATER)) {
+			level.scheduleTick(pos, this, 20);
 		}
-		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+
+		return super.updateShape(state, direction, newState, level, pos, pos1);
 	}
 
 	@Override

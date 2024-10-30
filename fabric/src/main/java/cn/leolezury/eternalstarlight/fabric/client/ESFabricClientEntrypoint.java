@@ -43,6 +43,7 @@ public class ESFabricClientEntrypoint implements ClientModInitializer {
 		ClientSetupHandlers.registerExtraBakedModels(ESModelLoadingPlugin.MODELS::add);
 		ModelLoadingPlugin.register(new ESModelLoadingPlugin());
 		ClientSetupHandlers.registerItemColors(ColorProviderRegistry.ITEM::register);
+		ClientSetupHandlers.registerShaders((location, format, loaded) -> CoreShaderRegistrationCallback.EVENT.register(context -> context.register(location, format, loaded)));
 		ClientSetupHandlers.ParticleProviderRegisterStrategy particleProviderRegisterStrategy = new ClientSetupHandlers.ParticleProviderRegisterStrategy() {
 			@Override
 			public <T extends ParticleOptions> void register(ParticleType<T> particle, ParticleEngine.SpriteParticleRegistration<T> provider) {

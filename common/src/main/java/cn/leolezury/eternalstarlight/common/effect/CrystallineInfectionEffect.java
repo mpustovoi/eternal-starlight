@@ -3,7 +3,6 @@ package cn.leolezury.eternalstarlight.common.effect;
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.data.ESDamageTypes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,8 +19,8 @@ public class CrystallineInfectionEffect extends MobEffect {
 	}
 
 	@Override
-	public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity living, int amplifier) {
-		living.hurtServer(serverLevel, ESDamageTypes.getDamageSource(living.level(), ESDamageTypes.CRYSTALLINE_INFECTION), (amplifier + 1));
+	public boolean applyEffectTick(LivingEntity living, int amplifier) {
+		living.hurt(ESDamageTypes.getDamageSource(living.level(), ESDamageTypes.CRYSTALLINE_INFECTION), (amplifier + 1));
 		return true;
 	}
 

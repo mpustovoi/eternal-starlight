@@ -11,8 +11,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -66,14 +66,15 @@ public class JinglingPickleBlock extends BushBlock implements BonemealableBlock,
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		if (!state.canSurvive(level, pos)) {
+	public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+		if (!blockState.canSurvive(levelAccessor, blockPos)) {
 			return Blocks.AIR.defaultBlockState();
 		} else {
-			if (state.getValue(WATERLOGGED)) {
-				tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			if (blockState.getValue(WATERLOGGED)) {
+				levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
 			}
-			return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+
+			return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
 		}
 	}
 

@@ -8,13 +8,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -51,11 +49,11 @@ public class DisplayBookComponent extends BookComponent {
 	@Override
 	public void render(BookAccess access, GuiGraphics graphics, Font font, int x, int y, int mouseX, int mouseY) {
 		for (ImageDisplay display : imageDisplays) {
-			graphics.blit(RenderType::guiTextured, display.location(), x + display.x(), y + display.y(), 0, 0, display.width(), display.height(), display.width(), display.height());
+			graphics.blit(display.location(), x + display.x(), y + display.y(), 0, 0, display.width(), display.height(), display.width(), display.height());
 		}
 		for (EntityDisplay display : entityDisplays) {
 			if (!entities.containsKey(display) && Minecraft.getInstance().level != null) {
-				LivingEntity livingEntity = display.type().create(Minecraft.getInstance().level, EntitySpawnReason.LOAD);
+				LivingEntity livingEntity = display.type().create(Minecraft.getInstance().level);
 				if (livingEntity != null) {
 					livingEntity.yBodyRot = display.yRot();
 					livingEntity.setXRot(display.xRot());

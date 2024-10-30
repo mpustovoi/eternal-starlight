@@ -17,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+import java.io.IOException;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
@@ -164,13 +166,24 @@ public class ClientSetupEvents {
 
 	@SubscribeEvent
 	private static void onRegisterShader(RegisterShadersEvent event) {
-		ClientSetupHandlers.registerShaders(event::registerShader);
+		ClientSetupHandlers.registerShaders((location, format, loaded) -> {
+			try {
+				event.registerShader(new ShaderInstance(event.getResourceProvider(), location, format), loaded);
+			} catch (IOException e) {
+				EternalStarlight.LOGGER.error("Cannot register shader: {}", location);
+			}
+		});
 	}
 
 	@SubscribeEvent
 	private static void onRegisterGuiLayers(RegisterGuiLayersEvent event) {
 		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, EternalStarlight.id("spell_crosshair"), (graphics, partialTicks) -> ClientHandlers.renderSpellCrosshair(graphics, graphics.guiWidth(), graphics.guiHeight()));
 		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, EternalStarlight.id("ether_erosion"), (graphics, partialTicks) -> ClientHandlers.renderEtherErosion(graphics));
+		event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, EternalStarlight.id("ether_armor"), (graphics, partialTicks) -> {
+			if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().gameMode.canHurtPlayer()) {
+				ClientHandlers.renderEtherArmor(graphics, graphics.guiWidth(), graphics.guiHeight());
+			}
+		});
 		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, EternalStarlight.id("orb_of_prophecy_use"), (graphics, partialTicks) -> ClientHandlers.renderOrbOfProphecyUse(graphics));
 		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, EternalStarlight.id("dream_catcher"), (graphics, partialTicks) -> ClientHandlers.renderDreamCatcher(graphics));
 		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, EternalStarlight.id("current_crest"), (graphics, partialTicks) -> ClientHandlers.renderCurrentCrest(graphics));

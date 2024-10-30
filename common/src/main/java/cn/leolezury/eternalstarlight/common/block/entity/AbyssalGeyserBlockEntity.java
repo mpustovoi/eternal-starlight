@@ -49,28 +49,27 @@ public class AbyssalGeyserBlockEntity extends BlockEntity {
 				ESPlatform.INSTANCE.sendToAllClients(serverLevel, packet3);
 				if (entity.ticksSinceLastErupt == 200) {
 					// convert items above
-					List<RecipeHolder<?>> list = serverLevel.getServer().getRecipeManager().getRecipes().stream().filter(recipeHolder -> recipeHolder.value().getType() == ESRecipes.GEYSER_SMOKING.get()).toList();
+					List<RecipeHolder<GeyserSmokingRecipe>> list = level.getRecipeManager().getAllRecipesFor(ESRecipes.GEYSER_SMOKING.get());
 					AABB itemBox = new AABB(pos);
 					itemBox = itemBox.setMaxY(itemBox.maxY + 2);
 					for (ItemEntity itemEntity : level.getEntitiesOfClass(ItemEntity.class, itemBox)) {
 						ItemStack item = itemEntity.getItem();
-						for (RecipeHolder<?> recipeHolder : list) {
-							if (recipeHolder.value() instanceof GeyserSmokingRecipe smokingRecipe) {
-								if (item.is(smokingRecipe.input()) && item.getCount() >= smokingRecipe.inputCount()) {
-									int count = item.getCount() - smokingRecipe.inputCount();
-									Vec3 itemPos = itemEntity.position();
-									if (count > 0) {
-										itemEntity.setItem(item.copyWithCount(count));
-									} else {
-										itemEntity.discard();
-									}
-									DataComponentMap components = item.getComponents();
-									ItemStack stack = smokingRecipe.output().copy();
-									stack.applyComponents(components);
-									ItemEntity outputEntity = new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, stack);
-									outputEntity.setDefaultPickUpDelay();
-									level.addFreshEntity(outputEntity);
+						for (RecipeHolder<GeyserSmokingRecipe> recipeHolder : list) {
+							GeyserSmokingRecipe recipe = recipeHolder.value();
+							if (item.is(recipeHolder.value().input()) && item.getCount() >= recipe.inputCount()) {
+								int count = item.getCount() - recipe.inputCount();
+								Vec3 itemPos = itemEntity.position();
+								if (count > 0) {
+									itemEntity.setItem(item.copyWithCount(count));
+								} else {
+									itemEntity.discard();
 								}
+								DataComponentMap components = item.getComponents();
+								ItemStack stack = recipe.output().copy();
+								stack.applyComponents(components);
+								ItemEntity outputEntity = new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, stack);
+								outputEntity.setDefaultPickUpDelay();
+								level.addFreshEntity(outputEntity);
 							}
 						}
 					}

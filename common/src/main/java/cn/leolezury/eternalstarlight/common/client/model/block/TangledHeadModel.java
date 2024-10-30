@@ -1,6 +1,8 @@
 package cn.leolezury.eternalstarlight.common.client.model.block;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.SkullModelBase;
@@ -16,7 +18,6 @@ public class TangledHeadModel extends SkullModelBase {
 	private final ModelPart head;
 
 	public TangledHeadModel(ModelPart root) {
-		super(root);
 		this.head = root.getChild("head");
 	}
 
@@ -35,5 +36,10 @@ public class TangledHeadModel extends SkullModelBase {
 		this.head.yRot = g * Mth.DEG_TO_RAD;
 		this.head.xRot = h * Mth.DEG_TO_RAD;
 		this.head.xScale = this.head.yScale = this.head.zScale = 0.99f;
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 }

@@ -3,10 +3,8 @@ package cn.leolezury.eternalstarlight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,17 +26,17 @@ public class PolishedToxiteBlock extends Block {
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		boolean above = level.getBlockState(pos.above()).is(this);
-		boolean below = level.getBlockState(pos.below()).is(this);
+	protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+		boolean above = levelAccessor.getBlockState(blockPos.above()).is(this);
+		boolean below = levelAccessor.getBlockState(blockPos.below()).is(this);
 		if ((!above && !below)) {
-			return state.setValue(PART, Part.FULL);
+			return blockState.setValue(PART, Part.FULL);
 		} else if (above && below) {
-			return state.setValue(PART, Part.MIDDLE);
+			return blockState.setValue(PART, Part.MIDDLE);
 		} else if (above) {
-			return state.setValue(PART, Part.LOWER);
+			return blockState.setValue(PART, Part.LOWER);
 		} else {
-			return state.setValue(PART, Part.UPPER);
+			return blockState.setValue(PART, Part.UPPER);
 		}
 	}
 

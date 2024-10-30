@@ -13,12 +13,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -68,7 +66,7 @@ public class CrestButton extends Button {
 			if (crest == null) {
 				setTooltip(Tooltip.create(Component.empty()));
 			} else {
-				Registry<Crest> registry = Minecraft.getInstance().level.registryAccess().lookupOrThrow(ESRegistries.CREST);
+				Registry<Crest> registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(ESRegistries.CREST);
 				MutableComponent nameComponent = Component.translatable(Util.makeDescriptionId("crest", registry.getKey(crest.crest().value())));
 				MutableComponent levelComponent = Component.translatable("enchantment.level." + crest.level());
 				MutableComponent typeComponent = Component.translatable(Util.makeDescriptionId("mana_type", EternalStarlight.id(crest.crest().value().type().getSerializedName()))).withColor(crest.crest().value().type().getColor());
@@ -145,7 +143,7 @@ public class CrestButton extends Button {
 
 	@Override
 	protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-		float partialTicks = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally());
+		float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally());
 		float x, y;
 		if (orbit) {
 			float currentAngle = Mth.lerp(partialTicks, prevAngle, angle);
@@ -161,7 +159,7 @@ public class CrestButton extends Button {
 			float progress = (Mth.lerp(partialTicks, prevHoverProgress, hoverProgress) / 40f) + 1f;
 			float width = CREST_WIDTH * progress;
 			float height = CREST_HEIGHT * progress;
-			ESGuiUtil.blit(guiGraphics, RenderType::guiTextured, crest.crest().value().texture(), (x - (width - getWidth()) / 2f), (y - (height - getHeight()) / 2f), width, height, width, height, ARGB.colorFromFloat(alpha, 1, 1, 1));
+			ESGuiUtil.blit(guiGraphics, crest.crest().value().texture(), (x - (width - getWidth()) / 2f), (y - (height - getHeight()) / 2f), width, height, width, height);
 		}
 	}
 }

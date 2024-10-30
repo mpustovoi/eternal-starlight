@@ -1,7 +1,24 @@
 {
-  "vertex": "minecraft:core/gui",
-  "fragment": "eternal_starlight:core/gui_crest_selection",
-  "samplers": [],
+  "blend": {
+    "func": "add",
+    "srcrgb": "srcalpha",
+    "dstrgb": "1-srcalpha"
+  },
+  "vertex": "eternal_starlight:rendertype_laser_beam",
+  "fragment": "eternal_starlight:rendertype_laser_beam",
+  "attributes": [
+    "Position",
+    "Color",
+    "UV0",
+    "UV1",
+    "UV2",
+    "Normal"
+  ],
+  "samplers": [
+    {
+      "name": "Sampler0"
+    }
+  ],
   "uniforms": [
     {
       "name": "ModelViewMat",
@@ -61,7 +78,31 @@
       ]
     },
     {
-      "name": "TickCount",
+      "name": "FogStart",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.0
+      ]
+    },
+    {
+      "name": "FogEnd",
+      "type": "float",
+      "count": 1,
+      "values": [
+        1.0
+      ]
+    },
+    {
+      "name": "FogShape",
+      "type": "int",
+      "count": 1,
+      "values": [
+        0
+      ]
+    },
+    {
+      "name": "GameTime",
       "type": "float",
       "count": 1,
       "values": [
@@ -70,3 +111,4 @@
     }
   ]
 }
+

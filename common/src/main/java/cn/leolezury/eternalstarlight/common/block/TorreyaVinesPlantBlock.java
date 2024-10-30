@@ -6,10 +6,9 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
@@ -48,11 +47,12 @@ public class TorreyaVinesPlantBlock extends GrowingPlantBodyBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		if (!level.getBlockState(pos.above()).is(ESBlocks.TORREYA_VINES_PLANT.get()) && !state.getValue(TorreyaVinesPlantBlock.TOP)) {
-			state.setValue(TOP, true);
+	public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor level, BlockPos blockPos, BlockPos blockPos2) {
+		BlockState state = super.updateShape(blockState, direction, blockState2, level, blockPos, blockPos2);
+		if (!level.getBlockState(blockPos.above()).is(this) && state.hasProperty(TOP)) {
+			state = state.setValue(TOP, true);
 		}
-		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+		return state;
 	}
 
 	@Override

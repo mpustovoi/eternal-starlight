@@ -117,7 +117,7 @@ public class ESCrestUtil {
 	}
 
 	public static int getCrestLevel(Player player, ResourceKey<Crest> key) {
-		Optional<Holder.Reference<Crest>> crest = player.registryAccess().lookupOrThrow(ESRegistries.CREST).get(key);
+		Optional<Holder.Reference<Crest>> crest = player.registryAccess().registryOrThrow(ESRegistries.CREST).getHolder(key);
 		return crest.map(ref -> getCrestLevel(player, ref)).orElse(0);
 	}
 
@@ -166,7 +166,7 @@ public class ESCrestUtil {
 				}
 			}
 		});
-		player.level().registryAccess().lookupOrThrow(ESRegistries.CREST).forEach(c ->
+		player.level().registryAccess().registryOrThrow(ESRegistries.CREST).forEach(c ->
 			c.attributeModifiers().ifPresent(modifiers ->
 				modifiers.forEach(modifier -> {
 					AttributeInstance instance = player.getAttributes().getInstance(modifier.attribute());

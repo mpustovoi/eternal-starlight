@@ -5,9 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,11 +40,11 @@ public class CaveMossVeinBlock extends MultifaceBlock implements BonemealableBlo
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, LevelAccessor level, BlockPos pos, BlockPos pos1) {
 		if (state.getValue(WATERLOGGED)) {
-			tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+		return super.updateShape(state, direction, state1, level, pos, pos1);
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class CaveMossVeinBlock extends MultifaceBlock implements BonemealableBlo
 	}
 
 	@Override
-	protected boolean propagatesSkylightDown(BlockState state) {
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter blockGetter, BlockPos pos) {
 		return state.getFluidState().isEmpty();
 	}
 
