@@ -67,8 +67,8 @@ public record Crest(ManaType type, int maxLevel, ResourceLocation texture, Optio
 		).apply(instance, Instance::new));
 
 		public static Optional<Instance> of(RegistryAccess access, ResourceKey<Crest> key, int level) {
-			Registry<Crest> registry = access.registryOrThrow(ESRegistries.CREST);
-			Optional<Holder.Reference<Crest>> holder = registry.getHolder(key);
+			Registry<Crest> registry = access.lookupOrThrow(ESRegistries.CREST);
+			Optional<Holder.Reference<Crest>> holder = registry.get(key);
 			return holder.map(ref -> new Instance(ref, Math.min(level, ref.value().maxLevel())));
 		}
 	}

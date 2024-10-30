@@ -12,8 +12,8 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 	public static final MapCodec<IcicleBlock> CODEC = simpleCodec(IcicleBlock::new);
-	public static final DirectionProperty TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
+	public static final EnumProperty<Direction> TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
 	public static final EnumProperty<IcicleThickness> THICKNESS = EnumProperty.create("icicle_thickness", IcicleThickness.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -51,34 +50,34 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 
 	@Override
 	public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-		return getSuitableState(defaultBlockState().setValue(TIP_DIRECTION, context.getNearestLookingVerticalDirection().getOpposite()), context.getLevel(), context.getClickedPos(), false);
+		return getSuitableState(defaultBlockState().setValue(TIP_DIRECTION, context.getNearestLookingVerticalDirection().getOpposite()), context.getLevel(), context.getClickedPos());
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		BlockState newState = direction.getAxis() == Direction.Axis.Y ? getSuitableState(state, level, pos, true) : state;
+		BlockState newState = direction.getAxis() == Direction.Axis.Y ? getSuitableState(state, level, pos) : state;
 		if (newState.isAir() && state.getValue(TIP_DIRECTION) == Direction.DOWN) {
-			level.scheduleTick(pos, this, 2);
+			tickAccess.scheduleTick(pos, this, 2);
 			newState = state;
 		}
-		return newState;
+		return newState.getValue(TIP_DIRECTION) == state.getValue(TIP_DIRECTION) && newState.getValue(THICKNESS) == state.getValue(THICKNESS) ? state : newState;
 	}
 
 	@Override
 	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (getSuitableState(state, level, pos, false).isAir()) {
+		if (getSuitableState(state, level, pos).isAir()) {
 			spawnFallingStalactite(state, level, pos);
 		}
 	}
 
 	@Override
 	protected void onProjectileHit(Level level, BlockState state, BlockHitResult hitResult, Projectile projectile) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
 			BlockPos pos = hitResult.getBlockPos();
-			if (projectile.mayInteract(level, pos) && projectile.mayBreak(level) && projectile.getDeltaMovement().length() > 0.6) {
+			if (projectile.mayInteract(serverLevel, pos) && projectile.mayBreak(serverLevel) && projectile.getDeltaMovement().length() > 0.6) {
 				level.destroyBlock(pos, true);
 			}
 		}
@@ -93,7 +92,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 		}
 	}
 
-	private BlockState getSuitableState(BlockState state, LevelAccessor level, BlockPos pos, boolean updateOthers) {
+	private BlockState getSuitableState(BlockState state, LevelReader level, BlockPos pos) {
 		Direction tipDir = state.getValue(TIP_DIRECTION);
 		BlockPos tipPos = findTip(state, level, pos);
 		if (tipPos == null) {
@@ -111,7 +110,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				return state.setValue(THICKNESS, IcicleThickness.TIP);
 			}
 			case 1 -> {
-				if (updateOthers) {
+				/*if (updateOthers) {
 					if (pos.equals(tipPos)) {
 						BlockState original = level.getBlockState(basePos);
 						if (original.is(this) && original.getValue(THICKNESS) != IcicleThickness.TOP) {
@@ -123,7 +122,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							level.setBlock(tipPos, original.setValue(THICKNESS, IcicleThickness.TIP), Block.UPDATE_ALL);
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, pos.equals(tipPos) ? IcicleThickness.TIP : IcicleThickness.TOP);
 			}
 			case 2 -> {
@@ -136,7 +135,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				} else {
 					thickness = IcicleThickness.BASE;
 				}
-				if (updateOthers) {
+				/*if (updateOthers) {
 					for (int i = 0; i < 3; i++) {
 						BlockPos partPos = basePos.relative(tipDir, i);
 						IcicleThickness partThickness = switch (i) {
@@ -151,7 +150,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							}
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, thickness);
 			}
 			case 3 -> {
@@ -167,7 +166,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				} else {
 					thickness = IcicleThickness.BASE;
 				}
-				if (updateOthers) {
+				/*if (updateOthers) {
 					for (int i = 0; i < 4; i++) {
 						BlockPos partPos = basePos.relative(tipDir, i);
 						IcicleThickness partThickness = switch (i) {
@@ -183,7 +182,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							}
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, thickness);
 			}
 		}

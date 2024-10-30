@@ -68,10 +68,11 @@ public class AstralGolem extends AbstractGolem implements NeutralMob {
 	private int remainingPersistentAngerTime;
 	@Nullable
 	private UUID persistentAngerTarget;
+	private int oldAttackAnimationTick;
 	private int attackAnimationTick;
 
-	public int getAttackAnimationTick() {
-		return this.attackAnimationTick;
+	public float getAttackAnimationTick(float partialTicks) {
+		return Mth.lerp(partialTicks, this.oldAttackAnimationTick, this.attackAnimationTick);
 	}
 
 	public BlockPos homePos = BlockPos.ZERO;
@@ -152,11 +153,11 @@ public class AstralGolem extends AbstractGolem implements NeutralMob {
 	}
 
 	public AstralGolemMaterial getMaterial() {
-		return level().registryAccess().registryOrThrow(ESRegistries.ASTRAL_GOLEM_MATERIAL).get(getMaterialId());
+		return level().registryAccess().lookupOrThrow(ESRegistries.ASTRAL_GOLEM_MATERIAL).get(getMaterialId());
 	}
 
 	public void setMaterial(AstralGolemMaterial material) {
-		ResourceLocation key = level().registryAccess().registryOrThrow(ESRegistries.ASTRAL_GOLEM_MATERIAL).getKey(material);
+		ResourceLocation key = level().registryAccess().lookupOrThrow(ESRegistries.ASTRAL_GOLEM_MATERIAL).getKey(material);
 		if (key != null) {
 			setMaterialId(key);
 		}
@@ -201,6 +202,7 @@ public class AstralGolem extends AbstractGolem implements NeutralMob {
 		if (isLeftHanded()) {
 			setLeftHanded(false);
 		}
+		this.oldAttackAnimationTick = attackAnimationTick;
 		if (this.attackAnimationTick > 0) {
 			--this.attackAnimationTick;
 		}

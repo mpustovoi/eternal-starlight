@@ -135,12 +135,8 @@ public class ESEntityLootSubProvider extends EntityLootSubProvider {
 				.add(LootItem.lootTableItem(ESItems.TANGLED_SKULL.get()))));
 
 		// no loot
-
-		// how dare you hurt the cute npc
 		add(ESEntities.BOARWARF.get(), LootTable.lootTable());
 		add(ESEntities.ASTRAL_GOLEM.get(), LootTable.lootTable());
-
-		// our boss uses custom loots
 		add(ESEntities.THE_GATEKEEPER.get(), LootTable.lootTable());
 		add(ESEntities.STARLIGHT_GOLEM.get(), LootTable.lootTable());
 		add(ESEntities.TANGLED_HATRED.get(), LootTable.lootTable());

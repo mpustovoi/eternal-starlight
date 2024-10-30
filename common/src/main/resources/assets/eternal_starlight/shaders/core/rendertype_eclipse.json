@@ -1,19 +1,6 @@
 {
-  "blend": {
-    "func": "add",
-    "srcrgb": "srcalpha",
-    "dstrgb": "1-srcalpha"
-  },
-  "vertex": "eternal_starlight:rendertype_eclipse",
-  "fragment": "eternal_starlight:rendertype_eclipse",
-  "attributes": [
-    "Position",
-    "Color",
-    "UV0",
-    "UV1",
-    "UV2",
-    "Normal"
-  ],
+  "vertex": "eternal_starlight:core/rendertype_eclipse",
+  "fragment": "eternal_starlight:core/rendertype_eclipse",
   "samplers": [],
   "uniforms": [
     {
@@ -98,10 +85,13 @@
       ]
     },
     {
-      "name": "GameTime",
+      "name": "FogColor",
       "type": "float",
-      "count": 1,
+      "count": 4,
       "values": [
+        0.0,
+        0.0,
+        0.0,
         0.0
       ]
     }

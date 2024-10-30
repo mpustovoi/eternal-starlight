@@ -40,7 +40,7 @@ public class PlayerAnimator {
 
 		@Override
 		public float animateTicks(AbstractClientPlayer player, float ageInTicks) {
-			return Math.min(player.getUseItem().getUseDuration(player), player.getTicksUsingItem() + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()));
+			return Math.min(player.getUseItem().getUseDuration(player), player.getTicksUsingItem() + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()));
 		}
 	}
 
@@ -56,17 +56,17 @@ public class PlayerAnimator {
 
 	public static class CopyOuterLayerAnimationTransformer implements AnimationTransformer {
 		@Override
-		public boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 			return true;
 		}
 
 		@Override
-		public void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 
 		}
 
 		@Override
-		public void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 			model.hat.copyFrom(model.head);
 			model.jacket.copyFrom(model.body);
 			model.leftSleeve.copyFrom(model.leftArm);
@@ -76,17 +76,17 @@ public class PlayerAnimator {
 		}
 
 		@Override
-		public Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, String original) {
+		public Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, String original) {
 			return Optional.empty();
 		}
 
 		@Override
-		public float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original) {
+		public float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original) {
 			return original;
 		}
 
 		@Override
-		public float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original) {
+		public float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original) {
 			return original;
 		}
 	}
@@ -118,12 +118,12 @@ public class PlayerAnimator {
 		private Vec3 leftPantsOriginalRot;
 
 		@Override
-		public boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 			return player.getUsedItemHand() == InteractionHand.OFF_HAND;
 		}
 
 		@Override
-		public void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 			hatOriginalPos = makeModelPartPos(model.hat);
 			hatOriginalRot = makeModelPartRot(model.hat);
 
@@ -162,7 +162,7 @@ public class PlayerAnimator {
 		}
 
 		@Override
-		public void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model) {
+		public void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model) {
 			transformModelPart(model.hat, hatOriginalPos, hatOriginalRot);
 			transformModelPart(model.head, headOriginalPos, headOriginalRot);
 
@@ -177,7 +177,7 @@ public class PlayerAnimator {
 		}
 
 		@Override
-		public Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, String original) {
+		public Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, String original) {
 			switch (original) {
 				case "hat" -> {
 					return Optional.of(model.hat);
@@ -220,12 +220,12 @@ public class PlayerAnimator {
 		}
 
 		@Override
-		public float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original) {
+		public float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original) {
 			return original;
 		}
 
 		@Override
-		public float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original) {
+		public float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original) {
 			return original;
 		}
 
@@ -250,17 +250,17 @@ public class PlayerAnimator {
 	}
 
 	public interface AnimationTransformer {
-		boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model);
+		boolean shouldApply(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model);
 
-		void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model);
+		void preAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model);
 
-		void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model);
+		void postAnimate(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model);
 
-		Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, String original);
+		Optional<ModelPart> modifyModelPart(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, String original);
 
-		float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original);
+		float modifyTicks(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original);
 
-		float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel<?> model, float original);
+		float modifyScale(PlayerAnimationState state, AbstractClientPlayer player, PlayerModel model, float original);
 	}
 
 	public record PlayerAnimationState(AnimationDefinition definition, AnimationDefinition firstPersonDefinition, List<AnimationTransformer> transformers, boolean renderLeftArm, boolean renderRightArm, boolean resetLeftArmBeforeAnimation, boolean resetRightArmBeforeAnimation) {

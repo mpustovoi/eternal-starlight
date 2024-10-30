@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -34,15 +34,15 @@ public interface WeatheringGolemSteel {
 		.put(ESBlocks.GOLEM_STEEL_JET.get(), ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get())
 		.build());
 
-	default ItemInteractionResult use(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player) {
+	default InteractionResult use(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player) {
 		Optional<Block> scraped = TO_OXIDIZED.get().entrySet().stream().filter(e -> e.getValue() == state.getBlock()).findFirst().map(Map.Entry::getKey);
 		if (ESPlatform.INSTANCE.canScrape(stack) && scraped.isPresent()) {
 			level.setBlockAndUpdate(pos, scraped.get().withPropertiesOf(state));
 			player.playSound(SoundEvents.AXE_SCRAPE);
 			stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	default boolean isOxidized() {

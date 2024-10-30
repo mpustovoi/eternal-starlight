@@ -34,6 +34,7 @@
     "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
+    "client.GuiMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin",

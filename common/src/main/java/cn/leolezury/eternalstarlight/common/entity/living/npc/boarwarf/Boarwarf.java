@@ -80,7 +80,7 @@ public class Boarwarf extends PathfinderMob implements Npc, Merchant {
 	}
 
 	public BoarwarfType getBoarwarfType() {
-		return level().registryAccess().registryOrThrow(ESRegistries.BOARWARF_TYPE).get(getTypeId());
+		return level().registryAccess().lookupOrThrow(ESRegistries.BOARWARF_TYPE).get(getTypeId());
 	}
 
 	public void setTypeId(ResourceLocation typeId) {
@@ -88,7 +88,7 @@ public class Boarwarf extends PathfinderMob implements Npc, Merchant {
 	}
 
 	public void setBoarwarfType(BoarwarfType type) {
-		ResourceLocation key = level().registryAccess().registryOrThrow(ESRegistries.BOARWARF_TYPE).getKey(type);
+		ResourceLocation key = level().registryAccess().lookupOrThrow(ESRegistries.BOARWARF_TYPE).getKey(type);
 		if (key != null) {
 			setTypeId(key);
 		}
@@ -181,7 +181,7 @@ public class Boarwarf extends PathfinderMob implements Npc, Merchant {
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data) {
 		homePos = blockPosition();
 
-		level().registryAccess().registryOrThrow(ESRegistries.BOARWARF_TYPE).forEach((type) -> {
+		level().registryAccess().lookupOrThrow(ESRegistries.BOARWARF_TYPE).forEach((type) -> {
 			if (type.biome().value() == level.getBiome(blockPosition()).value()) {
 				setBoarwarfType(type);
 			}

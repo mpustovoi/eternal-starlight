@@ -72,27 +72,27 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropWhenSilkTouch(ESBlocks.DEAD_TENTACLES_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.TENTACLES_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.DEAD_TENTACLES_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.DEAD_TENTACLES_CORAL_WALL_FAN.get(), ESBlocks.DEAD_TENTACLES_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.DEAD_TENTACLES_CORAL_WALL_FAN.get(), ESBlocks.DEAD_TENTACLES_CORAL_FAN.get());
 		dropWhenSilkTouch(ESBlocks.TENTACLES_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.TENTACLES_CORAL_WALL_FAN.get(), ESBlocks.TENTACLES_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.TENTACLES_CORAL_WALL_FAN.get(), ESBlocks.TENTACLES_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_TENTACLES_CORAL_BLOCK.get());
 
 		add(ESBlocks.TENTACLES_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_TENTACLES_CORAL_BLOCK.get()));
 		dropWhenSilkTouch(ESBlocks.DEAD_GOLDEN_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.GOLDEN_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.DEAD_GOLDEN_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.DEAD_GOLDEN_CORAL_WALL_FAN.get(), ESBlocks.DEAD_GOLDEN_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.DEAD_GOLDEN_CORAL_WALL_FAN.get(), ESBlocks.DEAD_GOLDEN_CORAL_FAN.get());
 		dropWhenSilkTouch(ESBlocks.GOLDEN_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.GOLDEN_CORAL_WALL_FAN.get(), ESBlocks.GOLDEN_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.GOLDEN_CORAL_WALL_FAN.get(), ESBlocks.GOLDEN_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_GOLDEN_CORAL_BLOCK.get());
 		add(ESBlocks.GOLDEN_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_GOLDEN_CORAL_BLOCK.get()));
 		dropWhenSilkTouch(ESBlocks.DEAD_CRYSTALLUM_CORAL.get());
 
 		dropWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.DEAD_CRYSTALLUM_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.DEAD_CRYSTALLUM_CORAL_WALL_FAN.get(), ESBlocks.DEAD_CRYSTALLUM_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.DEAD_CRYSTALLUM_CORAL_WALL_FAN.get(), ESBlocks.DEAD_CRYSTALLUM_CORAL_FAN.get());
 		dropWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL_FAN.get());
-		otherWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL_WALL_FAN.get(), ESBlocks.CRYSTALLUM_CORAL_FAN.get());
+		// otherWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL_WALL_FAN.get(), ESBlocks.CRYSTALLUM_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_CRYSTALLUM_CORAL_BLOCK.get());
 		add(ESBlocks.CRYSTALLUM_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_CRYSTALLUM_CORAL_BLOCK.get()));
 
@@ -118,7 +118,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.LUNAR_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.LUNAR_STAIRS.get());
 		dropSelf(ESBlocks.LUNAR_SIGN.get());
-		dropSelf(ESBlocks.LUNAR_WALL_SIGN.get());
+		// dropSelf(ESBlocks.LUNAR_WALL_SIGN.get());
 		dropSelf(ESBlocks.LUNAR_HANGING_SIGN.get());
 		dropSelf(ESBlocks.LUNAR_WALL_HANGING_SIGN.get());
 		dropSelf(ESBlocks.LUNAR_SAPLING.get());
@@ -143,7 +143,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.NORTHLAND_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.NORTHLAND_STAIRS.get());
 		dropSelf(ESBlocks.NORTHLAND_SIGN.get());
-		dropSelf(ESBlocks.NORTHLAND_WALL_SIGN.get());
+		// dropSelf(ESBlocks.NORTHLAND_WALL_SIGN.get());
 		dropSelf(ESBlocks.NORTHLAND_HANGING_SIGN.get());
 		dropSelf(ESBlocks.NORTHLAND_WALL_HANGING_SIGN.get());
 		dropSelf(ESBlocks.NORTHLAND_SAPLING.get());
@@ -164,7 +164,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.STARLIGHT_MANGROVE_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_STAIRS.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_SIGN.get());
-		dropSelf(ESBlocks.STARLIGHT_MANGROVE_WALL_SIGN.get());
+		// dropSelf(ESBlocks.STARLIGHT_MANGROVE_WALL_SIGN.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_HANGING_SIGN.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_WALL_HANGING_SIGN.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_SAPLING.get());
@@ -188,7 +188,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.SCARLET_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.SCARLET_STAIRS.get());
 		dropSelf(ESBlocks.SCARLET_SIGN.get());
-		dropSelf(ESBlocks.SCARLET_WALL_SIGN.get());
+		// dropSelf(ESBlocks.SCARLET_WALL_SIGN.get());
 		dropSelf(ESBlocks.SCARLET_HANGING_SIGN.get());
 		dropSelf(ESBlocks.SCARLET_WALL_HANGING_SIGN.get());
 		dropSelf(ESBlocks.SCARLET_SAPLING.get());
@@ -209,7 +209,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.TORREYA_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.TORREYA_STAIRS.get());
 		dropSelf(ESBlocks.TORREYA_SIGN.get());
-		dropSelf(ESBlocks.TORREYA_WALL_SIGN.get());
+		// dropSelf(ESBlocks.TORREYA_WALL_SIGN.get());
 		dropSelf(ESBlocks.TORREYA_HANGING_SIGN.get());
 		dropSelf(ESBlocks.TORREYA_WALL_HANGING_SIGN.get());
 		dropSelf(ESBlocks.TORREYA_SAPLING.get());
@@ -436,9 +436,9 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.LUNAR_MAT.get());
 
 		dropSelf(ESBlocks.DOOMED_TORCH.get());
-		dropOther(ESBlocks.WALL_DOOMED_TORCH.get(), ESItems.DOOMED_TORCH.get());
+		// dropOther(ESBlocks.WALL_DOOMED_TORCH.get(), ESItems.DOOMED_TORCH.get());
 		dropSelf(ESBlocks.DOOMED_REDSTONE_TORCH.get());
-		dropOther(ESBlocks.WALL_DOOMED_REDSTONE_TORCH.get(), ESItems.DOOMED_REDSTONE_TORCH.get());
+		// dropOther(ESBlocks.WALL_DOOMED_REDSTONE_TORCH.get(), ESItems.DOOMED_REDSTONE_TORCH.get());
 		dropSelf(ESBlocks.DOOMEDEN_BRICKS.get());
 		add(ESBlocks.DOOMEDEN_BRICK_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.DOOMEDEN_BRICK_STAIRS.get());
@@ -595,7 +595,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.BLACK_YETI_FUR_CARPET.get());
 
 		dropSelf(ESBlocks.TANGLED_SKULL.get());
-		dropOther(ESBlocks.TANGLED_WALL_SKULL.get(), ESBlocks.TANGLED_SKULL.get());
+		// dropOther(ESBlocks.TANGLED_WALL_SKULL.get(), ESBlocks.TANGLED_SKULL.get());
 
 		dropSelf(ESBlocks.RAW_AETHERSENT_BLOCK.get());
 		dropSelf(ESBlocks.AETHERSENT_BLOCK.get());

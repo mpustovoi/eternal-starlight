@@ -11,14 +11,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -45,7 +45,7 @@ public interface Stellagmite {
 		));
 	}
 
-	default ItemInteractionResult use(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand) {
+	default InteractionResult use(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand) {
 		Block block = blockState.getBlock();
 		ImmutableMap<Block, Block> toMolten = TO_MOLTEN.get();
 		if (toMolten.containsKey(block) && itemStack.is(ESTags.Items.STELLAGMITE_IGNITERS) && (isAffectedByFluid(blockState, level, blockPos, FluidTags.LAVA) || !isAffectedByFluid(blockState, level, blockPos, FluidTags.WATER))) {
@@ -59,13 +59,13 @@ public interface Stellagmite {
 			Block moltenBlock = toMolten.get(block);
 			if (moltenBlock != null) {
 				level.setBlockAndUpdate(blockPos, moltenBlock.withPropertiesOf(blockState));
-				return ItemInteractionResult.sidedSuccess(level.isClientSide);
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
-	default BlockState updateShape(BlockState state, LevelAccessor level, BlockPos pos) {
+	default BlockState updateShape(BlockState state, LevelReader level, BlockPos pos) {
 		return isAffectedByFluid(state, level, pos, FluidTags.LAVA) ? asMolten(state) : (
 			isAffectedByFluid(state, level, pos, FluidTags.WATER) ?
 				asCooled(state) : state
@@ -78,7 +78,7 @@ public interface Stellagmite {
 		}
 	}
 
-	default boolean isAffectedByFluid(BlockState state, LevelAccessor level, BlockPos pos, TagKey<Fluid> fluid) {
+	default boolean isAffectedByFluid(BlockState state, LevelReader level, BlockPos pos, TagKey<Fluid> fluid) {
 		return Arrays.stream(Direction.values()).anyMatch(direction -> level.getFluidState(pos.relative(direction)).is(fluid)) || state.getFluidState().is(fluid);
 	}
 
