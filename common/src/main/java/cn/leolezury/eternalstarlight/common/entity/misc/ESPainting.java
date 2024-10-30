@@ -42,7 +42,7 @@ public class ESPainting extends Painting {
 	public static Optional<ESPainting> createPainting(Level level, ItemStack item, BlockPos blockPos, Direction direction) {
 		ESPainting painting = new ESPainting(level, blockPos);
 		List<Holder<PaintingVariant>> list = new ArrayList<>();
-		Iterable<Holder<PaintingVariant>> placeable = level.registryAccess().registryOrThrow(Registries.PAINTING_VARIANT).getTagOrEmpty(ESTags.PaintingVariants.PLACEABLE);
+		Iterable<Holder<PaintingVariant>> placeable = level.registryAccess().lookupOrThrow(Registries.PAINTING_VARIANT).getTagOrEmpty(ESTags.PaintingVariants.PLACEABLE);
 		placeable.forEach(list::add);
 		if (list.isEmpty()) {
 			return Optional.empty();

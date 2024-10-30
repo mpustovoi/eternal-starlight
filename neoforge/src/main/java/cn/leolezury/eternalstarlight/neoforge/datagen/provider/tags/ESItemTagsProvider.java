@@ -215,6 +215,12 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		copy(ESTags.Blocks.YETI_FUR, ESTags.Items.YETI_FUR);
 		copy(ESTags.Blocks.YETI_FUR_CARPETS, ESTags.Items.YETI_FUR_CARPETS);
 		copy(ESTags.Blocks.TOOTH_OF_HUNGER_BLOCKS, ESTags.Items.TOOTH_OF_HUNGER_BLOCKS);
+		tag(ESTags.Items.REPAIRS_ALCHEMIST_ARMOR).addTag(ESConventionalTags.Items.GEMS_THIOQUARTZ);
+		tag(ESTags.Items.REPAIRS_AMARAMBER_ARMOR).addTag(ESConventionalTags.Items.INGOTS_AMARAMBER);
+		tag(ESTags.Items.REPAIRS_AETHERSENT_ARMOR).addTag(ESConventionalTags.Items.INGOTS_AETHERSENT);
+		tag(ESTags.Items.REPAIRS_THERMAL_SPRINGSTONE_ARMOR).addTag(ESConventionalTags.Items.INGOTS_THERMAL_SPRINGSTONE);
+		tag(ESTags.Items.REPAIRS_GLACITE_ARMOR).addTag(ESConventionalTags.Items.GEMS_GLACITE);
+		tag(ESTags.Items.REPAIRS_SWAMP_SILVER_ARMOR).addTag(ESConventionalTags.Items.INGOTS_SWAMP_SILVER);
 		tag(ESTags.Items.SCYTHES).add(
 			ESItems.THERMAL_SPRINGSTONE_SCYTHE.get(),
 			ESItems.GLACITE_SCYTHE.get(),

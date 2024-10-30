@@ -12,9 +12,7 @@ import cn.leolezury.eternalstarlight.common.entity.living.boss.monstrosity.Tangl
 import cn.leolezury.eternalstarlight.common.entity.living.monster.*;
 import cn.leolezury.eternalstarlight.common.entity.living.npc.boarwarf.Boarwarf;
 import cn.leolezury.eternalstarlight.common.entity.living.npc.boarwarf.golem.AstralGolem;
-import cn.leolezury.eternalstarlight.common.entity.misc.ESBoat;
 import cn.leolezury.eternalstarlight.common.item.dispenser.BucketDispenseItemBehavior;
-import cn.leolezury.eternalstarlight.common.item.dispenser.ESBoatDispenseItemBehavior;
 import cn.leolezury.eternalstarlight.common.network.ESPackets;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.ESBlocks;
@@ -28,10 +26,11 @@ import com.google.common.base.Suppliers;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.core.*;
-import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.dispenser.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
@@ -39,16 +38,21 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -94,20 +98,20 @@ public class CommonSetupHandlers {
 		DispenserBlock.registerProjectileBehavior(ESItems.FROZEN_TUBE.get());
 		DispenserBlock.registerProjectileBehavior(ESItems.SONAR_BOMB.get());
 		DispenserBlock.registerProjectileBehavior(ESItems.GLEECH_EGG.get());
-		DispenserBlock.registerBehavior(ESItems.LUNAR_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.LUNAR));
-		DispenserBlock.registerBehavior(ESItems.LUNAR_CHEST_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.LUNAR, true));
-		DispenserBlock.registerBehavior(ESItems.NORTHLAND_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.NORTHLAND));
-		DispenserBlock.registerBehavior(ESItems.NORTHLAND_CHEST_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.NORTHLAND, true));
-		DispenserBlock.registerBehavior(ESItems.STARLIGHT_MANGROVE_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.STARLIGHT_MANGROVE));
-		DispenserBlock.registerBehavior(ESItems.STARLIGHT_MANGROVE_CHEST_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.STARLIGHT_MANGROVE, true));
-		DispenserBlock.registerBehavior(ESItems.SCARLET_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.SCARLET));
-		DispenserBlock.registerBehavior(ESItems.SCARLET_CHEST_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.SCARLET, true));
-		DispenserBlock.registerBehavior(ESItems.TORREYA_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.TORREYA));
-		DispenserBlock.registerBehavior(ESItems.TORREYA_CHEST_BOAT.get(), new ESBoatDispenseItemBehavior(ESBoat.Type.TORREYA, true));
+		DispenserBlock.registerBehavior(ESItems.LUNAR_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.LUNAR_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.LUNAR_CHEST_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.LUNAR_CHEST_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.NORTHLAND_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.NORTHLAND_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.NORTHLAND_CHEST_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.NORTHLAND_CHEST_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.STARLIGHT_MANGROVE_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.STARLIGHT_MANGROVE_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.STARLIGHT_MANGROVE_CHEST_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.STARLIGHT_MANGROVE_CHEST_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.SCARLET_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.SCARLET_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.SCARLET_CHEST_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.SCARLET_CHEST_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.TORREYA_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.TORREYA_BOAT.get()));
+		DispenserBlock.registerBehavior(ESItems.TORREYA_CHEST_BOAT.get(), new BoatDispenseItemBehavior(ESEntities.TORREYA_CHEST_BOAT.get()));
 		DispenserBlock.registerBehavior(ESItems.ETHER_BUCKET.get(), new BucketDispenseItemBehavior());
 		DispenserBlock.registerBehavior(ESItems.SALTPETER_MATCHBOX.get(), new OptionalDispenseItemBehavior() {
 			@Override
-			protected ItemStack execute(BlockSource blockSource, ItemStack item) {
+			protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
 				ServerLevel serverLevel = blockSource.level();
 				this.setSuccess(true);
 				Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
@@ -116,80 +120,91 @@ public class CommonSetupHandlers {
 				if (BaseFireBlock.canBePlacedAt(serverLevel, blockPos, direction)) {
 					serverLevel.setBlockAndUpdate(blockPos, BaseFireBlock.getState(serverLevel, blockPos));
 					serverLevel.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
-				} else if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
-					if (blockState.getBlock() instanceof TntBlock) {
-						TntBlock.explode(serverLevel, blockPos);
-						serverLevel.removeBlock(blockPos, false);
-					} else {
-						this.setSuccess(false);
-					}
-				} else {
-					serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BlockStateProperties.LIT, true));
+				} else if (CampfireBlock.canLight(blockState) || CandleBlock.canLight(blockState) || CandleCakeBlock.canLight(blockState)) {
+					serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)));
 					serverLevel.gameEvent(null, GameEvent.BLOCK_CHANGE, blockPos);
+				} else if (blockState.getBlock() instanceof TntBlock) {
+					TntBlock.explode(serverLevel, blockPos);
+					serverLevel.removeBlock(blockPos, false);
+				} else {
+					this.setSuccess(false);
 				}
 
 				if (this.isSuccess()) {
-					item.hurtAndBreak(1, serverLevel, null, (i) -> {
+					itemStack.hurtAndBreak(1, serverLevel, null, item -> {
 					});
 				}
 
-				return item;
+				return itemStack;
 			}
 		});
-		DispenserBlock.registerBehavior(ESItems.TANGLED_SKULL.get(), new DefaultDispenseItemBehavior() {
+		DispenserBlock.registerBehavior(ESItems.TANGLED_SKULL.get(), new OptionalDispenseItemBehavior() {
 			@Override
-			protected ItemStack execute(BlockSource blockSource, ItemStack item) {
-				if (!ArmorItem.dispenseArmor(blockSource, item)) {
-					Level level = blockSource.level();
-					Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
-					Position position = DispenserBlock.getDispensePosition(blockSource, 0.7, new Vec3(0.0, 0.1, 0.0));
-					TangledSkull skull = new TangledSkull(ESEntities.TANGLED_SKULL.get(), level);
-					skull.setPos(new Vec3(position.x(), position.y(), position.z()));
-					skull.setShot(true);
-					Vec3 movement = new Vec3(direction.getStepX(), direction.getStepY(), direction.getStepZ());
-					skull.setShotMovement(movement.normalize());
-					level.addFreshEntity(skull);
+			protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+				Level level = blockSource.level();
+				Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
+				BlockPos blockPos = blockSource.pos().relative(direction);
+				if (level.isEmptyBlock(blockPos) && WitherSkullBlock.canSpawnMob(level, blockPos, itemStack)) {
+					level.setBlock(
+						blockPos,
+						ESBlocks.TANGLED_SKULL.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(RotationSegment.convertToSegment(direction))),
+						3
+					);
+					level.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
+					BlockEntity blockEntity = level.getBlockEntity(blockPos);
+					if (blockEntity instanceof SkullBlockEntity) {
+						WitherSkullBlock.checkSpawn(level, blockPos, (SkullBlockEntity) blockEntity);
+					}
+
+					itemStack.shrink(1);
+					this.setSuccess(true);
+				} else {
+					this.setSuccess(EquipmentDispenseItemBehavior.dispenseEquipment(blockSource, itemStack));
 				}
-				item.shrink(1);
-				return item;
+
+				return itemStack;
 			}
 		});
 		DispenserBlock.registerBehavior(ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get(), new OptionalDispenseItemBehavior() {
 			@Override
-			protected ItemStack execute(BlockSource blockSource, ItemStack item) {
+			protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
 				Level level = blockSource.level();
-				BlockPos blockpos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
+				BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
 				CarvedLunarisCactusFruitBlock fruitBlock = ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get();
-				if (level.isEmptyBlock(blockpos) && fruitBlock.canSpawnGolem(level, blockpos)) {
+				if (level.isEmptyBlock(blockPos) && fruitBlock.canSpawnGolem(level, blockPos)) {
 					if (!level.isClientSide) {
-						level.setBlock(blockpos, fruitBlock.defaultBlockState(), 3);
-						level.gameEvent(null, GameEvent.BLOCK_PLACE, blockpos);
+						level.setBlock(blockPos, fruitBlock.defaultBlockState(), 3);
+						level.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
 					}
-					item.shrink(1);
+
+					itemStack.shrink(1);
 					this.setSuccess(true);
 				} else {
-					this.setSuccess(ArmorItem.dispenseArmor(blockSource, item));
+					this.setSuccess(EquipmentDispenseItemBehavior.dispenseEquipment(blockSource, itemStack));
 				}
-				return item;
+
+				return itemStack;
 			}
 		});
 		if (ESPlatform.INSTANCE.getLoader() == ESPlatform.Loader.FABRIC) {
 			DefaultDispenseItemBehavior eggBehavior = new DefaultDispenseItemBehavior() {
 				@Override
-				public ItemStack execute(BlockSource blockSource, ItemStack item) {
+				public ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
 					Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
-					EntityType<?> entityType = ((SpawnEggItem) item.getItem()).getType(item);
+					EntityType<?> entityType = ((SpawnEggItem) itemStack.getItem()).getType(itemStack);
 
 					try {
-						entityType.spawn(blockSource.level(), item, null, blockSource.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
-					} catch (Exception exception) {
-						LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blockSource.pos(), exception);
+						entityType.spawn(
+							blockSource.level(), itemStack, null, blockSource.pos().relative(direction), EntitySpawnReason.DISPENSER, direction != Direction.UP, false
+						);
+					} catch (Exception var6) {
+						LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blockSource.pos(), var6);
 						return ItemStack.EMPTY;
 					}
 
-					item.shrink(1);
+					itemStack.shrink(1);
 					blockSource.level().gameEvent(null, GameEvent.ENTITY_PLACE, blockSource.pos());
-					return item;
+					return itemStack;
 				}
 			};
 			for (Item item : BuiltInRegistries.ITEM.stream().toList()) {

@@ -25,6 +25,12 @@ public class ESTags {
 		public static final TagKey<Item> YETI_FUR = create("yeti_fur");
 		public static final TagKey<Item> YETI_FUR_CARPETS = create("yeti_fur_carpets");
 		public static final TagKey<Item> TOOTH_OF_HUNGER_BLOCKS = create("tooth_of_hunger_blocks");
+		public static final TagKey<Item> REPAIRS_ALCHEMIST_ARMOR = create("repairs_alchemist_armor");
+		public static final TagKey<Item> REPAIRS_AMARAMBER_ARMOR = create("repairs_amaramber_armor");
+		public static final TagKey<Item> REPAIRS_AETHERSENT_ARMOR = create("repairs_aethersent_armor");
+		public static final TagKey<Item> REPAIRS_THERMAL_SPRINGSTONE_ARMOR = create("repairs_thermal_springstone_armor");
+		public static final TagKey<Item> REPAIRS_GLACITE_ARMOR = create("repairs_glacite_armor");
+		public static final TagKey<Item> REPAIRS_SWAMP_SILVER_ARMOR = create("repairs_swamp_silver_armor");
 		public static final TagKey<Item> SCYTHES = create("scythes");
 		public static final TagKey<Item> SICKLES = create("sickles");
 		public static final TagKey<Item> GREATSWORDS = create("greatswords");

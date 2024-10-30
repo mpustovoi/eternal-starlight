@@ -34,7 +34,7 @@ public class DuskLightBlock extends BaseEntityBlock {
 			if (!level.isClientSide) {
 				entity.setFacing();
 			}
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
 	}

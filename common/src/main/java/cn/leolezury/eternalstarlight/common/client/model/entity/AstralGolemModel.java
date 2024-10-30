@@ -1,10 +1,7 @@
 package cn.leolezury.eternalstarlight.common.client.model.entity;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
-import cn.leolezury.eternalstarlight.common.entity.living.npc.boarwarf.golem.AstralGolem;
-import cn.leolezury.eternalstarlight.common.entity.living.npc.boarwarf.golem.AstralGolemMaterial;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import cn.leolezury.eternalstarlight.common.client.renderer.entity.state.AstralGolemRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
@@ -12,16 +9,14 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 @Environment(EnvType.CLIENT)
-public class AstralGolemModel<T extends AstralGolem> extends HumanoidModel<T> {
+public class AstralGolemModel extends HumanoidModel<AstralGolemRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(EternalStarlight.id("astral_golem"), "main");
 	public static final ModelLayerLocation INNER_ARMOR_LOCATION = new ModelLayerLocation(EternalStarlight.id("astral_golem"), "inner_armor");
 	public static final ModelLayerLocation OUTER_ARMOR_LOCATION = new ModelLayerLocation(EternalStarlight.id("astral_golem"), "outer_armor");
-	private float armXRot = 0;
-	private int tintColor = -1;
 
 	public AstralGolemModel(ModelPart root) {
 		super(root);
@@ -48,11 +43,15 @@ public class AstralGolemModel<T extends AstralGolem> extends HumanoidModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		AstralGolemMaterial material = entity.getMaterial();
-		tintColor = material == null ? -1 : material.tintColor();
-		if (entity.getMainHandItem().isEmpty()) {
+	public void setupAnim(AstralGolemRenderState state) {
+		super.setupAnim(state);
+		float armXRot;
+		if (state.attackAnimationTick > 0) {
+			armXRot = -2.0F + 1.5F * Mth.triangleWave(state.attackAnimationTick, 10.0F);
+		} else {
+			armXRot = 0;
+		}
+		if (state.getMainHandItem().isEmpty()) {
 			leftArm.xRot += armXRot;
 			rightArm.xRot += armXRot;
 		} else {
@@ -67,25 +66,10 @@ public class AstralGolemModel<T extends AstralGolem> extends HumanoidModel<T> {
 	}
 
 	@Override
-	public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTick) {
-		super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
-		this.leftArmPose = ArmPose.EMPTY;
-		int animationTick = entity.getAttackAnimationTick();
-		if (animationTick > 0) {
-			armXRot = -2.0F + 1.5F * Mth.triangleWave((float) animationTick - partialTick, 10.0F);
-		} else {
-			armXRot = 0;
+	protected ArmPose getArmPose(AstralGolemRenderState state, HumanoidArm arm) {
+		if (arm == HumanoidArm.LEFT && state.blocking) {
+			return ArmPose.BLOCK;
 		}
-		if (entity.isGolemBlocking()) {
-			this.leftArmPose = ArmPose.BLOCK;
-		}
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, tintColor == -1 ? color : FastColor.ARGB32.multiply(color, tintColor));
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, tintColor == -1 ? color : FastColor.ARGB32.multiply(color, tintColor));
-		rightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, tintColor == -1 ? color : FastColor.ARGB32.multiply(color, tintColor));
-		leftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, tintColor == -1 ? color : FastColor.ARGB32.multiply(color, tintColor));
+		return ArmPose.EMPTY;
 	}
 }

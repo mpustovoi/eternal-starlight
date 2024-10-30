@@ -4,7 +4,6 @@
 
 uniform vec4 ColorModulator;
 uniform float TickCount;
-uniform float Ratio;
 
 in vec2 texCoord0;
 
@@ -28,8 +27,7 @@ out vec4 fragColor;
 void main() {
     // get coords and direction
     vec2 uv = texCoord0 * 16. - .5;
-    uv /= 16.;// because of mc
-    uv.y *= Ratio;
+    uv /= 16.;
     vec3 dir = vec3(uv * zoom, 1.);
     float time = TickCount * .05 * speed + .25;
 

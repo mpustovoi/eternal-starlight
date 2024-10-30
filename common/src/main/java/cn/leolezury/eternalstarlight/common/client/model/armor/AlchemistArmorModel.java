@@ -1,8 +1,6 @@
 package cn.leolezury.eternalstarlight.common.client.model.armor;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidArmorModel;
@@ -10,10 +8,10 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 @Environment(EnvType.CLIENT)
-public class AlchemistArmorModel<T extends LivingEntity> extends HumanoidArmorModel<T> {
+public class AlchemistArmorModel<T extends HumanoidRenderState> extends HumanoidArmorModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(EternalStarlight.id("alchemist_armor"), "main");
 
 	public final ModelPart head;
@@ -51,18 +49,5 @@ public class AlchemistArmorModel<T extends LivingEntity> extends HumanoidArmorMo
 			.texOffs(46, 32).mirror().addBox(-1.0F, -2.0F, -2.0F, 5.0F, 5.0F, 4.0F, new CubeDeformation(0.75F)).mirror(false), PartPose.offset(5.0F, 2.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
-	}
-
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		rightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		leftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 }

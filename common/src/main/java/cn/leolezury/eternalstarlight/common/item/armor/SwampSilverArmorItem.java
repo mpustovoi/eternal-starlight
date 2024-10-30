@@ -13,7 +13,10 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 
@@ -58,7 +61,7 @@ public class SwampSilverArmorItem extends ArmorItem implements TickableArmor {
 			}
 		});
 		if (fullSet.get()) {
-			level.registryAccess().registryOrThrow(Registries.MOB_EFFECT).getTagOrEmpty(ESTags.MobEffects.SWAMP_SILVER_ARMOR_CAN_REMOVE).forEach(effect -> {
+			level.registryAccess().lookupOrThrow(Registries.MOB_EFFECT).getTagOrEmpty(ESTags.MobEffects.SWAMP_SILVER_ARMOR_CAN_REMOVE).forEach(effect -> {
 				if (livingEntity.hasEffect(effect)) {
 					livingEntity.removeEffect(effect);
 				}

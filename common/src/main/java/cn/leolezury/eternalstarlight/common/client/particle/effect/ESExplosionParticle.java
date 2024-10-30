@@ -23,7 +23,7 @@ public class ESExplosionParticle extends SimpleAnimatedParticle {
 
 	@Override
 	public ParticleRenderType getRenderType() {
-		return ParticleRenderType.PARTICLE_SHEET_LIT;
+		return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
 	}
 
 	public static class Provider implements ParticleProvider<ESExplosionParticleOptions> {
