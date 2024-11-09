@@ -52,7 +52,7 @@ public class CarvedLunarisCactusFruitBlock extends HorizontalDirectionalBlock {
 	}
 
 	@Override
-	public MapCodec<? extends HorizontalDirectionalBlock> codec() {
+	public MapCodec<? extends CarvedLunarisCactusFruitBlock> codec() {
 		return CODEC;
 	}
 

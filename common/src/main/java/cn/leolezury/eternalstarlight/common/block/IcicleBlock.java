@@ -51,7 +51,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 
 	@Override
 	public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-		return getSuitableState(defaultBlockState().setValue(TIP_DIRECTION, context.getNearestLookingVerticalDirection().getOpposite()), context.getLevel(), context.getClickedPos(), false);
+		return getSuitableState(defaultBlockState().setValue(TIP_DIRECTION, context.getNearestLookingVerticalDirection().getOpposite()), context.getLevel(), context.getClickedPos());
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 		if (state.getValue(WATERLOGGED)) {
 			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		BlockState newState = direction.getAxis() == Direction.Axis.Y ? getSuitableState(state, level, pos, true) : state;
+		BlockState newState = direction.getAxis() == Direction.Axis.Y ? getSuitableState(state, level, pos) : state;
 		if (newState.isAir() && state.getValue(TIP_DIRECTION) == Direction.DOWN) {
 			level.scheduleTick(pos, this, 2);
 			newState = state;
@@ -69,7 +69,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 
 	@Override
 	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (getSuitableState(state, level, pos, false).isAir()) {
+		if (getSuitableState(state, level, pos).isAir()) {
 			spawnFallingStalactite(state, level, pos);
 		}
 	}
@@ -93,7 +93,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 		}
 	}
 
-	private BlockState getSuitableState(BlockState state, LevelAccessor level, BlockPos pos, boolean updateOthers) {
+	private BlockState getSuitableState(BlockState state, LevelReader level, BlockPos pos) {
 		Direction tipDir = state.getValue(TIP_DIRECTION);
 		BlockPos tipPos = findTip(state, level, pos);
 		if (tipPos == null) {
@@ -111,7 +111,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				return state.setValue(THICKNESS, IcicleThickness.TIP);
 			}
 			case 1 -> {
-				if (updateOthers) {
+				/*if (updateOthers) {
 					if (pos.equals(tipPos)) {
 						BlockState original = level.getBlockState(basePos);
 						if (original.is(this) && original.getValue(THICKNESS) != IcicleThickness.TOP) {
@@ -123,7 +123,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							level.setBlock(tipPos, original.setValue(THICKNESS, IcicleThickness.TIP), Block.UPDATE_ALL);
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, pos.equals(tipPos) ? IcicleThickness.TIP : IcicleThickness.TOP);
 			}
 			case 2 -> {
@@ -136,7 +136,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				} else {
 					thickness = IcicleThickness.BASE;
 				}
-				if (updateOthers) {
+				/*if (updateOthers) {
 					for (int i = 0; i < 3; i++) {
 						BlockPos partPos = basePos.relative(tipDir, i);
 						IcicleThickness partThickness = switch (i) {
@@ -151,7 +151,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							}
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, thickness);
 			}
 			case 3 -> {
@@ -167,7 +167,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 				} else {
 					thickness = IcicleThickness.BASE;
 				}
-				if (updateOthers) {
+				/*if (updateOthers) {
 					for (int i = 0; i < 4; i++) {
 						BlockPos partPos = basePos.relative(tipDir, i);
 						IcicleThickness partThickness = switch (i) {
@@ -183,7 +183,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 							}
 						}
 					}
-				}
+				}*/
 				return state.setValue(THICKNESS, thickness);
 			}
 		}

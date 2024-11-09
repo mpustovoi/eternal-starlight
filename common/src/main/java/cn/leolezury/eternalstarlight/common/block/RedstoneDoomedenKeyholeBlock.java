@@ -29,7 +29,7 @@ public class RedstoneDoomedenKeyholeBlock extends HorizontalAxisBlock {
 	}
 
 	@Override
-	protected MapCodec<? extends HorizontalAxisBlock> codec() {
+	protected MapCodec<RedstoneDoomedenKeyholeBlock> codec() {
 		return CODEC;
 	}
 
