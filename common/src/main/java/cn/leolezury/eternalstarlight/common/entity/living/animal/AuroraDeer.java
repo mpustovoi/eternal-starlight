@@ -45,7 +45,6 @@ public class AuroraDeer extends Animal implements Charger {
 	private static final String TAG_SNOW = "snow";
 	private static final String TAG_SNOW_PROGRESS = "snow_progress";
 
-	private static final Ingredient FOOD_ITEMS = Ingredient.of(ESTags.Items.AURORA_DEER_FOOD);
 	protected static final EntityDataAccessor<Boolean> LEFT_ANTLER = SynchedEntityData.defineId(AuroraDeer.class, EntityDataSerializers.BOOLEAN);
 
 	public boolean hasLeftAntler() {
@@ -140,7 +139,7 @@ public class AuroraDeer extends Animal implements Charger {
 			}
 		});
 		this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
+		this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, this::isFood, false));
 		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D) {
 			@Override
@@ -164,7 +163,7 @@ public class AuroraDeer extends Animal implements Charger {
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return FOOD_ITEMS.test(stack);
+		return stack.is(ESTags.Items.AURORA_DEER_FOOD);
 	}
 
 	@Override
@@ -227,8 +226,8 @@ public class AuroraDeer extends Animal implements Charger {
 			this.getEntityData().set(accessor, false);
 			if (level() instanceof ServerLevel serverLevel) {
 				serverLevel.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + getBbHeight() / 2f, this.getZ(), 2, 0.2, 0.2, 0.2, 0.0);
+				spawnAtLocation(serverLevel, ESItems.AURORA_DEER_ANTLER.get());
 			}
-			spawnAtLocation(ESItems.AURORA_DEER_ANTLER.get());
 		}
 	}
 
@@ -269,13 +268,13 @@ public class AuroraDeer extends Animal implements Charger {
 		return ESSoundEvents.AURORA_DEER_HURT.get();
 	}
 
-	public static boolean checkAuroraDeerSpawnRules(EntityType<? extends AuroraDeer> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+	public static boolean checkAuroraDeerSpawnRules(EntityType<? extends AuroraDeer> type, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
 		return level.getBlockState(pos.below()).is(BlockTags.DIRT) && ESConfig.INSTANCE.mobsConfig.auroraDeer.canSpawn();
 	}
 
 	@Nullable
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return ESEntities.AURORA_DEER.get().create(serverLevel);
+		return ESEntities.AURORA_DEER.get().create(serverLevel, EntitySpawnReason.BREEDING);
 	}
 }

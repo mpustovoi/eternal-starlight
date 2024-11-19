@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,19 +47,19 @@ public class DoomedenKeyholeBlock extends HorizontalAxisBlock {
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+	protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
 		if (itemStack.is(ESTags.Items.DOOMEDEN_KEYS) && !blockState.getValue(LIT)) {
 			level.setBlockAndUpdate(blockPos, blockState.setValue(LIT, true));
 			level.scheduleTick(blockPos, this, 15);
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		} else {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
 		}
 	}
 
 	@Override
-	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-		if (level.getBlockState(fromPos).getBlock() instanceof RedstoneDoomedenKeyholeBlock && !state.getValue(LIT) && Arrays.stream(Direction.values()).anyMatch(direction -> hasInputSignal(level, pos, direction))) {
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean isMoving) {
+		if (!state.getValue(LIT) && Arrays.stream(Direction.values()).anyMatch(direction -> hasInputSignal(level, pos, direction) && level.getBlockState(pos.relative(direction)).getBlock() instanceof RedstoneDoomedenKeyholeBlock)) {
 			level.setBlockAndUpdate(pos, state.setValue(LIT, true));
 			level.scheduleTick(pos, this, 15);
 		}

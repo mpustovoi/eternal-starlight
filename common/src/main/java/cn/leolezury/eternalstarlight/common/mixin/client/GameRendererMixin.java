@@ -17,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 	@Shadow
-	protected abstract void loadEffect(ResourceLocation resourceLocation);
+	protected abstract void setPostEffect(ResourceLocation resourceLocation);
 
 	@Inject(method = "checkEntityPostEffect", at = @At("TAIL"))
 	private void checkEntityPostEffect(Entity entity, CallbackInfo ci) {
 		if (entity instanceof SoulitSpectator) {
-			loadEffect(EternalStarlight.id("shaders/post/soulit_spectator.json"));
+			setPostEffect(EternalStarlight.id("soulit_spectator"));
 		}
 	}
 }

@@ -24,15 +24,12 @@ import cn.leolezury.eternalstarlight.common.client.shader.ESShaders;
 import cn.leolezury.eternalstarlight.common.client.visual.TrailVisualEffect;
 import cn.leolezury.eternalstarlight.common.client.visual.WorldVisualEffect;
 import cn.leolezury.eternalstarlight.common.entity.interfaces.GrapplingOwner;
-import cn.leolezury.eternalstarlight.common.entity.misc.ESBoat;
 import cn.leolezury.eternalstarlight.common.item.magic.OrbOfProphecyItem;
 import cn.leolezury.eternalstarlight.common.item.weapon.ChainOfSoulsItem;
 import cn.leolezury.eternalstarlight.common.item.weapon.ShatteredSwordItem;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.*;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Util;
@@ -40,7 +37,10 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.SkeletonModel;
+import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -50,8 +50,9 @@ import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.ShaderProgram;
 import net.minecraft.client.renderer.blockentity.*;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -105,10 +106,6 @@ public class ClientSetupHandlers {
 
 	public interface RendererLayerRegisterStrategy {
 		void register(ModelLayerLocation layerLocation, Supplier<LayerDefinition> supplier);
-	}
-
-	public interface ShaderRegisterStrategy {
-		void register(ResourceLocation location, VertexFormat format, Consumer<ShaderInstance> loaded);
 	}
 
 	public interface WorldVisualEffectSpawnFunction {
@@ -529,11 +526,10 @@ public class ClientSetupHandlers {
 		strategy.register(toBlock, ESBlocks.BLACK_YETI_FUR_CARPET.get());
 	}
 
-	public static void registerShaders(ShaderRegisterStrategy strategy) {
-		strategy.register(EternalStarlight.id("crest_selection_gui"), DefaultVertexFormat.POSITION_TEX, ESShaders::setCrestSelectionGui);
-		strategy.register(EternalStarlight.id("rendertype_laser_beam"), DefaultVertexFormat.NEW_ENTITY, ESShaders::setRenderTypeLaserBeam);
-		strategy.register(EternalStarlight.id("rendertype_starlight_portal"), DefaultVertexFormat.BLOCK, ESShaders::setRenderTypeStarlightPortal);
-		strategy.register(EternalStarlight.id("rendertype_eclipse"), DefaultVertexFormat.BLOCK, ESShaders::setRenderTypeEclipse);
+	public static void registerShaders(Consumer<ShaderProgram> strategy) {
+		strategy.accept(ESShaders.RENDERTYPE_GUI_CREST_SELECTION);
+		strategy.accept(ESShaders.RENDERTYPE_STARLIGHT_PORTAL);
+		strategy.accept(ESShaders.RENDERTYPE_ECLIPSE);
 	}
 
 	public static void modifyBakingResult(Map<ModelResourceLocation, BakedModel> models) {
@@ -581,12 +577,31 @@ public class ClientSetupHandlers {
 		strategy.register(ESParticles.SHINE.get(), AdvancedParticle.Provider::new);
 	}
 
+	private static final ModelLayerLocation LUNAR_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("boat/lunar"), "main");
+	private static final ModelLayerLocation LUNAR_CHEST_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("chest_boat/lunar"), "main");
+	private static final ModelLayerLocation NORTHLAND_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("boat/northland"), "main");
+	private static final ModelLayerLocation NORTHLAND_CHEST_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("chest_boat/northland"), "main");
+	private static final ModelLayerLocation STARLIGHT_MANGROVE_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("boat/starlight_mangrove"), "main");
+	private static final ModelLayerLocation STARLIGHT_MANGROVE_CHEST_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("chest_boat/starlight_mangrove"), "main");
+	private static final ModelLayerLocation SCARLET_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("boat/scarlet"), "main");
+	private static final ModelLayerLocation SCARLET_CHEST_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("chest_boat/scarlet"), "main");
+	private static final ModelLayerLocation TORREYA_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("boat/torreya"), "main");
+	private static final ModelLayerLocation TORREYA_CHEST_BOAT_LAYER = new ModelLayerLocation(EternalStarlight.id("chest_boat/torreya"), "main");
+
 	public static void registerEntityRenderers(EntityRendererRegisterStrategy strategy) {
 		strategy.register(ESEntities.FALLING_BLOCK.get(), ESFallingBlockRenderer::new);
 		strategy.register(ESEntities.PAINTING.get(), PaintingRenderer::new);
 		strategy.register(ESEntities.AETHERSENT_METEOR.get(), AethersentMeteorRenderer::new);
-		strategy.register(ESEntities.BOAT.get(), (context) -> new ESBoatRenderer(context, false));
-		strategy.register(ESEntities.CHEST_BOAT.get(), (context) -> new ESBoatRenderer(context, true));
+		strategy.register(ESEntities.LUNAR_BOAT.get(), context -> new BoatRenderer(context, LUNAR_BOAT_LAYER));
+		strategy.register(ESEntities.LUNAR_CHEST_BOAT.get(), context -> new BoatRenderer(context, LUNAR_CHEST_BOAT_LAYER));
+		strategy.register(ESEntities.NORTHLAND_BOAT.get(), context -> new BoatRenderer(context, NORTHLAND_BOAT_LAYER));
+		strategy.register(ESEntities.NORTHLAND_CHEST_BOAT.get(), context -> new BoatRenderer(context, NORTHLAND_CHEST_BOAT_LAYER));
+		strategy.register(ESEntities.STARLIGHT_MANGROVE_BOAT.get(), context -> new BoatRenderer(context, STARLIGHT_MANGROVE_BOAT_LAYER));
+		strategy.register(ESEntities.STARLIGHT_MANGROVE_CHEST_BOAT.get(), context -> new BoatRenderer(context, STARLIGHT_MANGROVE_CHEST_BOAT_LAYER));
+		strategy.register(ESEntities.SCARLET_BOAT.get(), context -> new BoatRenderer(context, SCARLET_BOAT_LAYER));
+		strategy.register(ESEntities.SCARLET_CHEST_BOAT.get(), context -> new BoatRenderer(context, SCARLET_CHEST_BOAT_LAYER));
+		strategy.register(ESEntities.TORREYA_BOAT.get(), context -> new BoatRenderer(context, TORREYA_BOAT_LAYER));
+		strategy.register(ESEntities.TORREYA_CHEST_BOAT.get(), context -> new BoatRenderer(context, TORREYA_CHEST_BOAT_LAYER));
 		strategy.register(ESEntities.EYE_OF_SEEKING.get(), ThrownItemRenderer::new);
 		strategy.register(ESEntities.CREST.get(), EmptyRenderer::new);
 		strategy.register(ESEntities.BOARWARF.get(), BoarwarfRenderer::new);
@@ -640,16 +655,16 @@ public class ClientSetupHandlers {
 		strategy.register(ThermalSpringStoneArmorModel.INNER_LOCATION, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(INNER_ARMOR_DEFORMATION), 64, 32));
 		strategy.register(ThermalSpringStoneArmorModel.OUTER_LOCATION, () -> ThermalSpringStoneArmorModel.createArmorLayer(OUTER_ARMOR_DEFORMATION));
 		strategy.register(AlchemistArmorModel.LAYER_LOCATION, AlchemistArmorModel::createBodyLayer);
-		strategy.register(ESBoatRenderer.createBoatModelName(ESBoat.Type.LUNAR), BoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createChestBoatModelName(ESBoat.Type.LUNAR), ChestBoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createBoatModelName(ESBoat.Type.NORTHLAND), BoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createChestBoatModelName(ESBoat.Type.NORTHLAND), ChestBoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createBoatModelName(ESBoat.Type.STARLIGHT_MANGROVE), BoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createChestBoatModelName(ESBoat.Type.STARLIGHT_MANGROVE), ChestBoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createBoatModelName(ESBoat.Type.SCARLET), BoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createChestBoatModelName(ESBoat.Type.SCARLET), ChestBoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createBoatModelName(ESBoat.Type.TORREYA), BoatModel::createBodyModel);
-		strategy.register(ESBoatRenderer.createChestBoatModelName(ESBoat.Type.TORREYA), ChestBoatModel::createBodyModel);
+		strategy.register(LUNAR_BOAT_LAYER, BoatModel::createBoatModel);
+		strategy.register(LUNAR_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
+		strategy.register(NORTHLAND_BOAT_LAYER, BoatModel::createBoatModel);
+		strategy.register(NORTHLAND_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
+		strategy.register(STARLIGHT_MANGROVE_BOAT_LAYER, BoatModel::createBoatModel);
+		strategy.register(STARLIGHT_MANGROVE_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
+		strategy.register(SCARLET_BOAT_LAYER, BoatModel::createBoatModel);
+		strategy.register(SCARLET_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
+		strategy.register(TORREYA_BOAT_LAYER, BoatModel::createBoatModel);
+		strategy.register(TORREYA_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
 		strategy.register(BoarwarfModel.LAYER_LOCATION, BoarwarfModel::createBodyLayer);
 		strategy.register(BoarwarfBlacksmithModel.LAYER_LOCATION, BoarwarfBlacksmithModel::createBodyLayer);
 		strategy.register(BoarwarfChefModel.LAYER_LOCATION, BoarwarfChefModel::createBodyLayer);

@@ -241,8 +241,8 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	}
 
 	@Nullable
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData) {
-		spawnGroupData = super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
+		spawnGroupData = super.finalizeSpawn(serverLevelAccessor, difficultyInstance, spawnReason, spawnGroupData);
 		RandomSource randomSource = serverLevelAccessor.getRandom();
 		this.populateDefaultEquipmentSlots(randomSource, difficultyInstance);
 		return spawnGroupData;
@@ -476,7 +476,7 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	private boolean teleport(Vec3 target, double x, double y, double z) {
 		BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos(x, y, z);
 
-		while (mutableBlockPos.getY() > this.level().getMinBuildHeight() && !this.level().getBlockState(mutableBlockPos).blocksMotion()) {
+		while (mutableBlockPos.getY() > this.level().getMinY() && !this.level().getBlockState(mutableBlockPos).blocksMotion()) {
 			mutableBlockPos.move(Direction.DOWN);
 		}
 
@@ -498,7 +498,7 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 
 		if (level.hasChunkAt(blockPos)) {
 			boolean blocksMotion = false;
-			while (!blocksMotion && blockPos.getY() > level.getMinBuildHeight()) {
+			while (!blocksMotion && blockPos.getY() > level.getMinY()) {
 				BlockPos blockPos2 = blockPos.below();
 				BlockState blockState = level.getBlockState(blockPos2);
 				if (blockState.blocksMotion()) {

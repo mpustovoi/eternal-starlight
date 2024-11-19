@@ -37,7 +37,7 @@ public class EnchantedGrimstoneBricksBlock extends HorizontalDirectionalBlock {
 	protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
 		player.displayClientMessage(Component.translatable("message.eternal_starlight.enchanted_grimstone_pre"), true);
 		player.displayClientMessage(Component.translatable("message.eternal_starlight.enchanted_grimstone_pre"), true);
-		return InteractionResult.sidedSuccess(level.isClientSide);
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
