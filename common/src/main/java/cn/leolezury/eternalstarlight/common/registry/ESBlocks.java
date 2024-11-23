@@ -116,7 +116,7 @@ public class ESBlocks {
 		() -> new CeilingHangingSignBlock(ESWoodTypes.LUNAR, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.COLOR_BLACK)));
 	public static final RegistryObject<Block, WallHangingSignBlock> LUNAR_WALL_HANGING_SIGN = BLOCKS.register("lunar_wall_hanging_sign",
 		() -> new WallHangingSignBlock(ESWoodTypes.LUNAR, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistryObject<Block, SaplingBlock> LUNAR_SAPLING = BLOCKS.register("lunar_sapling", () -> new SaplingBlock(new TreeGrower("lunar", 0.2f, Optional.empty(), Optional.empty(), Optional.of(ESConfiguredFeatures.LUNAR), Optional.of(ESConfiguredFeatures.LUNAR_HUGE), Optional.empty(), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.COLOR_LIGHT_BLUE)));
+	public static final RegistryObject<Block, SaplingBlock> LUNAR_SAPLING = BLOCKS.register("lunar_sapling", () -> new SaplingBlock(new TreeGrower("lunar", Optional.of(ESConfiguredFeatures.LUNAR_HUGE), Optional.of(ESConfiguredFeatures.LUNAR), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.COLOR_LIGHT_BLUE)));
 	public static final RegistryObject<Block, FlowerPotBlock> POTTED_LUNAR_SAPLING = BLOCKS.register("potted_lunar_sapling", () -> ESPlatform.INSTANCE.createFlowerPot(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LUNAR_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).mapColor(MapColor.COLOR_LIGHT_BLUE)));
 
 	// lunar extras: desert

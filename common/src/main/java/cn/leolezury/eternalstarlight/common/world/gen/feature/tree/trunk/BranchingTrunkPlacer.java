@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -60,6 +61,17 @@ public class BranchingTrunkPlacer extends TrunkPlacer {
 		int numBranchesLayer = branchLayerNum.sample(random);
 		int numBranches = branchNum.sample(random);
 		int lenBranches = branchLen.sample(random);
+		// this seems to make no sense, but it actually fixed a stupid block update bug that occurs when a mega tree is placed
+		// hideous code, but just works
+		for (int x = 0; x <= 1; x++) {
+			for (int z = 0; z <= 1; z++) {
+				BlockPos pos = startPos.offset(x, 0, z);
+				if (reader.isStateAtPosition(pos, state -> state.isAir() || state.is(BlockTags.SAPLINGS))) {
+					placer.accept(pos, config.trunkProvider.getState(random, pos));
+					placer.accept(pos, Blocks.AIR.defaultBlockState());
+				}
+			}
+		}
 		return placeBranchingTrunk(reader, placer, startPos, random, height, numBranchesLayer, numBranches, lenBranches, config);
 	}
 

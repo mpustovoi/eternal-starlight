@@ -154,7 +154,6 @@ public class ESBiomes {
 		}
 		BiomeDefaultFeatures.addSurfaceFreezing(builder);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.WATERSIDE_VEGETATION);
-		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_VINE);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_MOSS);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_MOSS_VEIN);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.BOULDERSHROOM);
@@ -182,7 +181,6 @@ public class ESBiomes {
 		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(featureGetter, carverGetter);
 
 		BiomeDefaultFeatures.addSurfaceFreezing(builder);
-		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_VINE);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_MOSS);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_MOSS_VEIN);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.BOULDERSHROOM);
@@ -211,6 +209,7 @@ public class ESBiomes {
 		builder.addFeature(GenerationStep.Decoration.RAW_GENERATION, ESPlacedFeatures.FALLEN_LUNAR_LOG);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.STARLIGHT_FOREST);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.FOREST_VEGETATION);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_VINE);
 		builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ESPlacedFeatures.STONE_SPIKE);
 
 		return builder;
@@ -222,6 +221,7 @@ public class ESBiomes {
 		builder.addFeature(GenerationStep.Decoration.RAW_GENERATION, ESPlacedFeatures.FALLEN_LUNAR_LOG);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.DENSE_FOREST);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.FOREST_VEGETATION);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.CAVE_VINE);
 
 		return builder;
 	}
