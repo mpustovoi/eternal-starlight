@@ -36,6 +36,10 @@ public class ESConventionalTags {
 		public static final TagKey<Item> STORAGE_BLOCKS_SALTPETER = storageBlock("saltpeter");
 		public static final TagKey<Item> DUSTS_SALTPETER = dust("saltpeter");
 
+		public static final TagKey<Item> ORES_ATALPHAITE = ore("atalphaite");
+		public static final TagKey<Item> STORAGE_BLOCKS_ATALPHAITE = storageBlock("atalphaite");
+		public static final TagKey<Item> GEMS_ATALPHAITE = gem("atalphaite");
+
 		public static final TagKey<Item> RAW_MATERIALS_AMARAMBER = rawMaterial("amaramber");
 		public static final TagKey<Item> INGOTS_AMARAMBER = ingot("amaramber");
 		public static final TagKey<Item> NUGGETS_AMARAMBER = nugget("amaramber");
@@ -94,8 +98,13 @@ public class ESConventionalTags {
 		public static final TagKey<Block> ORES_SALTPETER = ore("saltpeter");
 		public static final TagKey<Block> STORAGE_BLOCKS_SALTPETER = storageBlock("saltpeter");
 
+		public static final TagKey<Block> ORES_ATALPHAITE = ore("atalphaite");
+		public static final TagKey<Block> STORAGE_BLOCKS_ATALPHAITE = storageBlock("atalphaite");
+
 		public static final TagKey<Block> ORES_IN_GROUND_GRIMSTONE = oresInGround("grimstone");
 		public static final TagKey<Block> ORES_IN_GROUND_VOIDSTONE = oresInGround("voidstone");
+		public static final TagKey<Block> ORES_IN_GROUND_ETERNAL_ICE = oresInGround("eternal_ice");
+		public static final TagKey<Block> ORES_IN_GROUND_HAZE_ICE = oresInGround("haze_ice");
 		public static final TagKey<Block> ORES_IN_GROUND_NIGHTFALL_MUD = oresInGround("nightfall_mud");
 
 		private static TagKey<Block> ore(String string) {

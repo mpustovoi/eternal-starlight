@@ -47,6 +47,12 @@ public class ESItemModelProvider extends ItemModelProvider {
 		block(ESItems.BLUE_STARLIGHT_CRYSTAL_BLOCK.get());
 		flatBlockTexture(ESItems.RED_STARLIGHT_CRYSTAL_CLUSTER.get());
 		flatBlockTexture(ESItems.BLUE_STARLIGHT_CRYSTAL_CLUSTER.get());
+		flatBlockTexture(ESItems.BLOOMING_RED_STARLIGHT_CRYSTAL_CLUSTER.get());
+		flatBlockTexture(ESItems.BLOOMING_BLUE_STARLIGHT_CRYSTAL_CLUSTER.get());
+		flatBlockTexture(ESItems.RED_CRYSTALFLEUR.get());
+		flatBlockTexture(ESItems.BLUE_CRYSTALFLEUR.get());
+		flatBlockTexture(ESItems.RED_CRYSTALFLEUR_VINE.get());
+		flatBlockTexture(ESItems.BLUE_CRYSTALFLEUR_VINE.get());
 		block(ESItems.RED_CRYSTAL_MOSS_CARPET.get());
 		block(ESItems.BLUE_CRYSTAL_MOSS_CARPET.get());
 		basicItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get());
@@ -239,6 +245,11 @@ public class ESItemModelProvider extends ItemModelProvider {
 		block(ESItems.ETERNAL_ICE_BRICK_SLAB.get());
 		block(ESItems.ETERNAL_ICE_BRICK_STAIRS.get());
 		wall(ESItems.ETERNAL_ICE_BRICK_WALL.get(), ESItems.ETERNAL_ICE_BRICKS.get());
+		block(ESItems.HAZE_ICE.get());
+		block(ESItems.HAZE_ICE_BRICKS.get());
+		block(ESItems.HAZE_ICE_BRICK_SLAB.get());
+		block(ESItems.HAZE_ICE_BRICK_STAIRS.get());
+		wall(ESItems.HAZE_ICE_BRICK_WALL.get(), ESItems.HAZE_ICE_BRICKS.get());
 		basicItem(ESItems.ICICLE.get(), blockTextureFromItem(ESItems.ICICLE.get()).withSuffix("_tip"));
 		layeredBlock(ESItems.ASHEN_SNOW.get());
 
@@ -253,8 +264,10 @@ public class ESItemModelProvider extends ItemModelProvider {
 		block(ESItems.ATALPHAITE_BLOCK.get());
 		block(ESItems.BLAZING_ATALPHAITE_BLOCK.get());
 		block(ESItems.ATALPHAITE_LIGHT.get());
-		block(ESItems.VOIDSTONE_ATALPHAITE_ORE.get());
 		block(ESItems.GRIMSTONE_ATALPHAITE_ORE.get());
+		block(ESItems.VOIDSTONE_ATALPHAITE_ORE.get());
+		block(ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get());
+		block(ESItems.HAZE_ICE_ATALPHAITE_ORE.get());
 		block(ESItems.DUSK_GLASS.get());
 		block(ESItems.DUSK_LIGHT.get());
 		block(ESItems.ECLIPSE_CORE.get());
@@ -616,9 +629,13 @@ public class ESItemModelProvider extends ItemModelProvider {
 
 		block(ESItems.GRIMSTONE_REDSTONE_ORE.get());
 		block(ESItems.VOIDSTONE_REDSTONE_ORE.get());
+		block(ESItems.ETERNAL_ICE_REDSTONE_ORE.get());
+		block(ESItems.HAZE_ICE_REDSTONE_ORE.get());
 
 		block(ESItems.GRIMSTONE_SALTPETER_ORE.get());
 		block(ESItems.VOIDSTONE_SALTPETER_ORE.get());
+		block(ESItems.ETERNAL_ICE_SALTPETER_ORE.get());
+		block(ESItems.HAZE_ICE_SALTPETER_ORE.get());
 		block(ESItems.SALTPETER_BLOCK.get());
 		basicItem(ESItems.SALTPETER_POWDER.get());
 		basicItem(ESItems.SALTPETER_MATCHBOX.get());

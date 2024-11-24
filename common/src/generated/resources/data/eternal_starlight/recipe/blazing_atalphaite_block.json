@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "A": {
-      "item": "eternal_starlight:atalphaite"
+      "tag": "c:gems/atalphaite"
     },
     "B": {
       "item": "eternal_starlight:atalphaite_block"

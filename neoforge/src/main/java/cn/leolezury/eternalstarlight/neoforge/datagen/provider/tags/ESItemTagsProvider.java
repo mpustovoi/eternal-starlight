@@ -162,6 +162,8 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		copy(ESConventionalTags.Blocks.STORAGE_BLOCKS_SWAMP_SILVER, ESConventionalTags.Items.STORAGE_BLOCKS_SWAMP_SILVER);
 		copy(ESConventionalTags.Blocks.ORES_SALTPETER, ESConventionalTags.Items.ORES_SALTPETER);
 		copy(ESConventionalTags.Blocks.STORAGE_BLOCKS_SALTPETER, ESConventionalTags.Items.STORAGE_BLOCKS_SALTPETER);
+		copy(ESConventionalTags.Blocks.ORES_ATALPHAITE, ESConventionalTags.Items.ORES_ATALPHAITE);
+		copy(ESConventionalTags.Blocks.STORAGE_BLOCKS_ATALPHAITE, ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE);
 		copy(ESConventionalTags.Blocks.ORES_IN_GROUND_GRIMSTONE, ESConventionalTags.Items.ORES_IN_GROUND_GRIMSTONE);
 		copy(ESConventionalTags.Blocks.ORES_IN_GROUND_VOIDSTONE, ESConventionalTags.Items.ORES_IN_GROUND_VOIDSTONE);
 		copy(ESConventionalTags.Blocks.ORES_IN_GROUND_NIGHTFALL_MUD, ESConventionalTags.Items.ORES_IN_GROUND_NIGHTFALL_MUD);
@@ -200,6 +202,9 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		);
 		tag(ESConventionalTags.Items.DUSTS_SALTPETER).add(
 			ESItems.SALTPETER_POWDER.get()
+		);
+		tag(ESConventionalTags.Items.GEMS_ATALPHAITE).add(
+			ESItems.ATALPHAITE.get()
 		);
 		tag(ESConventionalTags.Items.RAW_MATERIALS_AMARAMBER).add(
 			ESItems.RAW_AMARAMBER.get()

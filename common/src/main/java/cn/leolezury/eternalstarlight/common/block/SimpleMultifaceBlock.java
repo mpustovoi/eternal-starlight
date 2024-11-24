@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -18,17 +20,17 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
-public class CaveMossVeinBlock extends MultifaceBlock implements BonemealableBlock, SimpleWaterloggedBlock {
-	public static final MapCodec<CaveMossVeinBlock> CODEC = simpleCodec(CaveMossVeinBlock::new);
+public class SimpleMultifaceBlock extends MultifaceBlock implements BonemealableBlock, SimpleWaterloggedBlock {
+	public static final MapCodec<SimpleMultifaceBlock> CODEC = simpleCodec(SimpleMultifaceBlock::new);
 	private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private final MultifaceSpreader spreader = new MultifaceSpreader(this);
 
 	@Override
-	protected MapCodec<CaveMossVeinBlock> codec() {
+	protected MapCodec<? extends SimpleMultifaceBlock> codec() {
 		return CODEC;
 	}
 
-	public CaveMossVeinBlock(BlockBehaviour.Properties properties) {
+	public SimpleMultifaceBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
 	}
@@ -45,6 +47,11 @@ public class CaveMossVeinBlock extends MultifaceBlock implements BonemealableBlo
 			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		return super.updateShape(state, direction, state1, level, pos, pos1);
+	}
+
+	@Override
+	protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+		return !(context.getItemInHand().getItem() instanceof BlockItem item && item.getBlock() == this) || super.canBeReplaced(state, context);
 	}
 
 	@Override

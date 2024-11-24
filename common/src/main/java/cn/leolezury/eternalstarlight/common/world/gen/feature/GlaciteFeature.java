@@ -24,7 +24,7 @@ public class GlaciteFeature extends ESFeature<NoneFeatureConfiguration> {
 		WorldGenLevel level = context.level();
 		BlockPos pos = context.origin();
 		RandomSource random = context.random();
-		BlockPos toPos = pos.offset(random.nextInt(13, 16) * (random.nextBoolean() ? -1 : 1), random.nextInt(10, 16) * (random.nextBoolean() ? -1 : 1), random.nextInt(13, 16) * (random.nextBoolean() ? -1 : 1));
+		BlockPos toPos = pos.offset(random.nextInt(8, 10) * (random.nextBoolean() ? -1 : 1), random.nextInt(8, 10) * (random.nextBoolean() ? -1 : 1), random.nextInt(8, 10) * (random.nextBoolean() ? -1 : 1));
 		BlockHitResult result = level.clip(new ClipContext(pos.getCenter(), toPos.getCenter(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty()));
 		if (result.getType() != HitResult.Type.MISS) {
 			toPos = result.getBlockPos();
@@ -38,7 +38,7 @@ public class GlaciteFeature extends ESFeature<NoneFeatureConfiguration> {
 		for (int x = Math.min(pos.getX(), toPos.getX()); x <= Math.max(pos.getX(), toPos.getX()); x++) {
 			for (int y = Math.min(pos.getY(), toPos.getY()); y <= Math.max(pos.getY(), toPos.getY()); y++) {
 				for (int z = Math.min(pos.getZ(), toPos.getZ()); z <= Math.max(pos.getZ(), toPos.getZ()); z++) {
-					if (ESMathUtil.distSqrBetweenLineAndDot(pos.getX(), pos.getY(), pos.getZ(), toPos.getX(), toPos.getY(), toPos.getZ(), x, y, z) < 2) {
+					if (ESMathUtil.distSqrBetweenLineAndDot(pos.getX(), pos.getY(), pos.getZ(), toPos.getX(), toPos.getY(), toPos.getZ(), x, y, z) < 1.5) {
 						placePos.set(x, y, z);
 						setBlockIfEmpty(level, placePos, ESBlocks.GLACITE.get().defaultBlockState());
 						for (Direction direction : Direction.values()) {

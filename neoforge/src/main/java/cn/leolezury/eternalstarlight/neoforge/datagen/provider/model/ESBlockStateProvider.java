@@ -42,6 +42,14 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ESBlocks.ORBFLORA_LIGHT.get());
 		directionalBud(ESBlocks.RED_STARLIGHT_CRYSTAL_CLUSTER.get());
 		directionalBud(ESBlocks.BLUE_STARLIGHT_CRYSTAL_CLUSTER.get());
+		directionalBud(ESBlocks.BLOOMING_RED_STARLIGHT_CRYSTAL_CLUSTER.get());
+		directionalBud(ESBlocks.BLOOMING_BLUE_STARLIGHT_CRYSTAL_CLUSTER.get());
+		cross(ESBlocks.RED_CRYSTALFLEUR.get());
+		pottedPlant(ESBlocks.POTTED_RED_CRYSTALFLEUR.get(), blockTexture(ESBlocks.RED_CRYSTALFLEUR.get()));
+		cross(ESBlocks.BLUE_CRYSTALFLEUR.get());
+		pottedPlant(ESBlocks.POTTED_BLUE_CRYSTALFLEUR.get(), blockTexture(ESBlocks.BLUE_CRYSTALFLEUR.get()));
+		multifaceBlock(ESBlocks.RED_CRYSTALFLEUR_VINE.get());
+		multifaceBlock(ESBlocks.BLUE_CRYSTALFLEUR_VINE.get());
 		simpleBlock(ESBlocks.RED_STARLIGHT_CRYSTAL_BLOCK.get());
 		simpleBlock(ESBlocks.BLUE_STARLIGHT_CRYSTAL_BLOCK.get());
 		carpet(ESBlocks.RED_CRYSTAL_MOSS_CARPET.get(), blockTexture(ESBlocks.RED_CRYSTAL_MOSS_CARPET.get()));
@@ -81,6 +89,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ESBlocks.RED_VELVETUMOSS.get());
 		directionalCrossCropBud(ESBlocks.RED_VELVETUMOSS_VILLI.get());
 		cross(ESBlocks.RED_VELVETUMOSS_FLOWER.get());
+		pottedPlant(ESBlocks.POTTED_RED_VELVETUMOSS_FLOWER.get(), blockTexture(ESBlocks.RED_VELVETUMOSS_FLOWER.get()));
 
 		// woods
 		leaves(ESBlocks.LUNAR_LEAVES.get());
@@ -136,6 +145,8 @@ public class ESBlockStateProvider extends BlockStateProvider {
 
 		simpleBlock(ESBlocks.ETERNAL_ICE.get());
 		stoneSet(ESBlocks.ETERNAL_ICE_BRICKS.get(), ESBlocks.ETERNAL_ICE_BRICK_SLAB.get(), ESBlocks.ETERNAL_ICE_BRICK_STAIRS.get(), ESBlocks.ETERNAL_ICE_BRICK_WALL.get());
+		simpleBlock(ESBlocks.HAZE_ICE.get());
+		stoneSet(ESBlocks.HAZE_ICE_BRICKS.get(), ESBlocks.HAZE_ICE_BRICK_SLAB.get(), ESBlocks.HAZE_ICE_BRICK_STAIRS.get(), ESBlocks.HAZE_ICE_BRICK_WALL.get());
 		icicle(ESBlocks.ICICLE.get());
 		layered(ESBlocks.ASHEN_SNOW.get(), blockTexture(ESBlocks.ASHEN_SNOW.get()));
 
@@ -146,8 +157,10 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ESBlocks.ATALPHAITE_BLOCK.get());
 		simpleBlock(ESBlocks.BLAZING_ATALPHAITE_BLOCK.get());
 		simpleBlock(ESBlocks.ATALPHAITE_LIGHT.get());
-		simpleBlock(ESBlocks.VOIDSTONE_ATALPHAITE_ORE.get());
 		simpleBlock(ESBlocks.GRIMSTONE_ATALPHAITE_ORE.get());
+		simpleBlock(ESBlocks.VOIDSTONE_ATALPHAITE_ORE.get());
+		simpleBlock(ESBlocks.ETERNAL_ICE_ATALPHAITE_ORE.get());
+		simpleBlock(ESBlocks.HAZE_ICE_ATALPHAITE_ORE.get());
 		simpleBlock(ESBlocks.DUSK_GLASS.get(), models().cubeAll(name(ESBlocks.DUSK_GLASS.get()), blockTexture(ESBlocks.DUSK_GLASS.get())).renderType(TRANSLUCENT));
 		simpleBlock(ESBlocks.DUSK_LIGHT.get());
 		simpleBlock(ESBlocks.ECLIPSE_CORE.get());
@@ -420,8 +433,12 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ESBlocks.SWAMP_SILVER_BLOCK.get());
 		redstoneOre(ESBlocks.GRIMSTONE_REDSTONE_ORE.get());
 		redstoneOre(ESBlocks.VOIDSTONE_REDSTONE_ORE.get());
+		simpleBlock(ESBlocks.ETERNAL_ICE_REDSTONE_ORE.get());
+		simpleBlock(ESBlocks.HAZE_ICE_REDSTONE_ORE.get());
 		simpleBlock(ESBlocks.GRIMSTONE_SALTPETER_ORE.get());
 		simpleBlock(ESBlocks.VOIDSTONE_SALTPETER_ORE.get());
+		simpleBlock(ESBlocks.ETERNAL_ICE_SALTPETER_ORE.get());
+		simpleBlock(ESBlocks.HAZE_ICE_SALTPETER_ORE.get());
 		simpleBlock(ESBlocks.SALTPETER_BLOCK.get());
 
 		lantern(ESBlocks.AMARAMBER_LANTERN.get());

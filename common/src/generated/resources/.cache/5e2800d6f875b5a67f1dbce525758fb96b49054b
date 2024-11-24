@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-09T20:44:19.5069971	Tags for minecraft:item mod id eternal_starlight
+// 1.21.1	2024-11-24T21:50:16.998275	Tags for minecraft:item mod id eternal_starlight
 49d6be28d9b8da6ebe3d7246980fb4a6109f43df data/c/tags/item/campfires.json
 952ece4a60060206e6e340490f8c12cd3ca05984 data/c/tags/item/dusts/saltpeter.json
 bcbb383a374ac16304cbea6d3945e47228828d5d data/c/tags/item/fences.json
@@ -13,6 +13,7 @@ c462e321b14ff979ddd095a4c5db297e753978d7 data/c/tags/item/fence_gates.json
 1b358a5ddc4e169992763bf5c406a16124be40eb data/c/tags/item/foods/raw_fish.json
 9641843c3572e2757ea567b9930a2323551af8b9 data/c/tags/item/foods/raw_meat.json
 05a32cac42475b4cc1a04113de32c355c72ba126 data/c/tags/item/gems.json
+f1a281472a393646e9431d2f44844770ef27bd98 data/c/tags/item/gems/atalphaite.json
 66ff992b2f3b1a07bf922f1caeb8fce665e1c4d2 data/c/tags/item/gems/glacite.json
 b1b5a7416a3fbdc302bd2496bd573b8f41f0e68d data/c/tags/item/gems/quartz.json
 3b8dc1994e75677513f1a4ec3b602402e8f12875 data/c/tags/item/gems/thioquartz.json
@@ -29,14 +30,15 @@ f385c8660651bf8d8c80e7697a58141b6eeaebed data/c/tags/item/ingots/thermal_springs
 e590937ef043d5bf6e6876f27d2dc83089b3c8ee data/c/tags/item/nuggets/aethersent.json
 f4dc3980b35bfbf6e5c114f953c888f305966075 data/c/tags/item/nuggets/amaramber.json
 d29136487306048710dc2bfbe22595e36710d81f data/c/tags/item/nuggets/swamp_silver.json
-a3ea5890c569fe12b1b41d000d078333aec261d8 data/c/tags/item/ores.json
-d5df2ab223e32c4fda43c8070ef7c947761e974c data/c/tags/item/ores/saltpeter.json
+25331b8d498c0457dd1e612169c1bebf2b32a698 data/c/tags/item/ores.json
+3f904d94183d2afae7698d7e242281b93273ad37 data/c/tags/item/ores/atalphaite.json
+4ae824bf159c2223e29a2d0f70fd8e836d42f4df data/c/tags/item/ores/saltpeter.json
 79594e3530f1e6eab2277904c04fdd886e5bfa08 data/c/tags/item/ores/swamp_silver.json
 45381b163559539ad21f7177191d46cc1a08a13a data/c/tags/item/ores_in_ground/grimstone.json
 79594e3530f1e6eab2277904c04fdd886e5bfa08 data/c/tags/item/ores_in_ground/nightfall_mud.json
 563721be5739d8a7ece10ec28cac72f462439fb5 data/c/tags/item/ores_in_ground/voidstone.json
-234b0283150e53943ec5710eaf278b10a4ca2810 data/c/tags/item/ore_rates/dense.json
-665e7c01ec659bbad54f6626a4f0638d6bcc16d6 data/c/tags/item/ore_rates/sparse.json
+edf66ee65420e307e4fc4220483ec2c8c5902786 data/c/tags/item/ore_rates/dense.json
+6b468cb024bd722e479c0d14bd14c1f0694e0b7f data/c/tags/item/ore_rates/sparse.json
 a108a858637ccff8277d9ef49ae130f227c599c8 data/c/tags/item/raw_materials.json
 652f6b9b076931b4a7fb90ff2bc2c81b704204dc data/c/tags/item/raw_materials/aethersent.json
 74a68b74f5863830cf3b4ba95a1ed6ea1cd84d81 data/c/tags/item/raw_materials/amaramber.json
@@ -44,9 +46,10 @@ a108a858637ccff8277d9ef49ae130f227c599c8 data/c/tags/item/raw_materials.json
 9ed1a8054322f0da7a2db0c72f73e1d03cfd2a3d data/c/tags/item/sandstone/blocks.json
 5b87b123e291847286b5f065a15e87cd2e8e4fef data/c/tags/item/sandstone/slabs.json
 5dda62b0aa1ce442cd4bd50db134061efaef2e4c data/c/tags/item/sandstone/stairs.json
-61979a279b4bb8bc6613c1a86aff3b56bb204214 data/c/tags/item/stones.json
+194b1a9ebb9e1ba6ff7617944f7fa71a3f738c57 data/c/tags/item/stones.json
 606e326420feb61ab12d7807dd4a4d173061097a data/c/tags/item/storage_blocks.json
 c625a3f19bec1654353dcb73615d95dd772471cf data/c/tags/item/storage_blocks/aethersent.json
+0a8d9fbaaa644fa07b8e48aa2bccaaba14cedf6e data/c/tags/item/storage_blocks/atalphaite.json
 252ddce914b462b117c335eb7bd1758725927f96 data/c/tags/item/storage_blocks/golem_steel.json
 1b85805879792f934ad432561017f2a458d3ffdc data/c/tags/item/storage_blocks/oxidized_golem_steel.json
 67c51ec7d04bb9ca0201cb358926b2c2176ed768 data/c/tags/item/storage_blocks/raw_aethersent.json
@@ -138,17 +141,17 @@ ebcc4ae4c545daab4f4774ee9051934a544712d3 data/minecraft/tags/item/sand.json
 b8bde5808a3177f5ccfa9d129c1563f5aea4f7d6 data/minecraft/tags/item/saplings.json
 5259b94b22abc45cb3d045c31908727e4de1deff data/minecraft/tags/item/shovels.json
 5e6814148d162c46ef2df4ddedad602827b7665a data/minecraft/tags/item/signs.json
-6c33c868fac717b9fdb7743c50ca5002d85bc9a3 data/minecraft/tags/item/slabs.json
-0a6b4e91f9e391ceac7e20c3d9fdffe24f50cd98 data/minecraft/tags/item/small_flowers.json
+a1cdbc38a2d5acfc03fba83f01ab122471a6e288 data/minecraft/tags/item/slabs.json
+05f66411ff1d85a93c74d3aac078fcd8c24abe92 data/minecraft/tags/item/small_flowers.json
 ebcc4ae4c545daab4f4774ee9051934a544712d3 data/minecraft/tags/item/smelts_to_glass.json
-4ce8d4eebc5d2d47a289b79755454cbe80851df4 data/minecraft/tags/item/stairs.json
+4c497e48e01edf71b3e4bc56a2a1c38cf41738d6 data/minecraft/tags/item/stairs.json
 a8695a95c491930d90a9e490edb0e1eebf6d6b73 data/minecraft/tags/item/stone_crafting_materials.json
 a8695a95c491930d90a9e490edb0e1eebf6d6b73 data/minecraft/tags/item/stone_tool_materials.json
 4f535b15d0506f24317fae886f85d643dac080eb data/minecraft/tags/item/swords.json
 aba45c2d101a6d2ee3a974958d26251511456af8 data/minecraft/tags/item/tall_flowers.json
 1e02fd92bb14061d1222a906665499db2ba9203b data/minecraft/tags/item/trim_materials.json
 77c40771e01c263ced67e3ea5099a8d690efbc39 data/minecraft/tags/item/trim_templates.json
-11930eb0f637f60a6b176cbf149309392cfef565 data/minecraft/tags/item/walls.json
+1d83de17f2d3e8ccc01173474b897e0b3c5a6fb7 data/minecraft/tags/item/walls.json
 2ef261a2ee8458fa023fcd45efeac2dbf120b140 data/minecraft/tags/item/wooden_buttons.json
 408496cb9fee4fbbfc36c93af2d07fac9f7ff480 data/minecraft/tags/item/wooden_doors.json
 02d0c9ac8007b3e212bcd7e5deadcbc7a0ffaaa3 data/minecraft/tags/item/wooden_fences.json

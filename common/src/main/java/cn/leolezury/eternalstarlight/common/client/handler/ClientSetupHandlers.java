@@ -161,6 +161,7 @@ public class ClientSetupHandlers {
 		ESBlocks.VELVETUMOSS_VILLI,
 		ESBlocks.RED_VELVETUMOSS_VILLI,
 		ESBlocks.RED_VELVETUMOSS_FLOWER,
+		ESBlocks.POTTED_RED_VELVETUMOSS_FLOWER,
 		ESBlocks.LUNAR_SAPLING,
 		ESBlocks.POTTED_LUNAR_SAPLING,
 		ESBlocks.LUNAR_TRAPDOOR,
@@ -188,8 +189,16 @@ public class ClientSetupHandlers {
 		ESBlocks.ABYSSAL_FIRE,
 		ESBlocks.GOLEM_STEEL_GRATE,
 		ESBlocks.OXIDIZED_GOLEM_STEEL_GRATE,
-		ESBlocks.BLUE_STARLIGHT_CRYSTAL_CLUSTER,
 		ESBlocks.RED_STARLIGHT_CRYSTAL_CLUSTER,
+		ESBlocks.BLUE_STARLIGHT_CRYSTAL_CLUSTER,
+		ESBlocks.BLOOMING_RED_STARLIGHT_CRYSTAL_CLUSTER,
+		ESBlocks.BLOOMING_BLUE_STARLIGHT_CRYSTAL_CLUSTER,
+		ESBlocks.RED_CRYSTALFLEUR,
+		ESBlocks.POTTED_RED_CRYSTALFLEUR,
+		ESBlocks.BLUE_CRYSTALFLEUR,
+		ESBlocks.POTTED_BLUE_CRYSTALFLEUR,
+		ESBlocks.RED_CRYSTALFLEUR_VINE,
+		ESBlocks.BLUE_CRYSTALFLEUR_VINE,
 		ESBlocks.THIOQUARTZ_CLUSTER,
 		ESBlocks.SHADEGRIEVE,
 		ESBlocks.BLOOMING_SHADEGRIEVE,
@@ -531,7 +540,6 @@ public class ClientSetupHandlers {
 
 	public static void registerShaders(ShaderRegisterStrategy strategy) {
 		strategy.register(EternalStarlight.id("crest_selection_gui"), DefaultVertexFormat.POSITION_TEX, ESShaders::setCrestSelectionGui);
-		strategy.register(EternalStarlight.id("rendertype_laser_beam"), DefaultVertexFormat.NEW_ENTITY, ESShaders::setRenderTypeLaserBeam);
 		strategy.register(EternalStarlight.id("rendertype_starlight_portal"), DefaultVertexFormat.BLOCK, ESShaders::setRenderTypeStarlightPortal);
 		strategy.register(EternalStarlight.id("rendertype_eclipse"), DefaultVertexFormat.BLOCK, ESShaders::setRenderTypeEclipse);
 	}
