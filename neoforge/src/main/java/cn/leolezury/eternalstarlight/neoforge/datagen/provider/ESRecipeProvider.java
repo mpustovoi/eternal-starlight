@@ -106,6 +106,10 @@ public class ESRecipeProvider extends RecipeProvider {
 		addBlast(recipeOutput, 100, ESItems.GRIMSTONE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.GRIMSTONE_REDSTONE_ORE.get());
 		addSmelt(recipeOutput, 200, ESItems.VOIDSTONE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.VOIDSTONE_REDSTONE_ORE.get());
 		addBlast(recipeOutput, 100, ESItems.VOIDSTONE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.VOIDSTONE_REDSTONE_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.ETERNAL_ICE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.ETERNAL_ICE_REDSTONE_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.ETERNAL_ICE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.ETERNAL_ICE_REDSTONE_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.HAZE_ICE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.HAZE_ICE_REDSTONE_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.HAZE_ICE_REDSTONE_ORE.get(), Items.REDSTONE, ESItems.HAZE_ICE_REDSTONE_ORE.get());
 
 		// magic
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ESItems.ORB_OF_PROPHECY.get())
@@ -489,6 +493,16 @@ public class ESRecipeProvider extends RecipeProvider {
 		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.ETERNAL_ICE_BRICK_STAIRS.get(), ESBlocks.ETERNAL_ICE_BRICKS.get());
 		addSlab(recipeOutput, ESBlocks.ETERNAL_ICE_BRICK_SLAB.get(), ESBlocks.ETERNAL_ICE_BRICKS.get());
 		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.ETERNAL_ICE_BRICK_SLAB.get(), ESBlocks.ETERNAL_ICE_BRICKS.get(), 2);
+
+		addStoneCompress(recipeOutput, ESBlocks.HAZE_ICE_BRICKS.get(), ESBlocks.HAZE_ICE.get());
+		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.HAZE_ICE_BRICKS.get(), ESBlocks.HAZE_ICE.get());
+		stonecuttingSet(recipeOutput, ESBlocks.HAZE_ICE_BRICK_SLAB.get(), ESBlocks.HAZE_ICE_BRICK_STAIRS.get(), ESBlocks.HAZE_ICE_BRICK_WALL.get(), ESBlocks.HAZE_ICE.get());
+		wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.HAZE_ICE_BRICK_WALL.get(), ESBlocks.HAZE_ICE_BRICKS.get());
+		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.HAZE_ICE_BRICK_WALL.get(), ESBlocks.HAZE_ICE_BRICKS.get());
+		addStairs(recipeOutput, ESBlocks.HAZE_ICE_BRICK_STAIRS.get(), ESBlocks.HAZE_ICE_BRICKS.get());
+		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.HAZE_ICE_BRICK_STAIRS.get(), ESBlocks.HAZE_ICE_BRICKS.get());
+		addSlab(recipeOutput, ESBlocks.HAZE_ICE_BRICK_SLAB.get(), ESBlocks.HAZE_ICE_BRICKS.get());
+		stonecutting(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESBlocks.HAZE_ICE_BRICK_SLAB.get(), ESBlocks.HAZE_ICE_BRICKS.get(), 2);
 
 		addShapeless(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ESItems.RAW_AETHERSENT.get(), ESBlocks.NEBULAITE.get(), 1, ESBlocks.VOIDSTONE.get(), ESBlocks.VOIDSTONE.get(), ESItems.RAW_AETHERSENT.get(), ESItems.RAW_AETHERSENT.get());
 		addStoneCompress(recipeOutput, ESBlocks.NEBULAITE_BRICKS.get(), ESBlocks.NEBULAITE.get());
@@ -1018,12 +1032,16 @@ public class ESRecipeProvider extends RecipeProvider {
 		addBlast(recipeOutput, 100, ESItems.GRIMSTONE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.GRIMSTONE_ATALPHAITE_ORE.get());
 		addSmelt(recipeOutput, 200, ESItems.VOIDSTONE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.VOIDSTONE_ATALPHAITE_ORE.get());
 		addBlast(recipeOutput, 100, ESItems.VOIDSTONE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.VOIDSTONE_ATALPHAITE_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.HAZE_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.HAZE_ICE_ATALPHAITE_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.HAZE_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.HAZE_ICE_ATALPHAITE_ORE.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ESItems.BLAZING_ATALPHAITE_BLOCK.get())
 			.pattern("TAT")
 			.pattern("ABA")
 			.pattern("TAT")
 			.define('B', ESItems.ATALPHAITE_BLOCK.get())
-			.define('A', ESItems.ATALPHAITE.get())
+			.define('A', ESConventionalTags.Items.GEMS_ATALPHAITE)
 			.define('T', ESConventionalTags.Items.INGOTS_THERMAL_SPRINGSTONE)
 			.unlockedBy("has_item", has(ESItems.ATALPHAITE_BLOCK.get()))
 			.save(recipeOutput);
@@ -1043,6 +1061,10 @@ public class ESRecipeProvider extends RecipeProvider {
 		addBlast(recipeOutput, 100, ESItems.GRIMSTONE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.GRIMSTONE_SALTPETER_ORE.get());
 		addSmelt(recipeOutput, 200, ESItems.VOIDSTONE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.VOIDSTONE_SALTPETER_ORE.get());
 		addBlast(recipeOutput, 100, ESItems.VOIDSTONE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.VOIDSTONE_SALTPETER_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.ETERNAL_ICE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.ETERNAL_ICE_SALTPETER_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.ETERNAL_ICE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.ETERNAL_ICE_SALTPETER_ORE.get());
+		addSmelt(recipeOutput, 300, ESItems.HAZE_ICE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.HAZE_ICE_SALTPETER_ORE.get());
+		addBlast(recipeOutput, 150, ESItems.HAZE_ICE_SALTPETER_ORE.get(), ESItems.SALTPETER_POWDER.get(), ESItems.HAZE_ICE_SALTPETER_ORE.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ESItems.SALTPETER_MATCHBOX.get())
 			.pattern("SSS")
 			.pattern("PPP")

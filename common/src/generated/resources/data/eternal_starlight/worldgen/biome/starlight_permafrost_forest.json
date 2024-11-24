@@ -46,7 +46,13 @@
       "eternal_starlight:grimstone_saltpeter_ore",
       "eternal_starlight:voidstone_saltpeter_ore",
       "eternal_starlight:grimstone_atalphaite_ore",
-      "eternal_starlight:voidstone_atalphaite_ore"
+      "eternal_starlight:voidstone_atalphaite_ore",
+      "eternal_starlight:eternal_ice_redstone_ore",
+      "eternal_starlight:haze_ice_redstone_ore",
+      "eternal_starlight:eternal_ice_saltpeter_ore",
+      "eternal_starlight:haze_ice_saltpeter_ore",
+      "eternal_starlight:eternal_ice_atalphaite_ore",
+      "eternal_starlight:haze_ice_atalphaite_ore"
     ],
     [
       "eternal_starlight:stellagmite",

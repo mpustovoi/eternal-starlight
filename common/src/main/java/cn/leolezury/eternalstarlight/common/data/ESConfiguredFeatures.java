@@ -77,10 +77,16 @@ public class ESConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SWAMP_SILVER_ORE = create("swamp_silver_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GRIMSTONE_REDSTONE_ORE = create("grimstone_redstone_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> VOIDSTONE_REDSTONE_ORE = create("voidstone_redstone_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ETERNAL_ICE_REDSTONE_ORE = create("eternal_ice_redstone_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> HAZE_ICE_REDSTONE_ORE = create("haze_ice_redstone_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GRIMSTONE_SALTPETER_ORE = create("grimstone_saltpeter_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> VOIDSTONE_SALTPETER_ORE = create("voidstone_saltpeter_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ETERNAL_ICE_SALTPETER_ORE = create("eternal_ice_saltpeter_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> HAZE_ICE_SALTPETER_ORE = create("haze_ice_saltpeter_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GRIMSTONE_ATALPHAITE_ORE = create("grimstone_atalphaite_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> VOIDSTONE_ATALPHAITE_ORE = create("voidstone_atalphaite_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ETERNAL_ICE_ATALPHAITE_ORE = create("eternal_ice_atalphaite_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> HAZE_ICE_ATALPHAITE_ORE = create("haze_ice_atalphaite_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_LUNAR_LOG = create("fallen_lunar_log");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_NORTHLAND_LOG = create("fallen_northland_log");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_STARLIGHT_MANGROVE_LOG = create("fallen_starlight_mangrove_log");
@@ -139,6 +145,8 @@ public class ESConfiguredFeatures {
 		RuleTest baseStone = new TagMatchTest(ESTags.Blocks.BASE_STONE_STARLIGHT);
 		RuleTest grimstone = new BlockMatchTest(ESBlocks.GRIMSTONE.get());
 		RuleTest voidstone = new BlockMatchTest(ESBlocks.VOIDSTONE.get());
+		RuleTest eternalIce = new BlockMatchTest(ESBlocks.ETERNAL_ICE.get());
+		RuleTest hazeIce = new BlockMatchTest(ESBlocks.HAZE_ICE.get());
 		RuleTest nightfallMud = new BlockMatchTest(ESBlocks.NIGHTFALL_MUD.get());
 		RuleTest dustedGravel = new BlockMatchTest(ESBlocks.DUSTED_GRAVEL.get());
 
@@ -156,10 +164,16 @@ public class ESConfiguredFeatures {
 		FeatureUtils.register(context, SWAMP_SILVER_ORE, Feature.ORE, new OreConfiguration(nightfallMud, ESBlocks.SWAMP_SILVER_ORE.get().defaultBlockState(), 7));
 		FeatureUtils.register(context, GRIMSTONE_REDSTONE_ORE, Feature.ORE, new OreConfiguration(grimstone, ESBlocks.GRIMSTONE_REDSTONE_ORE.get().defaultBlockState(), 7));
 		FeatureUtils.register(context, VOIDSTONE_REDSTONE_ORE, Feature.ORE, new OreConfiguration(voidstone, ESBlocks.VOIDSTONE_REDSTONE_ORE.get().defaultBlockState(), 7));
+		FeatureUtils.register(context, ETERNAL_ICE_REDSTONE_ORE, Feature.ORE, new OreConfiguration(eternalIce, ESBlocks.ETERNAL_ICE_REDSTONE_ORE.get().defaultBlockState(), 7));
+		FeatureUtils.register(context, HAZE_ICE_REDSTONE_ORE, Feature.ORE, new OreConfiguration(hazeIce, ESBlocks.HAZE_ICE_REDSTONE_ORE.get().defaultBlockState(), 7));
 		FeatureUtils.register(context, GRIMSTONE_SALTPETER_ORE, Feature.ORE, new OreConfiguration(grimstone, ESBlocks.GRIMSTONE_SALTPETER_ORE.get().defaultBlockState(), 20));
 		FeatureUtils.register(context, VOIDSTONE_SALTPETER_ORE, Feature.ORE, new OreConfiguration(voidstone, ESBlocks.VOIDSTONE_SALTPETER_ORE.get().defaultBlockState(), 20));
+		FeatureUtils.register(context, ETERNAL_ICE_SALTPETER_ORE, Feature.ORE, new OreConfiguration(eternalIce, ESBlocks.ETERNAL_ICE_SALTPETER_ORE.get().defaultBlockState(), 20));
+		FeatureUtils.register(context, HAZE_ICE_SALTPETER_ORE, Feature.ORE, new OreConfiguration(hazeIce, ESBlocks.HAZE_ICE_SALTPETER_ORE.get().defaultBlockState(), 20));
 		FeatureUtils.register(context, GRIMSTONE_ATALPHAITE_ORE, Feature.ORE, new OreConfiguration(grimstone, ESBlocks.GRIMSTONE_ATALPHAITE_ORE.get().defaultBlockState(), 5));
 		FeatureUtils.register(context, VOIDSTONE_ATALPHAITE_ORE, Feature.ORE, new OreConfiguration(voidstone, ESBlocks.VOIDSTONE_ATALPHAITE_ORE.get().defaultBlockState(), 5));
+		FeatureUtils.register(context, ETERNAL_ICE_ATALPHAITE_ORE, Feature.ORE, new OreConfiguration(eternalIce, ESBlocks.ETERNAL_ICE_ATALPHAITE_ORE.get().defaultBlockState(), 5));
+		FeatureUtils.register(context, HAZE_ICE_ATALPHAITE_ORE, Feature.ORE, new OreConfiguration(hazeIce, ESBlocks.HAZE_ICE_ATALPHAITE_ORE.get().defaultBlockState(), 5));
 		FeatureUtils.register(context, FALLEN_LUNAR_LOG, ESFeatures.FALLEN_LOG.get(), new FallenLogFeature.Configuration(BlockStateProvider.simple(ESBlocks.LUNAR_LOG.get())));
 		FeatureUtils.register(context, FALLEN_NORTHLAND_LOG, ESFeatures.FALLEN_LOG.get(), new FallenLogFeature.Configuration(BlockStateProvider.simple(ESBlocks.NORTHLAND_LOG.get())));
 		FeatureUtils.register(context, FALLEN_STARLIGHT_MANGROVE_LOG, ESFeatures.FALLEN_LOG.get(), new FallenLogFeature.Configuration(BlockStateProvider.simple(ESBlocks.STARLIGHT_MANGROVE_LOG.get())));

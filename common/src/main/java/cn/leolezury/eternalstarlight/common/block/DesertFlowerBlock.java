@@ -1,5 +1,6 @@
 package cn.leolezury.eternalstarlight.common.block;
 
+import cn.leolezury.eternalstarlight.common.registry.ESBlocks;
 import cn.leolezury.eternalstarlight.common.util.ESTags;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -33,6 +34,6 @@ public class DesertFlowerBlock extends FlowerBlock {
 
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return super.mayPlaceOn(blockState, blockGetter, blockPos) || blockState.is(BlockTags.SAND) || blockState.is(ESTags.Blocks.BASE_STONE_STARLIGHT);
+		return super.mayPlaceOn(blockState, blockGetter, blockPos) || blockState.is(BlockTags.SAND) || blockState.is(ESTags.Blocks.BASE_STONE_STARLIGHT) || blockState.is(ESBlocks.RED_STARLIGHT_CRYSTAL_BLOCK.get()) || blockState.is(ESBlocks.BLUE_STARLIGHT_CRYSTAL_BLOCK.get());
 	}
 }
