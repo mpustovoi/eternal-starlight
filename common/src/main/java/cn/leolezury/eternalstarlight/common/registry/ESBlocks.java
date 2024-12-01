@@ -529,6 +529,7 @@ public class ESBlocks {
 	public static final RegistryObject<Block, WeatheringGolemSteelFullBlock> OXIDIZED_CHISELED_GOLEM_STEEL_BLOCK = register("oxidized_chiseled_golem_steel_block", WeatheringGolemSteelFullBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.COLOR_GRAY));
 	public static final RegistryObject<Block, WeatheringGolemSteelJetBlock> GOLEM_STEEL_JET = register("golem_steel_jet", WeatheringGolemSteelJetBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.COLOR_BLUE));
 	public static final RegistryObject<Block, WeatheringGolemSteelJetBlock> OXIDIZED_GOLEM_STEEL_JET = register("oxidized_golem_steel_jet", WeatheringGolemSteelJetBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.COLOR_GRAY));
+	public static final RegistryObject<Block, CrateBlock> GOLEM_STEEL_CRATE = BLOCKS.register("golem_steel_crate", () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.COLOR_GRAY).strength(10F, 12F)));
 
 	// lunar monstrosity
 	public static final RegistryObject<Block, ShadegrieveBlock> SHADEGRIEVE = register("shadegrieve", properties -> new ShadegrieveBlock(false, properties), BlockBehaviour.Properties.of().strength(25F).sound(SoundType.AZALEA_LEAVES).mapColor(MapColor.COLOR_PURPLE));

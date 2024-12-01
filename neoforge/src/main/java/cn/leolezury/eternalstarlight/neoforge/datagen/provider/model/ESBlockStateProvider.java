@@ -250,6 +250,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ESBlocks.OXIDIZED_CHISELED_GOLEM_STEEL_BLOCK.get());
 		simpleBlock(ESBlocks.GOLEM_STEEL_JET.get());
 		simpleBlock(ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get());
+		directionalOnOffBlock(ESBlocks.GOLEM_STEEL_CRATE.get(), CrateBlock.OPEN, models().getExistingFile(modLoc("golem_steel_crate_open")), models().getExistingFile(modLoc("golem_steel_crate")));
 
 		shadegrieve(ESBlocks.SHADEGRIEVE.get());
 		shadegrieve(ESBlocks.BLOOMING_SHADEGRIEVE.get());
@@ -1045,6 +1046,14 @@ public class ESBlockStateProvider extends BlockStateProvider {
 			.modelForState().modelFile(off).addModel()
 			.partialState().with(property, true)
 			.modelForState().modelFile(on).addModel();
+	}
+
+	private void directionalOnOffBlock(Block block, BooleanProperty property, ModelFile on, ModelFile off) {
+		getVariantBuilder(block).forAllStates(state -> {
+			Direction direction = state.getValue(BlockStateProperties.FACING);
+			int rotX = direction == Direction.DOWN ? 180 : direction == Direction.UP ? 0 : 90;
+			return ConfiguredModel.builder().modelFile(state.getValue(property) ? on : off).rotationX(rotX).rotationY(((int) direction.toYRot() + 180) % 360).build();
+		});
 	}
 
 	private void simpleSign(Block normal, Block wall, ResourceLocation location) {

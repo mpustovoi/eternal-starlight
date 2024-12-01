@@ -2,6 +2,7 @@ package cn.leolezury.eternalstarlight.common.client.handler;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.block.ESSkullType;
+import cn.leolezury.eternalstarlight.common.client.gui.screen.CrateScreen;
 import cn.leolezury.eternalstarlight.common.client.model.animation.PlayerAnimator;
 import cn.leolezury.eternalstarlight.common.client.model.animation.definition.PlayerAnimation;
 import cn.leolezury.eternalstarlight.common.client.model.armor.AlchemistArmorModel;
@@ -41,6 +42,10 @@ import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.SkullModelBase;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -65,6 +70,8 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -106,6 +113,10 @@ public class ClientSetupHandlers {
 
 	public interface RendererLayerRegisterStrategy {
 		void register(ModelLayerLocation layerLocation, Supplier<LayerDefinition> supplier);
+	}
+
+	public interface MenuScreenRegisterStrategy {
+		<M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(MenuType<? extends M> menuType, MenuScreens.ScreenConstructor<M, U> screenConstructor);
 	}
 
 	public interface WorldVisualEffectSpawnFunction {
@@ -719,5 +730,9 @@ public class ClientSetupHandlers {
 		// block entities
 		strategy.register(LunarVineRenderer.VineModel.LAYER_LOCATION, LunarVineRenderer.VineModel::createLayer);
 		strategy.register(LunarVineRenderer.FlowerModel.LAYER_LOCATION, LunarVineRenderer.FlowerModel::createLayer);
+	}
+
+	public static void registerMenuScreens(MenuScreenRegisterStrategy strategy) {
+		strategy.register(ESMenuTypes.CRATE.get(), CrateScreen::new);
 	}
 }

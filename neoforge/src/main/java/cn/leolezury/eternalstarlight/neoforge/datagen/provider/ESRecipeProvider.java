@@ -858,6 +858,15 @@ public class ESRecipeProvider extends RecipeProvider {
 			.define('#', ESItems.OXIDIZED_GOLEM_STEEL_INGOT.get())
 			.unlockedBy("has_item", has(ESItems.OXIDIZED_GOLEM_STEEL_INGOT.get()))
 			.save(recipeOutput);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ESBlocks.GOLEM_STEEL_CRATE.get())
+			.pattern("SGS")
+			.pattern("SCS")
+			.pattern("SGS")
+			.define('G', ESItems.OXIDIZED_GOLEM_STEEL_INGOT.get())
+			.define('S', ESItems.SWAMP_SILVER_INGOT.get())
+			.define('C', Items.CHEST)
+			.unlockedBy("has_item", has(ESItems.OXIDIZED_GOLEM_STEEL_INGOT.get()))
+			.save(recipeOutput);
 
 		nineBlockStorageCustomUnpacking(recipeOutput, RecipeCategory.MISC, ESItems.TENACIOUS_PETAL.get(), RecipeCategory.BUILDING_BLOCKS, ESItems.LUNAR_MOSAIC.get(), "tenacious_petal_from_lunar_mosaic", "tenacious_petal");
 		addStairs(recipeOutput, ESBlocks.LUNAR_MOSAIC_STAIRS.get(), ESBlocks.LUNAR_MOSAIC.get());
@@ -874,16 +883,16 @@ public class ESRecipeProvider extends RecipeProvider {
 			.pattern("###")
 			.pattern("S S")
 			.define('#', Items.LEATHER)
-			.define('S', ESItems.THIOQUARTZ_SHARD.get())
-			.unlockedBy("has_item", has(ESItems.THIOQUARTZ_SHARD.get()))
+			.define('S', ESConventionalTags.Items.GEMS_THIOQUARTZ)
+			.unlockedBy("has_item", has(ESConventionalTags.Items.GEMS_THIOQUARTZ))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.ALCHEMIST_ROBE.get())
 			.pattern("S S")
 			.pattern("#S#")
 			.pattern("#S#")
 			.define('#', Items.LEATHER)
-			.define('S', ESItems.THIOQUARTZ_SHARD.get())
-			.unlockedBy("has_item", has(ESItems.THIOQUARTZ_SHARD.get()))
+			.define('S', ESConventionalTags.Items.GEMS_THIOQUARTZ)
+			.unlockedBy("has_item", has(ESConventionalTags.Items.GEMS_THIOQUARTZ))
 			.save(recipeOutput);
 	}
 
@@ -1040,18 +1049,18 @@ public class ESRecipeProvider extends RecipeProvider {
 			.pattern("TAT")
 			.pattern("ABA")
 			.pattern("TAT")
-			.define('B', ESItems.ATALPHAITE_BLOCK.get())
+			.define('B', ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE)
 			.define('A', ESConventionalTags.Items.GEMS_ATALPHAITE)
 			.define('T', ESConventionalTags.Items.INGOTS_THERMAL_SPRINGSTONE)
-			.unlockedBy("has_item", has(ESItems.ATALPHAITE_BLOCK.get()))
+			.unlockedBy("has_item", has(ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ESItems.ATALPHAITE_LIGHT.get())
 			.pattern(" G ")
 			.pattern("GBG")
 			.pattern(" G ")
-			.define('B', ESItems.ATALPHAITE_BLOCK.get())
+			.define('B', ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE)
 			.define('G', ESItems.DUSK_GLASS.get())
-			.unlockedBy("has_item", has(ESItems.ATALPHAITE_BLOCK.get()))
+			.unlockedBy("has_item", has(ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE))
 			.save(recipeOutput);
 	}
 

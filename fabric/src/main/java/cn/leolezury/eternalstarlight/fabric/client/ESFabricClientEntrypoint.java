@@ -23,6 +23,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleOptions;
@@ -53,6 +54,7 @@ public class ESFabricClientEntrypoint implements ClientModInitializer {
 
 		ClientSetupHandlers.registerEntityRenderers(EntityRendererRegistry::register);
 		ClientSetupHandlers.registerLayers((layerLocation, supplier) -> EntityModelLayerRegistry.registerModelLayer(layerLocation, supplier::get));
+		ClientSetupHandlers.registerMenuScreens(MenuScreens::register);
 		WorldRenderEvents.AFTER_ENTITIES.register(context -> ClientHandlers.onAfterRenderEntities(context.consumers(), context.matrixStack(), context.tickCounter().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally())));
 
 		for (Supplier<? extends Block> blockSupplier : ClientSetupHandlers.BLOCKS_CUTOUT_MIPPED) {

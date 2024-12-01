@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-24T21:50:16.9774767	Block States: eternal_starlight
+// 1.21.1	2024-11-30T14:43:00.0558526	Block States: eternal_starlight
 0fa0d5e3aac576a13b6468badbef299870f730a6 assets/eternal_starlight/blockstates/abyssal_geyser.json
 dd0f2627e74ab03459ebae3d5a1df9def4a89042 assets/eternal_starlight/blockstates/abyssal_kelp.json
 f02d5b82ec269c56ac32c6a38b0dc0cdbbf3d008 assets/eternal_starlight/blockstates/abyssal_kelp_plant.json
@@ -161,6 +161,7 @@ ffd835f88b71b7297801156cd1d6fe0d385b739c assets/eternal_starlight/blockstates/gl
 b7a68798335ebba312a70ae9127f9ea54752761f assets/eternal_starlight/blockstates/golden_grass.json
 5a36dc197fa0675e05025cabd2da1b1a1fc3037d assets/eternal_starlight/blockstates/golden_grass_block.json
 7e11035c307e031acfb5bbb44e920159f983fddf assets/eternal_starlight/blockstates/golem_steel_block.json
+651aca8eeabb14d95e61da41a778cd64c6a3a1a9 assets/eternal_starlight/blockstates/golem_steel_crate.json
 5d07ec624fab2ff4b02b88a748663504e2351f96 assets/eternal_starlight/blockstates/golem_steel_grate.json
 65359105fd9298bab335eb2b6a9c4da1ff7c9fe2 assets/eternal_starlight/blockstates/golem_steel_jet.json
 739a08d1ec43e43409e38cfdd0faaabba755afd4 assets/eternal_starlight/blockstates/golem_steel_pillar.json

@@ -61,16 +61,16 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.ORBFLORA_PLANT.get(), noDrop());
 		dropSelf(ESBlocks.ORBFLORA_LIGHT.get());
 
-		add(ESBlocks.RED_STARLIGHT_CRYSTAL_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
-		add(ESBlocks.BLUE_STARLIGHT_CRYSTAL_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
-		add(ESBlocks.BLOOMING_RED_STARLIGHT_CRYSTAL_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
-		add(ESBlocks.BLOOMING_BLUE_STARLIGHT_CRYSTAL_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+		add(ESBlocks.RED_STARLIGHT_CRYSTAL_CLUSTER.get(), block -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+		add(ESBlocks.BLUE_STARLIGHT_CRYSTAL_CLUSTER.get(), block -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+		add(ESBlocks.BLOOMING_RED_STARLIGHT_CRYSTAL_CLUSTER.get(), block -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.RED_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+		add(ESBlocks.BLOOMING_BLUE_STARLIGHT_CRYSTAL_CLUSTER.get(), block -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 		dropSelf(ESBlocks.RED_CRYSTALFLEUR.get());
 		dropPottedContents(ESBlocks.POTTED_RED_CRYSTALFLEUR.get());
 		dropSelf(ESBlocks.BLUE_CRYSTALFLEUR.get());
 		dropPottedContents(ESBlocks.POTTED_BLUE_CRYSTALFLEUR.get());
-		add(ESBlocks.RED_CRYSTALFLEUR_VINE.get(), (block) -> this.createMultifaceBlockDrops(block, HAS_SHEARS_OR_SICKLE));
-		add(ESBlocks.BLUE_CRYSTALFLEUR_VINE.get(), (block) -> this.createMultifaceBlockDrops(block, HAS_SHEARS_OR_SICKLE));
+		add(ESBlocks.RED_CRYSTALFLEUR_VINE.get(), block -> this.createMultifaceBlockDrops(block, HAS_SHEARS_OR_SICKLE));
+		add(ESBlocks.BLUE_CRYSTALFLEUR_VINE.get(), block -> this.createMultifaceBlockDrops(block, HAS_SHEARS_OR_SICKLE));
 
 		dropSelf(ESBlocks.RED_STARLIGHT_CRYSTAL_BLOCK.get());
 		dropSelf(ESBlocks.BLUE_STARLIGHT_CRYSTAL_BLOCK.get());
@@ -87,7 +87,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropWhenSilkTouch(ESBlocks.TENTACLES_CORAL_FAN.get());
 		// otherWhenSilkTouch(ESBlocks.TENTACLES_CORAL_WALL_FAN.get(), ESBlocks.TENTACLES_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_TENTACLES_CORAL_BLOCK.get());
-		add(ESBlocks.TENTACLES_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_TENTACLES_CORAL_BLOCK.get()));
+		add(ESBlocks.TENTACLES_CORAL_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_TENTACLES_CORAL_BLOCK.get()));
 
 		dropWhenSilkTouch(ESBlocks.DEAD_GOLDEN_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.GOLDEN_CORAL.get());
@@ -96,7 +96,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropWhenSilkTouch(ESBlocks.GOLDEN_CORAL_FAN.get());
 		// otherWhenSilkTouch(ESBlocks.GOLDEN_CORAL_WALL_FAN.get(), ESBlocks.GOLDEN_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_GOLDEN_CORAL_BLOCK.get());
-		add(ESBlocks.GOLDEN_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_GOLDEN_CORAL_BLOCK.get()));
+		add(ESBlocks.GOLDEN_CORAL_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_GOLDEN_CORAL_BLOCK.get()));
 
 		dropWhenSilkTouch(ESBlocks.DEAD_CRYSTALLUM_CORAL.get());
 		dropWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL.get());
@@ -105,9 +105,9 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL_FAN.get());
 		// otherWhenSilkTouch(ESBlocks.CRYSTALLUM_CORAL_WALL_FAN.get(), ESBlocks.CRYSTALLUM_CORAL_FAN.get());
 		dropSelf(ESBlocks.DEAD_CRYSTALLUM_CORAL_BLOCK.get());
-		add(ESBlocks.CRYSTALLUM_CORAL_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_CRYSTALLUM_CORAL_BLOCK.get()));
+		add(ESBlocks.CRYSTALLUM_CORAL_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.DEAD_CRYSTALLUM_CORAL_BLOCK.get()));
 
-		add(ESBlocks.VELVETUMOSS.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.VELVETUMOSS_BALL.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 8.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.VELVETUMOSS.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.VELVETUMOSS_BALL.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 8.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
 		dropWhenSilkTouch(ESBlocks.VELVETUMOSS_VILLI.get());
 
 		dropSelf(ESBlocks.RED_VELVETUMOSS.get());
@@ -115,7 +115,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.RED_VELVETUMOSS_FLOWER.get());
 		dropPottedContents(ESBlocks.POTTED_RED_VELVETUMOSS_FLOWER.get());
 
-		add(ESBlocks.LUNAR_LEAVES.get(), (block) -> this.createLunarLeavesDrops(block, ESBlocks.LUNAR_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(ESBlocks.LUNAR_LEAVES.get(), block -> this.createLunarLeavesDrops(block, ESBlocks.LUNAR_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		dropSelf(ESBlocks.LUNAR_LOG.get());
 		dropSelf(ESBlocks.LUNAR_WOOD.get());
 		dropSelf(ESBlocks.LUNAR_PLANKS.get());
@@ -140,7 +140,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.RED_CRYSTALLIZED_LUNAR_LOG.get());
 		dropSelf(ESBlocks.BLUE_CRYSTALLIZED_LUNAR_LOG.get());
 
-		add(ESBlocks.NORTHLAND_LEAVES.get(), (block) -> this.createLeavesDrops(block, ESBlocks.NORTHLAND_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(ESBlocks.NORTHLAND_LEAVES.get(), block -> this.createLeavesDrops(block, ESBlocks.NORTHLAND_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		dropSelf(ESBlocks.NORTHLAND_LOG.get());
 		dropSelf(ESBlocks.NORTHLAND_WOOD.get());
 		dropSelf(ESBlocks.NORTHLAND_PLANKS.get());
@@ -161,7 +161,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.NORTHLAND_SAPLING.get());
 		dropPottedContents(ESBlocks.POTTED_NORTHLAND_SAPLING.get());
 
-		add(ESBlocks.STARLIGHT_MANGROVE_LEAVES.get(), (block) -> this.createLeavesDrops(block, ESBlocks.STARLIGHT_MANGROVE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(ESBlocks.STARLIGHT_MANGROVE_LEAVES.get(), block -> this.createLeavesDrops(block, ESBlocks.STARLIGHT_MANGROVE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_LOG.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_WOOD.get());
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_PLANKS.get());
@@ -184,7 +184,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.STARLIGHT_MANGROVE_ROOTS.get());
 		dropSelf(ESBlocks.MUDDY_STARLIGHT_MANGROVE_ROOTS.get());
 
-		add(ESBlocks.SCARLET_LEAVES.get(), (block) -> this.createLeavesDrops(block, ESBlocks.SCARLET_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(ESBlocks.SCARLET_LEAVES.get(), block -> this.createLeavesDrops(block, ESBlocks.SCARLET_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(ESBlocks.SCARLET_LEAVES_PILE.get(), noDrop());
 		dropSelf(ESBlocks.SCARLET_LOG.get());
 		dropSelf(ESBlocks.SCARLET_WOOD.get());
@@ -206,7 +206,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.SCARLET_SAPLING.get());
 		dropPottedContents(ESBlocks.POTTED_SCARLET_SAPLING.get());
 
-		add(ESBlocks.TORREYA_LEAVES.get(), (block) -> this.createLeavesDrops(block, ESBlocks.TORREYA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(ESBlocks.TORREYA_LEAVES.get(), block -> this.createLeavesDrops(block, ESBlocks.TORREYA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		dropSelf(ESBlocks.TORREYA_LOG.get());
 		dropSelf(ESBlocks.TORREYA_WOOD.get());
 		dropSelf(ESBlocks.TORREYA_PLANKS.get());
@@ -228,9 +228,9 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropPottedContents(ESBlocks.POTTED_TORREYA_SAPLING.get());
 		dropSelf(ESBlocks.TORREYA_VINES.get());
 		dropOther(ESBlocks.TORREYA_VINES_PLANT.get(), ESBlocks.TORREYA_VINES.get());
-		add(ESBlocks.TORREYA_CAMPFIRE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.RAW_AMARAMBER.get()))));
+		add(ESBlocks.TORREYA_CAMPFIRE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.RAW_AMARAMBER.get()))));
 
-		add(ESBlocks.GRIMSTONE.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.COBBLED_GRIMSTONE.get()));
+		add(ESBlocks.GRIMSTONE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.COBBLED_GRIMSTONE.get()));
 		dropSelf(ESBlocks.COBBLED_GRIMSTONE.get());
 		add(ESBlocks.COBBLED_GRIMSTONE_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.COBBLED_GRIMSTONE_STAIRS.get());
@@ -250,7 +250,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.CHISELED_GRIMSTONE.get());
 		dropSelf(ESBlocks.GLOWING_GRIMSTONE.get());
 
-		add(ESBlocks.VOIDSTONE.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.COBBLED_VOIDSTONE.get()));
+		add(ESBlocks.VOIDSTONE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.COBBLED_VOIDSTONE.get()));
 		dropSelf(ESBlocks.COBBLED_VOIDSTONE.get());
 		add(ESBlocks.COBBLED_VOIDSTONE_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.COBBLED_VOIDSTONE_STAIRS.get());
@@ -293,10 +293,10 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.ATALPHAITE_BLOCK.get());
 		dropSelf(ESBlocks.BLAZING_ATALPHAITE_BLOCK.get());
 		dropSelf(ESBlocks.ATALPHAITE_LIGHT.get());
-		add(ESBlocks.GRIMSTONE_ATALPHAITE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.VOIDSTONE_ATALPHAITE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.ETERNAL_ICE_ATALPHAITE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.HAZE_ICE_ATALPHAITE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.GRIMSTONE_ATALPHAITE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.VOIDSTONE_ATALPHAITE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.ETERNAL_ICE_ATALPHAITE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.HAZE_ICE_ATALPHAITE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.ATALPHAITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
 		dropWhenSilkTouch(ESBlocks.DUSK_GLASS.get());
 		dropWhenSilkTouch(ESBlocks.DUSK_LIGHT.get());
 		add(ESBlocks.ECLIPSE_CORE.get(), noDrop());
@@ -386,7 +386,7 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 
 		dropSelf(ESBlocks.THIOQUARTZ_BLOCK.get());
 		add(ESBlocks.BUDDING_THIOQUARTZ.get(), noDrop());
-		add(ESBlocks.THIOQUARTZ_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.THIOQUARTZ_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.THIOQUARTZ_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+		add(ESBlocks.THIOQUARTZ_CLUSTER.get(), block -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(ESItems.THIOQUARTZ_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.THIOQUARTZ_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 		dropSelf(ESBlocks.TOXITE.get());
 		add(ESBlocks.TOXITE_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.TOXITE_STAIRS.get());
@@ -415,15 +415,13 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.CUT_TWILIGHT_SANDSTONE_WALL.get());
 		dropSelf(ESBlocks.CHISELED_TWILIGHT_SANDSTONE.get());
 
-		add(ESBlocks.DUSTED_GRAVEL.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.DUSTED_SHARD.get()).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F)).otherwise(LootItem.lootTableItem(block)))));
+		add(ESBlocks.DUSTED_GRAVEL.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(ESItems.DUSTED_SHARD.get()).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F)).otherwise(LootItem.lootTableItem(block)))));
 		dropSelf(ESBlocks.DUSTED_BRICKS.get());
 		add(ESBlocks.DUSTED_BRICK_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.DUSTED_BRICK_STAIRS.get());
 		dropSelf(ESBlocks.DUSTED_BRICK_WALL.get());
 
 		dropSelf(ESBlocks.GOLEM_STEEL_BLOCK.get());
-		dropSelf(ESBlocks.GOLEM_STEEL_JET.get());
-		dropSelf(ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get());
 		dropSelf(ESBlocks.OXIDIZED_GOLEM_STEEL_BLOCK.get());
 		add(ESBlocks.GOLEM_STEEL_SLAB.get(), this::createSlabItemTable);
 		add(ESBlocks.OXIDIZED_GOLEM_STEEL_SLAB.get(), this::createSlabItemTable);
@@ -443,6 +441,9 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.OXIDIZED_GOLEM_STEEL_BARS.get());
 		dropSelf(ESBlocks.CHISELED_GOLEM_STEEL_BLOCK.get());
 		dropSelf(ESBlocks.OXIDIZED_CHISELED_GOLEM_STEEL_BLOCK.get());
+		dropSelf(ESBlocks.GOLEM_STEEL_JET.get());
+		dropSelf(ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get());
+		add(ESBlocks.GOLEM_STEEL_CRATE.get(), this::createShulkerBoxDrop);
 
 		dropSelf(ESBlocks.SHADEGRIEVE.get());
 		dropSelf(ESBlocks.BLOOMING_SHADEGRIEVE.get());
@@ -577,11 +578,11 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		plant(ESBlocks.GOLDEN_GRASS.get());
 		add(ESBlocks.TALL_GOLDEN_GRASS.get(), this::createDoublePlantDrops);
 
-		add(ESBlocks.NIGHTFALL_GRASS_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
-		add(ESBlocks.NIGHTFALL_PODZOL.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
-		add(ESBlocks.TENACIOUS_NIGHTFALL_GRASS_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
-		add(ESBlocks.GOLDEN_GRASS_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
-		add(ESBlocks.FANTASY_GRASS_BLOCK.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_MUD.get()));
+		add(ESBlocks.NIGHTFALL_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
+		add(ESBlocks.NIGHTFALL_PODZOL.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
+		add(ESBlocks.TENACIOUS_NIGHTFALL_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
+		add(ESBlocks.GOLDEN_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_DIRT.get()));
+		add(ESBlocks.FANTASY_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ESBlocks.NIGHTFALL_MUD.get()));
 		dropSelf(ESBlocks.FANTASY_GRASS_CARPET.get());
 		dropSelf(ESBlocks.NIGHTFALL_DIRT.get());
 		dropOther(ESBlocks.NIGHTFALL_FARMLAND.get(), ESBlocks.NIGHTFALL_DIRT.get());
@@ -647,17 +648,17 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		add(ESBlocks.THERMAL_SPRINGSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
 		dropSelf(ESBlocks.THERMAL_SPRINGSTONE_BRICK_STAIRS.get());
 		dropSelf(ESBlocks.THERMAL_SPRINGSTONE_BRICK_WALL.get());
-		add(ESBlocks.GLACITE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.GLACITE_SHARD.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.SWAMP_SILVER_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SWAMP_SILVER_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.GLACITE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.GLACITE_SHARD.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.SWAMP_SILVER_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SWAMP_SILVER_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
 		dropSelf(ESBlocks.SWAMP_SILVER_BLOCK.get());
-		add(ESBlocks.GRIMSTONE_REDSTONE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.VOIDSTONE_REDSTONE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.ETERNAL_ICE_REDSTONE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.HAZE_ICE_REDSTONE_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.GRIMSTONE_SALTPETER_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.VOIDSTONE_SALTPETER_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.ETERNAL_ICE_SALTPETER_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
-		add(ESBlocks.HAZE_ICE_SALTPETER_ORE.get(), (block) -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.GRIMSTONE_REDSTONE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.VOIDSTONE_REDSTONE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.ETERNAL_ICE_REDSTONE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.HAZE_ICE_REDSTONE_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.GRIMSTONE_SALTPETER_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.VOIDSTONE_SALTPETER_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.ETERNAL_ICE_SALTPETER_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
+		add(ESBlocks.HAZE_ICE_SALTPETER_ORE.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ESItems.SALTPETER_POWDER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))))));
 		dropSelf(ESBlocks.SALTPETER_BLOCK.get());
 
 		dropSelf(ESBlocks.AMARAMBER_LANTERN.get());

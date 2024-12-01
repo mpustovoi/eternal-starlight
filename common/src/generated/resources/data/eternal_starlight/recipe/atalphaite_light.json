@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "B": {
-      "item": "eternal_starlight:atalphaite_block"
+      "tag": "c:storage_blocks/atalphaite"
     },
     "G": {
       "item": "eternal_starlight:dusk_glass"

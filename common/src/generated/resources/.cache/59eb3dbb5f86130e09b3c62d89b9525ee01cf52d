@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-24T21:50:16.9576883	Loot Tables
+// 1.21.1	2024-11-30T14:43:00.0255867	Loot Tables
 2b18f4ee4964de853f965809175e41672c73f2a3 data/eternal_starlight/loot_table/blocks/abyssal_fire.json
 188b8614ef4815c81bb45c3a918877795892cf25 data/eternal_starlight/loot_table/blocks/abyssal_geyser.json
 77967e1af1e01fc2bbf8f97dd52c510df8648a4c data/eternal_starlight/loot_table/blocks/abyssal_kelp.json
@@ -162,6 +162,7 @@ f9f33b3b845903788f57f9bcb8bf7bf507aa99aa data/eternal_starlight/loot_table/block
 1f5e8f6e7b05ca3c97f1c4276622c0641543b747 data/eternal_starlight/loot_table/blocks/golden_grass_block.json
 7ab271d8aea5ad16a41a1621e3ae69abe69abf87 data/eternal_starlight/loot_table/blocks/golem_steel_bars.json
 2d26e1daa167286265c4decbd3ed80f09a197da8 data/eternal_starlight/loot_table/blocks/golem_steel_block.json
+f8635011cede8589e0f986477b86eb508b423dc8 data/eternal_starlight/loot_table/blocks/golem_steel_crate.json
 b27b8088b7003ef80790011bb1da391c07c59fa8 data/eternal_starlight/loot_table/blocks/golem_steel_grate.json
 563e58be2e2d4760a620a7bef40b51d37b6aaf16 data/eternal_starlight/loot_table/blocks/golem_steel_jet.json
 173c55305c1d05668683d30dc8d8351b3c6e330a data/eternal_starlight/loot_table/blocks/golem_steel_pillar.json

@@ -4,11 +4,13 @@ import cn.leolezury.eternalstarlight.common.registry.ESEntities;
 import cn.leolezury.eternalstarlight.common.registry.ESItems;
 import cn.leolezury.eternalstarlight.common.registry.ESSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -156,8 +158,8 @@ public class EyeOfSeeking extends Entity implements ItemSupplier {
 				this.discard();
 				if (this.surviveAfterDeath) {
 					this.level().addFreshEntity(new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.getItem()));
-				} else {
-					this.level().levelEvent(2003, this.blockPosition(), 0);
+				} else if (level() instanceof ServerLevel serverLevel) {
+					serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, getItem()), this.getX() + (this.random.nextFloat() - 0.5) * getBbWidth(), this.getY() + random.nextFloat() * getBbHeight(), this.getZ() + (this.random.nextFloat() - 0.5) * getBbWidth(), 5, 0.2, 0.2, 0.2, 0.0);
 				}
 			}
 		} else {

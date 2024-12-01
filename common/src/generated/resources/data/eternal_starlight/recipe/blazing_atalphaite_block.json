@@ -6,7 +6,7 @@
       "tag": "c:gems/atalphaite"
     },
     "B": {
-      "item": "eternal_starlight:atalphaite_block"
+      "tag": "c:storage_blocks/atalphaite"
     },
     "T": {
       "tag": "c:ingots/thermal_springstone"
