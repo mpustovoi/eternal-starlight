@@ -146,12 +146,13 @@ public class ShatteredBlade extends AbstractArrow {
 		compoundTag.putBoolean(TAG_DEALT_DAMAGE, this.dealtDamage);
 	}
 
-	@Override
+	// just despawn it as it sometimes gets really annoying
+	/*@Override
 	public void tickDespawn() {
 		if (this.pickup != Pickup.ALLOWED) {
 			super.tickDespawn();
 		}
-	}
+	}*/
 
 	@Override
 	protected float getWaterInertia() {

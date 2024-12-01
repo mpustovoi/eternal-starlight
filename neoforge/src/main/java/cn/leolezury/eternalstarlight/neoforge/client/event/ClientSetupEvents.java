@@ -165,6 +165,11 @@ public class ClientSetupEvents {
 	}
 
 	@SubscribeEvent
+	private static void onRegisterMenuScreens(RegisterMenuScreensEvent event) {
+		ClientSetupHandlers.registerMenuScreens(event::register);
+	}
+
+	@SubscribeEvent
 	private static void onRegisterShader(RegisterShadersEvent event) {
 		ClientSetupHandlers.registerShaders((location, format, loaded) -> {
 			try {

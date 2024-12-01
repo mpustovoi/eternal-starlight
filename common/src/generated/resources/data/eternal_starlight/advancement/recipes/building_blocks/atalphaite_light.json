@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "eternal_starlight:atalphaite_block"
+            "items": "#c:storage_blocks/atalphaite"
           }
         ]
       },

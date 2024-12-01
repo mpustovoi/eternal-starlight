@@ -1025,6 +1025,7 @@ public class ESBlockTagsProvider extends BlockTagsProvider {
 			ESBlocks.OXIDIZED_CHISELED_GOLEM_STEEL_BLOCK.get(),
 			ESBlocks.GOLEM_STEEL_JET.get(),
 			ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get(),
+			ESBlocks.GOLEM_STEEL_CRATE.get(),
 			ESBlocks.LUNAR_MOSAIC.get(),
 			ESBlocks.LUNAR_MOSAIC_SLAB.get(),
 			ESBlocks.LUNAR_MOSAIC_STAIRS.get(),
@@ -1132,12 +1133,20 @@ public class ESBlockTagsProvider extends BlockTagsProvider {
 			ESBlocks.OXIDIZED_CHISELED_GOLEM_STEEL_BLOCK.get(),
 			ESBlocks.GOLEM_STEEL_JET.get(),
 			ESBlocks.OXIDIZED_GOLEM_STEEL_JET.get(),
+			ESBlocks.GOLEM_STEEL_CRATE.get(),
 			ESBlocks.LUNAR_MOSAIC.get(),
 			ESBlocks.LUNAR_MOSAIC_SLAB.get(),
 			ESBlocks.LUNAR_MOSAIC_STAIRS.get(),
 			ESBlocks.LUNAR_MOSAIC_FENCE.get(),
 			ESBlocks.LUNAR_MOSAIC_FENCE_GATE.get(),
 			ESBlocks.LUNAR_MAT.get()
+		);
+		tag(BlockTags.FEATURES_CANNOT_REPLACE).add(
+			ESBlocks.THE_GATEKEEPER_SPAWNER.get(),
+			ESBlocks.STARLIGHT_GOLEM_SPAWNER.get(),
+			ESBlocks.LUNAR_MONSTROSITY_SPAWNER.get(),
+			ESBlocks.GOLEM_STEEL_CRATE.get(),
+			ESBlocks.ENERGY_BLOCK.get()
 		);
 		tag(BlockTags.CANDLES).add(
 			ESBlocks.AMARAMBER_CANDLE.get()
@@ -1156,6 +1165,9 @@ public class ESBlockTagsProvider extends BlockTagsProvider {
 		tag(BlockTags.FROG_PREFER_JUMP_TO).add(
 			ESBlocks.MOONLIGHT_LILY_PAD.get(),
 			ESBlocks.STARLIT_LILY_PAD.get()
+		);
+		tag(BlockTags.GUARDED_BY_PIGLINS).add(
+			ESBlocks.GOLEM_STEEL_CRATE.get()
 		);
 		tag(BlockTags.CAMPFIRES).add(
 			ESBlocks.TORREYA_CAMPFIRE.get()
