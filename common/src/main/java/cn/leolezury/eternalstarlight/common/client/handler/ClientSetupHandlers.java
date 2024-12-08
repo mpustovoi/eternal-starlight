@@ -595,6 +595,7 @@ public class ClientSetupHandlers {
 		strategy.register(ESParticles.SMOKE_TRAIL.get(), SmokeTrailParticle.Provider::new);
 		strategy.register(ESParticles.AETHERSENT_EXPLOSION.get(), AethersentExplosionParticle.Provider::new);
 		strategy.register(ESParticles.ASHEN_SNOW.get(), AshenSnowParticle.Provider::new);
+		strategy.register(ESParticles.EXPLOSION_SHOCK.get(), ExplosionShockParticle.Provider::new);
 		strategy.register(ESParticles.ADVANCED_GLOW.get(), AdvancedParticle.Provider::new);
 		strategy.register(ESParticles.SHINE.get(), AdvancedParticle.Provider::new);
 	}
@@ -614,6 +615,8 @@ public class ClientSetupHandlers {
 		strategy.register(ESEntities.LONESTAR_SKELETON.get(), LonestarSkeletonRenderer::new);
 		strategy.register(ESEntities.NIGHTFALL_SPIDER.get(), NightfallSpiderRenderer::new);
 		strategy.register(ESEntities.THIRST_WALKER.get(), ThirstWalkerRenderer::new);
+		strategy.register(ESEntities.CRETEOR.get(), CreteorRenderer::new);
+		strategy.register(ESEntities.TINY_CRETEOR.get(), TinyCreteorRenderer::new);
 		strategy.register(ESEntities.ENT.get(), EntRenderer::new);
 		strategy.register(ESEntities.RATLIN.get(), RatlinRenderer::new);
 		strategy.register(ESEntities.YETI.get(), YetiRenderer::new);
@@ -683,6 +686,10 @@ public class ClientSetupHandlers {
 		strategy.register(LonestarSkeletonRenderer.LONESTAR_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(INNER_ARMOR_DEFORMATION), 64, 32));
 		strategy.register(NightfallSpiderModel.LAYER_LOCATION, NightfallSpiderModel::createBodyLayer);
 		strategy.register(ThirstWalkerModel.LAYER_LOCATION, ThirstWalkerModel::createBodyLayer);
+		strategy.register(CreteorModel.LAYER_LOCATION, () -> CreteorModel.createBodyLayer(CubeDeformation.NONE));
+		strategy.register(CreteorModel.ARMOR_LOCATION, () -> CreteorModel.createBodyLayer(new CubeDeformation(2.0f)));
+		strategy.register(TinyCreteorModel.LAYER_LOCATION, () -> TinyCreteorModel.createBodyLayer(CubeDeformation.NONE));
+		strategy.register(TinyCreteorModel.ARMOR_LOCATION, () -> TinyCreteorModel.createBodyLayer(new CubeDeformation(2.0f)));
 		strategy.register(EntModel.LAYER_LOCATION, EntModel::createBodyLayer);
 		strategy.register(RatlinModel.LAYER_LOCATION, RatlinModel::createBodyLayer);
 		strategy.register(YetiModel.LAYER_LOCATION, YetiModel::createBodyLayer);

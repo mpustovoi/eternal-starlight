@@ -362,11 +362,11 @@ public class TangledSkull extends Monster {
 					TangledSkull.this.setDeltaMovement(TangledSkull.this.getDeltaMovement().add(vec3.scale(this.speedModifier * 0.05 / d)));
 					if (TangledSkull.this.getTarget() == null) {
 						Vec3 vec32 = TangledSkull.this.getDeltaMovement();
-						TangledSkull.this.setYRot(-((float) Mth.atan2(vec32.x, vec32.z)) * 57.295776F);
+						TangledSkull.this.setYRot(-((float) Mth.atan2(vec32.x, vec32.z)) * Mth.RAD_TO_DEG);
 					} else {
 						double e = TangledSkull.this.getTarget().getX() - TangledSkull.this.getX();
 						double f = TangledSkull.this.getTarget().getZ() - TangledSkull.this.getZ();
-						TangledSkull.this.setYRot(-((float) Mth.atan2(e, f)) * 57.295776F);
+						TangledSkull.this.setYRot(-((float) Mth.atan2(e, f)) * Mth.RAD_TO_DEG);
 					}
 					TangledSkull.this.yBodyRot = TangledSkull.this.getYRot();
 				}
