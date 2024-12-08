@@ -31,6 +31,7 @@ import net.minecraft.world.entity.vehicle.ChestBoat;
 
 public class ESEntities {
 	public static final RegistrationProvider<EntityType<?>> ENTITIES = RegistrationProvider.get(Registries.ENTITY_TYPE, EternalStarlight.ID);
+
 	public static final RegistryObject<EntityType<?>, EntityType<ESFallingBlock>> FALLING_BLOCK = ENTITIES.register(
 			"falling_block",
 			() -> EntityType.Builder.<ESFallingBlock>of(ESFallingBlock::new, MobCategory.MISC)
@@ -199,6 +200,8 @@ public class ESEntities {
 					.clientTrackingRange(8)
 					.build(entityKey("thirst_walker"))
 	);
+	public static final RegistryObject<EntityType<?>, EntityType<Creteor>> CRETEOR = ENTITIES.register("creteor", () -> EntityType.Builder.of(Creteor::new, MobCategory.MONSTER).sized(0.6F, 1.5F).clientTrackingRange(8).build(EternalStarlight.id("creteor").toString()));
+	public static final RegistryObject<EntityType<?>, EntityType<TinyCreteor>> TINY_CRETEOR = ENTITIES.register("tiny_creteor", () -> EntityType.Builder.of(TinyCreteor::new, MobCategory.MONSTER).sized(0.5F, 0.5F).clientTrackingRange(8).build(EternalStarlight.id("tiny_creteor").toString()));
 	public static final RegistryObject<EntityType<?>, EntityType<Ent>> ENT = ENTITIES.register("ent",
 			() -> EntityType.Builder.of(Ent::new, MobCategory.CREATURE)
 					.sized(0.7F, 0.3F)

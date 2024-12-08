@@ -85,6 +85,12 @@ public class ESSoundProvider extends SoundDefinitionsProvider {
 		add(ESSoundEvents.THIRST_WALKER_HURT.get(), definition().with(sound(loc("mob/thirst_walker/hurt1")), sound(loc("mob/thirst_walker/hurt2"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".thirst_walker.hurt"));
 		add(ESSoundEvents.THIRST_WALKER_DEATH.get(), definition().with(sound(loc("mob/thirst_walker/death"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".thirst_walker.death"));
 
+		add(ESSoundEvents.CRETEOR_ROLL.get(), definition().with(sound(loc("mob/creteor/roll"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".creteor.roll"));
+		add(ESSoundEvents.CRETEOR_HURT.get(), definition().with(sound(loc("mob/creteor/hurt1")), sound(loc("mob/creteor/hurt2")), sound(loc("mob/creteor/hurt3")), sound(loc("mob/creteor/hurt4"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".creteor.hurt"));
+		add(ESSoundEvents.CRETEOR_DEATH.get(), definition().with(sound(loc("mob/creteor/death"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".creteor.death"));
+		add(ESSoundEvents.CRETEOR_CHARGE.get(), definition().with(sound(loc("mob/creteor/charge"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".creteor.charge"));
+		add(ESSoundEvents.CRETEOR_EXPLODE.get(), definition().with(sound(loc("mob/creteor/explode"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".creteor.explode"));
+
 		add(ESSoundEvents.LUMINOFISH_HURT.get(), definition().with(sound(mcLoc("entity/fish/hurt1")), sound(mcLoc("entity/fish/hurt2")), sound(mcLoc("entity/fish/hurt3")), sound(mcLoc("entity/fish/hurt4"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".luminofish.hurt"));
 		add(ESSoundEvents.LUMINOFISH_DEATH.get(), definition().with(sound(mcLoc("entity/fish/hurt1")), sound(mcLoc("entity/fish/hurt2")), sound(mcLoc("entity/fish/hurt3")), sound(mcLoc("entity/fish/hurt4"))).subtitle("subtitles.entity." + EternalStarlight.ID + ".luminofish.death"));
 		add(ESSoundEvents.LUMINOFISH_FLOP.get(), definition().with(sound(mcLoc("entity/fish/flop1")).volume(0.3), sound(mcLoc("entity/fish/flop2")).volume(0.3), sound(mcLoc("entity/fish/flop3")).volume(0.3), sound(mcLoc("entity/fish/flop4")).volume(0.3)).subtitle("subtitles.entity." + EternalStarlight.ID + ".luminofish.flop"));

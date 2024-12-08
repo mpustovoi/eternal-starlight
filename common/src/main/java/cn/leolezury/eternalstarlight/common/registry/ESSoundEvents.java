@@ -71,6 +71,12 @@ public class ESSoundEvents {
 	public static final RegistryObject<SoundEvent, SoundEvent> THIRST_WALKER_HURT = register("entity.thirst_walker.hurt");
 	public static final RegistryObject<SoundEvent, SoundEvent> THIRST_WALKER_DEATH = register("entity.thirst_walker.death");
 
+	public static final RegistryObject<SoundEvent, SoundEvent> CRETEOR_ROLL = register("entity.creteor.roll");
+	public static final RegistryObject<SoundEvent, SoundEvent> CRETEOR_HURT = register("entity.creteor.hurt");
+	public static final RegistryObject<SoundEvent, SoundEvent> CRETEOR_DEATH = register("entity.creteor.death");
+	public static final RegistryObject<SoundEvent, SoundEvent> CRETEOR_CHARGE = register("entity.creteor.charge");
+	public static final RegistryObject<SoundEvent, SoundEvent> CRETEOR_EXPLODE = register("entity.creteor.explode");
+
 	public static final RegistryObject<SoundEvent, SoundEvent> LUMINOFISH_HURT = register("entity.luminofish.hurt");
 	public static final RegistryObject<SoundEvent, SoundEvent> LUMINOFISH_DEATH = register("entity.luminofish.death");
 	public static final RegistryObject<SoundEvent, SoundEvent> LUMINOFISH_FLOP = register("entity.luminofish.flop");

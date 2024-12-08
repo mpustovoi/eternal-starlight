@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -148,7 +149,7 @@ public class Yeti extends Animal {
 			idleAnimationState.startIfStopped(tickCount);
 			prevRollAngle = rollAngle;
 			rollAngle += (float) (position().subtract(new Vec3(xOld, yOld, zOld)).length() / (3f / 260f));
-			rollAngle = rollAngle % 360;
+			rollAngle = Mth.wrapDegrees(rollAngle);
 		}
 	}
 

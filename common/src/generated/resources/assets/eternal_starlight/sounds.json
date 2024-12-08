@@ -173,6 +173,39 @@
     ],
     "subtitle": "subtitles.entity.eternal_starlight.boarwarf.yes"
   },
+  "entity.creteor.charge": {
+    "sounds": [
+      "eternal_starlight:mob/creteor/charge"
+    ],
+    "subtitle": "subtitles.entity.eternal_starlight.creteor.charge"
+  },
+  "entity.creteor.death": {
+    "sounds": [
+      "eternal_starlight:mob/creteor/death"
+    ],
+    "subtitle": "subtitles.entity.eternal_starlight.creteor.death"
+  },
+  "entity.creteor.explode": {
+    "sounds": [
+      "eternal_starlight:mob/creteor/explode"
+    ],
+    "subtitle": "subtitles.entity.eternal_starlight.creteor.explode"
+  },
+  "entity.creteor.hurt": {
+    "sounds": [
+      "eternal_starlight:mob/creteor/hurt1",
+      "eternal_starlight:mob/creteor/hurt2",
+      "eternal_starlight:mob/creteor/hurt3",
+      "eternal_starlight:mob/creteor/hurt4"
+    ],
+    "subtitle": "subtitles.entity.eternal_starlight.creteor.hurt"
+  },
+  "entity.creteor.roll": {
+    "sounds": [
+      "eternal_starlight:mob/creteor/roll"
+    ],
+    "subtitle": "subtitles.entity.eternal_starlight.creteor.roll"
+  },
   "entity.ent.hurt": {
     "sounds": [
       "eternal_starlight:mob/ent/hurt"

@@ -28,6 +28,8 @@ public class ESConfig {
 		public final AttackingMobConfig lonestarSkeleton = new AttackingMobConfig(20, 0, 3.2, 16, true);
 		public final AttackingMobConfig nightfallSpider = new AttackingMobConfig(10, 0, 2, 16, true);
 		public final AttackingMobConfig thirstWalker = new AttackingMobConfig(40, 0, 4.5, 32, true);
+		public final AttackingMobConfig creteor = new AttackingMobConfig(15, 0, 5, 48, true);
+		public final AttackingMobConfig tinyCreteor = new AttackingMobConfig(5, 0, 2, 48, true);
 		public final MobConfig ent = new MobConfig(10, 0, true);
 		public final MobConfig ratlin = new MobConfig(15, 0, true);
 		public final MobConfig yeti = new MobConfig(20, 0, true);
