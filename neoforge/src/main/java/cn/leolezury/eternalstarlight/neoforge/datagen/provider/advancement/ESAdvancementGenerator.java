@@ -90,6 +90,8 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 
 		AdvancementHolder glaciteShard = addItemObtain(consumer, underPermafrostForest, "obtain_glacite_shard", ESItems.GLACITE_SHARD.get());
 
+		AdvancementHolder auroraDeerAntler = addItemObtain(consumer, underPermafrostForest, "obtain_aurora_deer_antler", ESItems.AURORA_DEER_ANTLER.get());
+
 		AdvancementHolder enterCrystallizedDesert = addInBiome(consumer, enterDim, "enter_crystallized_desert", ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get(), biomes.getOrThrow(ESBiomes.CRYSTALLIZED_DESERT));
 
 		AdvancementHolder toothOfHunger = addItemObtain(consumer, enterCrystallizedDesert, "obtain_tooth_of_hunger", ESItems.TOOTH_OF_HUNGER.get());
@@ -109,6 +111,16 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				true, true, false)
 			.addCriterion("thrown", ESCriteriaTriggers.THROW_GLEECH_EGG.get().createCriterion(new PlayerTrigger.TriggerInstance(Optional.empty())))
 			.save(consumer, EternalStarlight.ID + ":throw_gleech_egg");
+
+		AdvancementHolder tameCrystallizedMoth = Advancement.Builder.advancement().parent(enterCrystallizedDesert).display(
+				ESItems.SHIVERING_GEL.get(),
+				Component.translatable("advancements." + EternalStarlight.ID + ".tame_crystallized_moth.title"),
+				Component.translatable("advancements." + EternalStarlight.ID + ".tame_crystallized_moth.description"),
+				null,
+				AdvancementType.TASK,
+				true, true, false)
+			.addCriterion("tame", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ESEntities.CRYSTALLIZED_MOTH.get())))
+			.save(consumer, EternalStarlight.ID + ":tame_crystallized_moth");
 
 		AdvancementHolder inEtherFluid = addInFluid(consumer, enterDim, "in_ether_fluid", ESItems.ETHER_BUCKET.get(), fluids.getOrThrow(ESTags.Fluids.ETHER));
 
@@ -137,6 +149,8 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 		AdvancementHolder stellagmite = addItemObtain(consumer, enterDim, "obtain_stellagmite", ESItems.STELLAGMITE.get());
 
 		AdvancementHolder dustedShard = addItemObtain(consumer, enterDim, "obtain_dusted_shard", ESItems.DUSTED_SHARD.get());
+
+		AdvancementHolder killCreteor = addEntityKill(consumer, enterDim, "kill_creteor", ESEntities.CRETEOR.get(), ESItems.RAW_AETHERSENT_BLOCK.get());
 
 		Advancement.Builder allStarlightBiomesBuilder = Advancement.Builder.advancement().parent(enterDim).display(
 				ESBlocks.NIGHTFALL_GRASS_BLOCK.get(),
