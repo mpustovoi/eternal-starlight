@@ -120,7 +120,7 @@ public class AuroraDeer extends Animal implements Charger {
 							for (int k = fromPos.getZ(); k <= toPos.getZ(); ++k) {
 								mutableBlockPos.set(i, j, k);
 								BlockState blockState = AuroraDeer.this.level().getBlockState(mutableBlockPos);
-								if (blockState.is(BlockTags.SNAPS_GOAT_HORN)) {
+								if (blockState.is(BlockTags.LOGS) || blockState.is(BlockTags.SNAPS_GOAT_HORN) || blockState.is(ESTags.Blocks.BASE_STONE_STARLIGHT)) {
 									AuroraDeer.this.randomlyBreakAntler();
 									antlerBroken = true;
 									stop();

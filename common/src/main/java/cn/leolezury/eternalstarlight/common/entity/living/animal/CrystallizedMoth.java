@@ -301,7 +301,7 @@ public class CrystallizedMoth extends TamableAnimal implements FlyingAnimal, Neu
 	public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
 		if (!(target instanceof Creeper) && !(target instanceof Ghast)) {
 			return switch (target) {
-				case CrystallizedMoth zombie -> !zombie.isTame() || zombie.getOwner() != owner;
+				case CrystallizedMoth moth -> !moth.isTame() || moth.getOwner() != owner;
 				case Player playerTarget when owner instanceof Player playerOwner && !playerOwner.canHarmPlayer(playerTarget) -> false;
 				case AbstractHorse horse when horse.isTamed() -> false;
 				default -> !(target instanceof TamableAnimal animal) || !animal.isTame();
