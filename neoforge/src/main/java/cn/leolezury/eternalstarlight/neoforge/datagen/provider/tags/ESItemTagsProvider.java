@@ -24,6 +24,26 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 	@Override
 	protected void addTags(HolderLookup.Provider lookupProvider) {
 		// conventional tags
+		copy(Tags.Blocks.BUDDING_BLOCKS, Tags.Items.BUDDING_BLOCKS);
+		copy(Tags.Blocks.BUDS, Tags.Items.BUDS);
+		copy(Tags.Blocks.CLUSTERS, Tags.Items.CLUSTERS);
+		copy(Tags.Blocks.COBBLESTONES, Tags.Items.COBBLESTONES);
+		copy(Tags.Blocks.DYED_BLACK, Tags.Items.DYED_BLACK);
+		copy(Tags.Blocks.DYED_BLUE, Tags.Items.DYED_BLUE);
+		copy(Tags.Blocks.DYED_BROWN, Tags.Items.DYED_BROWN);
+		copy(Tags.Blocks.DYED_CYAN, Tags.Items.DYED_CYAN);
+		copy(Tags.Blocks.DYED_GRAY, Tags.Items.DYED_GRAY);
+		copy(Tags.Blocks.DYED_GREEN, Tags.Items.DYED_GREEN);
+		copy(Tags.Blocks.DYED_LIGHT_BLUE, Tags.Items.DYED_LIGHT_BLUE);
+		copy(Tags.Blocks.DYED_LIGHT_GRAY, Tags.Items.DYED_LIGHT_GRAY);
+		copy(Tags.Blocks.DYED_LIME, Tags.Items.DYED_LIME);
+		copy(Tags.Blocks.DYED_MAGENTA, Tags.Items.DYED_MAGENTA);
+		copy(Tags.Blocks.DYED_ORANGE, Tags.Items.DYED_ORANGE);
+		copy(Tags.Blocks.DYED_PINK, Tags.Items.DYED_PINK);
+		copy(Tags.Blocks.DYED_PURPLE, Tags.Items.DYED_PURPLE);
+		copy(Tags.Blocks.DYED_RED, Tags.Items.DYED_RED);
+		copy(Tags.Blocks.DYED_WHITE, Tags.Items.DYED_WHITE);
+		copy(Tags.Blocks.DYED_YELLOW, Tags.Items.DYED_YELLOW);
 		copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 		copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
 		copy(Tags.Blocks.FENCES, Tags.Items.FENCES);
@@ -32,6 +52,7 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		copy(Tags.Blocks.ORE_RATES_DENSE, Tags.Items.ORE_RATES_DENSE);
 		copy(Tags.Blocks.ORE_RATES_SPARSE, Tags.Items.ORE_RATES_SPARSE);
 		copy(Tags.Blocks.ORES, Tags.Items.ORES);
+		copy(Tags.Blocks.ORES_REDSTONE, Tags.Items.ORES_REDSTONE);
 		copy(Tags.Blocks.SANDS, Tags.Items.SANDS);
 		copy(Tags.Blocks.SANDSTONE_BLOCKS, Tags.Items.SANDSTONE_BLOCKS);
 		copy(Tags.Blocks.SANDSTONE_SLABS, Tags.Items.SANDSTONE_SLABS);
@@ -94,6 +115,7 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.GLOWING_MUSHROOM.get(),
 			ESItems.BOULDERSHROOM.get()
 		);
+		tag(Tags.Items.MUSIC_DISCS).addTag(ESTags.Items.MUSIC_DISCS);
 		tag(Tags.Items.NUGGETS).add(
 			ESItems.AMARAMBER_NUGGET.get(),
 			ESItems.AETHERSENT_NUGGET.get(),

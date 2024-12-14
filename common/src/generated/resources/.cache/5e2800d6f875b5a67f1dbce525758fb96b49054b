@@ -1,6 +1,26 @@
-// 1.21.1	2024-11-24T21:50:16.998275	Tags for minecraft:item mod id eternal_starlight
+// 1.21.1	2024-12-13T11:10:28.9992409	Tags for minecraft:item mod id eternal_starlight
+4e42849c79b21f7d80bc0c6ff216ffa705bb94aa data/c/tags/item/budding_blocks.json
+f2d1fdc1f3d6da57f00e708893a3bde6703c4d8f data/c/tags/item/buds.json
 49d6be28d9b8da6ebe3d7246980fb4a6109f43df data/c/tags/item/campfires.json
+41ca90f7ff686d13272ff2c1d1d8c24ae80b676a data/c/tags/item/clusters.json
+b04d2105752e0c9bccb4d3b08795218723b26263 data/c/tags/item/cobblestones.json
 952ece4a60060206e6e340490f8c12cd3ca05984 data/c/tags/item/dusts/saltpeter.json
+c69cf7ffb78252c012b944043f747aff73bc83e3 data/c/tags/item/dyed/black.json
+9da628311a492043aecc2736510319658e2dad06 data/c/tags/item/dyed/blue.json
+048ee1dedf5c83313a49640e81c03e1a3d7a629a data/c/tags/item/dyed/brown.json
+44158f96f1445bb8af3303d5755580db78449afa data/c/tags/item/dyed/cyan.json
+cd5ab1b3640aa3effc1c64c34f70810c896b349a data/c/tags/item/dyed/gray.json
+113b7a4ab4b9514a0b1a3666dd14885c9c322f99 data/c/tags/item/dyed/green.json
+a1b881e9cf8377843d131877268c25b8c78e43f0 data/c/tags/item/dyed/light_blue.json
+b2001ce669039c5ef658d735f1daef466d664114 data/c/tags/item/dyed/light_gray.json
+f55406937283081a2ad4f01e43e15a0a6603dfac data/c/tags/item/dyed/lime.json
+678c8236243bf670618fe79017cfb9c9592e78e6 data/c/tags/item/dyed/magenta.json
+f6051bb134e6fe6da555bd187be297f42b58926f data/c/tags/item/dyed/orange.json
+a2aa2ca64383073ff6c8fdd2d68e3e8a70f593c0 data/c/tags/item/dyed/pink.json
+5ab4c3088f5b792836b9139cd0bf2c21f8555a86 data/c/tags/item/dyed/purple.json
+a39ea04e69a04472928462219c41086462f13572 data/c/tags/item/dyed/red.json
+f1bfd8d1e58f64e87a6a8b58fa78780552b3e083 data/c/tags/item/dyed/white.json
+f0bd040a5c70355d46f29d0603177aa652593ce1 data/c/tags/item/dyed/yellow.json
 bcbb383a374ac16304cbea6d3945e47228828d5d data/c/tags/item/fences.json
 723ad4b69b24c2d95fa6d8445d5ee328298fffc7 data/c/tags/item/fences/wooden.json
 c462e321b14ff979ddd095a4c5db297e753978d7 data/c/tags/item/fence_gates.json
@@ -26,12 +46,14 @@ e4fb9c7ac1163f95cd2dcf4a757b8a93f7cd7760 data/c/tags/item/ingots.json
 ecba489c96163f74cd8b26f6814bd5eeedf5e00f data/c/tags/item/ingots/swamp_silver.json
 f385c8660651bf8d8c80e7697a58141b6eeaebed data/c/tags/item/ingots/thermal_springstone.json
 9f42dd2bc61760cd83c6d3a98f816a5bf7ad7686 data/c/tags/item/mushrooms.json
+2e5488be859333075b5108fa558f1153871808c8 data/c/tags/item/music_discs.json
 7d120d7b9572a62ffe8bc337d0f8c000cd5bdae6 data/c/tags/item/nuggets.json
 e590937ef043d5bf6e6876f27d2dc83089b3c8ee data/c/tags/item/nuggets/aethersent.json
 f4dc3980b35bfbf6e5c114f953c888f305966075 data/c/tags/item/nuggets/amaramber.json
 d29136487306048710dc2bfbe22595e36710d81f data/c/tags/item/nuggets/swamp_silver.json
 25331b8d498c0457dd1e612169c1bebf2b32a698 data/c/tags/item/ores.json
 3f904d94183d2afae7698d7e242281b93273ad37 data/c/tags/item/ores/atalphaite.json
+75ac2f95aef85dc0429ab605962ae1464b1d6f28 data/c/tags/item/ores/redstone.json
 4ae824bf159c2223e29a2d0f70fd8e836d42f4df data/c/tags/item/ores/saltpeter.json
 79594e3530f1e6eab2277904c04fdd886e5bfa08 data/c/tags/item/ores/swamp_silver.json
 45381b163559539ad21f7177191d46cc1a08a13a data/c/tags/item/ores_in_ground/grimstone.json
