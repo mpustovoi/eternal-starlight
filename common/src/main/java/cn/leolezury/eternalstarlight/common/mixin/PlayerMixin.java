@@ -4,6 +4,8 @@ import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.entity.interfaces.Grappling;
 import cn.leolezury.eternalstarlight.common.entity.interfaces.GrapplingOwner;
 import cn.leolezury.eternalstarlight.common.entity.interfaces.SpellCaster;
+import cn.leolezury.eternalstarlight.common.network.UpdateSpellDataPacket;
+import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.spell.AbstractSpell;
 import cn.leolezury.eternalstarlight.common.spell.SpellCastData;
 import cn.leolezury.eternalstarlight.common.spell.SpellCooldown;
@@ -13,6 +15,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -131,6 +134,10 @@ public abstract class PlayerMixin implements SpellCaster, GrapplingOwner {
 
 	@Override
 	public void setESSpellData(SpellCastData data) {
+		Player player = (Player) (Object) this;
+		if (!player.level().isClientSide && player.level() instanceof ServerLevel serverLevel && (this.spellCastData.spell() != data.spell() || this.spellCastData.hasSpell() != data.hasSpell() || this.spellCastData.strength() != data.strength())) {
+			ESPlatform.INSTANCE.sendToTrackingClients(serverLevel, player, new UpdateSpellDataPacket(player.getId(), data));
+		}
 		this.spellCastData = data;
 	}
 

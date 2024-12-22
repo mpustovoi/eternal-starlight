@@ -1,5 +1,7 @@
 package cn.leolezury.eternalstarlight.common.client.model.animation;
 
+import cn.leolezury.eternalstarlight.common.entity.interfaces.SpellCaster;
+import cn.leolezury.eternalstarlight.common.spell.AbstractSpell;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -41,6 +43,27 @@ public class PlayerAnimator {
 		@Override
 		public float animateTicks(AbstractClientPlayer player, float ageInTicks) {
 			return Math.min(player.getUseItem().getUseDuration(player), player.getTicksUsingItem() + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()));
+		}
+	}
+
+	public static class CastSpellAnimationTrigger implements AnimationTrigger {
+		private final Supplier<? extends AbstractSpell> spellSupplier;
+
+		public CastSpellAnimationTrigger(Supplier<? extends AbstractSpell> spellSupplier) {
+			this.spellSupplier = spellSupplier;
+		}
+
+		@Override
+		public boolean shouldPlay(AbstractClientPlayer player) {
+			return player instanceof SpellCaster caster && caster.getESSpellData().hasSpell() && caster.getESSpellData().spell() == spellSupplier.get();
+		}
+
+		@Override
+		public float animateTicks(AbstractClientPlayer player, float ageInTicks) {
+			if (player instanceof SpellCaster caster) {
+				return Math.min(caster.getESSpellData().spell().spellProperties().totalTicks(), caster.getESSpellData().castTicks() + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()));
+			}
+			return 0;
 		}
 	}
 

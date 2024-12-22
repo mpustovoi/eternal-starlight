@@ -5,7 +5,6 @@ import cn.leolezury.eternalstarlight.common.block.fluid.EtherFluid;
 import cn.leolezury.eternalstarlight.common.crest.Crest;
 import cn.leolezury.eternalstarlight.common.data.ESDamageTypes;
 import cn.leolezury.eternalstarlight.common.data.ESDimensions;
-import cn.leolezury.eternalstarlight.common.entity.interfaces.SpellCaster;
 import cn.leolezury.eternalstarlight.common.entity.projectile.AethersentMeteor;
 import cn.leolezury.eternalstarlight.common.item.armor.AethersentArmorItem;
 import cn.leolezury.eternalstarlight.common.item.armor.GlaciteArmorItem;
@@ -14,7 +13,6 @@ import cn.leolezury.eternalstarlight.common.item.component.CurrentCrestComponent
 import cn.leolezury.eternalstarlight.common.item.interfaces.TickableArmor;
 import cn.leolezury.eternalstarlight.common.item.misc.ManaCrystalItem;
 import cn.leolezury.eternalstarlight.common.network.NoParametersPacket;
-import cn.leolezury.eternalstarlight.common.network.UpdateSpellDataPacket;
 import cn.leolezury.eternalstarlight.common.network.UpdateWeatherPacket;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.*;
@@ -95,19 +93,6 @@ public class CommonHandlers {
 				}
 			}
 			ticksSinceLastUpdate = 0;
-		}
-		for (ServerLevel level : server.getAllLevels()) {
-			level.getChunkSource().chunkMap.entityMap.forEach((i, tracked) -> {
-				if (tracked.entity instanceof SpellCaster caster) {
-					tracked.seenBy.forEach(connection -> {
-						ServerPlayer player = connection.getPlayer();
-						ESPlatform.INSTANCE.sendToClient(player, new UpdateSpellDataPacket(tracked.entity.getId(), caster.getESSpellData()));
-					});
-					if (tracked.entity instanceof ServerPlayer player) {
-						ESPlatform.INSTANCE.sendToClient(player, new UpdateSpellDataPacket(tracked.entity.getId(), caster.getESSpellData()));
-					}
-				}
-			});
 		}
 	}
 

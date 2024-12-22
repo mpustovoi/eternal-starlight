@@ -28,24 +28,6 @@ public class SimpleSpellItem extends Item {
 	}
 
 	@Override
-	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int i) {
-		if (livingEntity instanceof SpellCaster caster && (caster.getESSpellData().spell() != spell.value() || !caster.getESSpellData().hasSpell())) {
-			livingEntity.stopUsingItem();
-			if (livingEntity instanceof Player player) {
-				player.getCooldowns().addCooldown(this, spell.value().spellProperties().cooldownTicks());
-			}
-		}
-	}
-
-	@Override
-	public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
-		spell.value().stop(livingEntity, getUseDuration(itemStack, livingEntity) - i - spell.value().spellProperties().preparationTicks());
-		if (livingEntity instanceof Player player) {
-			player.getCooldowns().addCooldown(this, spell.value().spellProperties().cooldownTicks());
-		}
-	}
-
-	@Override
 	public int getUseDuration(ItemStack itemStack, LivingEntity entity) {
 		return 72000;
 	}
@@ -54,7 +36,6 @@ public class SimpleSpellItem extends Item {
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
 		if (!level.isClientSide && spell.value().canCast(player, false)) {
-			player.startUsingItem(interactionHand);
 			itemStack.hurtAndBreak(1, player, player.getUsedItemHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 			spell.value().start(player, false);
 			if (player instanceof SpellCaster caster) {

@@ -25,6 +25,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -175,6 +176,13 @@ public interface ESPlatform {
 
 	default void sendToAllClients(ServerLevel level, CustomPacketPayload packet) {
 		for (ServerPlayer player : level.players()) {
+			sendToClient(player, packet);
+		}
+	}
+
+	default void sendToTrackingClients(ServerLevel level, Entity entity, CustomPacketPayload packet) {
+		level.getChunkSource().broadcast(entity, new ClientboundCustomPayloadPacket(packet));
+		if (entity instanceof ServerPlayer player) {
 			sendToClient(player, packet);
 		}
 	}

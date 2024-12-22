@@ -76,43 +76,6 @@ public class OrbOfProphecyItem extends Item {
 					player.stopUsingItem();
 					player.getCooldowns().addCooldown(this, 20);
 				}
-			} else {
-				boolean success = false;
-				CurrentCrestComponent component = itemStack.get(ESDataComponents.CURRENT_CREST.get());
-				if (component != null && component.crest().isBound()) {
-					Crest crest = component.crest().value();
-					if (crest.getSpell().isPresent()) {
-						success = true;
-						if (livingEntity instanceof SpellCaster caster && (caster.getESSpellData().spell() != crest.getSpell().get() || !caster.getESSpellData().hasSpell())) {
-							livingEntity.stopUsingItem();
-							if (livingEntity instanceof Player player) {
-								player.getCooldowns().addCooldown(this, crest.getSpell().get().spellProperties().cooldownTicks());
-							}
-						}
-					}
-				}
-				if (!success) {
-					livingEntity.stopUsingItem();
-					if (livingEntity instanceof Player player) {
-						player.getCooldowns().addCooldown(this, 20);
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
-		if (itemStack.has(ESDataComponents.CURRENT_CREST.get()) && !level.isClientSide) {
-			CurrentCrestComponent component = itemStack.get(ESDataComponents.CURRENT_CREST.get());
-			if (component != null && component.crest().isBound()) {
-				Crest crest = component.crest().value();
-				if (crest.getSpell().isPresent()) {
-					crest.getSpell().get().stop(livingEntity, getUseDuration(itemStack, livingEntity) - i - crest.getSpell().get().spellProperties().preparationTicks());
-					if (livingEntity instanceof Player player) {
-						player.getCooldowns().addCooldown(this, crest.getSpell().get().spellProperties().cooldownTicks());
-					}
-				}
 			}
 		}
 	}
@@ -140,21 +103,15 @@ public class OrbOfProphecyItem extends Item {
 			} else if (!itemStack.has(ESDataComponents.CURRENT_CREST.get())) {
 				player.startUsingItem(interactionHand);
 				return InteractionResultHolder.consume(itemStack);
-			} else if (!level.isClientSide) {
+			} else if (!level.isClientSide && player instanceof SpellCaster caster && !caster.getESSpellData().hasSpell()) {
 				CurrentCrestComponent component = itemStack.get(ESDataComponents.CURRENT_CREST.get());
 				if (component != null && component.crest().isBound()) {
 					Crest crest = component.crest().value();
 					if (crest.getSpell().isPresent() && crest.getSpell().get().canCast(player, true)) {
 						crest.getSpell().get().start(player, ESCrestUtil.getCrestLevel(player, component.crest()), true);
-						player.startUsingItem(interactionHand);
-						if (player instanceof SpellCaster caster) {
-							caster.setESSpellSource(new SpellCastData.ItemSpellSource(this, interactionHand));
-						}
+						caster.setESSpellSource(new SpellCastData.ItemSpellSource(this, interactionHand));
 						return InteractionResultHolder.consume(itemStack);
 					}
-				} else {
-					player.startUsingItem(interactionHand);
-					return InteractionResultHolder.consume(itemStack);
 				}
 			}
 		}

@@ -38,7 +38,7 @@ public record SpellCastData(boolean hasSpell, AbstractSpell spell, int strength,
 	public record ItemSpellSource(Item item, InteractionHand hand) implements SpellSource {
 		@Override
 		public boolean canContinue(LivingEntity living) {
-			return living.isUsingItem() && living.getUseItem().is(item()) && living.getUsedItemHand() == hand();
+			return living.getItemInHand(hand()).is(item());
 		}
 	}
 

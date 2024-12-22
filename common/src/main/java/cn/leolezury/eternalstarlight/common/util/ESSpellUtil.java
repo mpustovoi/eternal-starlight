@@ -31,19 +31,21 @@ public class ESSpellUtil {
 			caster.getESSpellCooldowns().removeIf(c -> c.getCooldown() <= 0);
 		}
 		// current spell
-		if (!entity.level().isClientSide && entity instanceof SpellCaster caster && caster.getESSpellData().hasSpell()) {
+		if (entity instanceof SpellCaster caster && caster.getESSpellData().hasSpell()) {
 			caster.setESSpellData(caster.getESSpellData().increaseTick());
 			AbstractSpell spell = caster.getESSpellData().spell();
-			int preparationTicks = spell.spellProperties().preparationTicks();
-			int spellTicks = spell.spellProperties().spellTicks();
-			int useTicks = caster.getESSpellData().castTicks();
-			if (!spell.canContinueToCast(entity, useTicks) || !caster.getESSpellSource().canContinue(entity)) {
-				spell.stop(entity, useTicks - preparationTicks);
-			}
-			if (useTicks <= preparationTicks + spellTicks) {
-				spell.tick(entity, useTicks);
-			} else {
-				spell.stop(entity, useTicks - preparationTicks);
+			if (!entity.level().isClientSide) {
+				int preparationTicks = spell.spellProperties().preparationTicks();
+				int spellTicks = spell.spellProperties().spellTicks();
+				int useTicks = caster.getESSpellData().castTicks();
+				if (!spell.canContinueToCast(entity, useTicks) || !caster.getESSpellSource().canContinue(entity)) {
+					spell.stop(entity, useTicks - preparationTicks);
+				}
+				if (useTicks <= preparationTicks + spellTicks) {
+					spell.tick(entity, useTicks);
+				} else {
+					spell.stop(entity, useTicks - preparationTicks);
+				}
 			}
 		}
 	}

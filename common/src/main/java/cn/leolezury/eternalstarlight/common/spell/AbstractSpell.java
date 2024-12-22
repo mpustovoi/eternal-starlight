@@ -97,6 +97,8 @@ public abstract class AbstractSpell {
 	public abstract void onStop(LivingEntity entity, int ticks);
 
 	public record Properties(List<ManaType> types, int preparationTicks, int spellTicks, int cooldownTicks) {
-
+		public int totalTicks() {
+			return preparationTicks() + spellTicks();
+		}
 	}
 }
