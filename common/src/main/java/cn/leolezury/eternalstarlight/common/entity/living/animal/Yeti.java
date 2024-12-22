@@ -82,7 +82,7 @@ public class Yeti extends Animal {
 
 	public float rollAngle, prevRollAngle;
 
-	public Yeti(EntityType<? extends Animal> entityType, Level level) {
+	public Yeti(EntityType<? extends Yeti> entityType, Level level) {
 		super(entityType, level);
 		this.getNavigation().setCanFloat(true);
 	}

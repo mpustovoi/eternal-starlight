@@ -13,11 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class LunarMonstrosityBreath extends RayAttack {
-	public LunarMonstrosityBreath(EntityType<? extends RayAttack> type, Level level) {
+	public LunarMonstrosityBreath(EntityType<? extends LunarMonstrosityBreath> type, Level level) {
 		super(type, level);
 	}
 
-	public LunarMonstrosityBreath(EntityType<? extends RayAttack> type, Level world, LivingEntity caster, double x, double y, double z, float yaw, float pitch) {
+	public LunarMonstrosityBreath(EntityType<? extends LunarMonstrosityBreath> type, Level world, LivingEntity caster, double x, double y, double z, float yaw, float pitch) {
 		super(type, world, caster, x, y, z, yaw, pitch);
 	}
 

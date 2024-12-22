@@ -60,7 +60,7 @@ public class Gleech extends Monster {
 
 	public AnimationState idleAnimationState = new AnimationState();
 
-	public Gleech(EntityType<? extends Monster> entityType, Level level) {
+	public Gleech(EntityType<? extends Gleech> entityType, Level level) {
 		super(entityType, level);
 	}
 

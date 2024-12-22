@@ -56,7 +56,7 @@ public class Boarwarf extends PathfinderMob implements Npc, Merchant {
 	private static final String TAG_HOME_Z = "home_z";
 	private static final String TAG_BOARWARF_CREDIT = "boarwarf_credit";
 
-	public Boarwarf(EntityType<? extends PathfinderMob> type, Level level) {
+	public Boarwarf(EntityType<? extends Boarwarf> type, Level level) {
 		super(type, level);
 	}
 

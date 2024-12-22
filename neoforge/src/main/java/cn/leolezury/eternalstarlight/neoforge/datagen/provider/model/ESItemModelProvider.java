@@ -254,6 +254,8 @@ public class ESItemModelProvider extends ItemModelProvider {
 		wall(ESItems.HAZE_ICE_BRICK_WALL.get(), ESItems.HAZE_ICE_BRICKS.get());
 		basicItem(ESItems.ICICLE.get(), blockTextureFromItem(ESItems.ICICLE.get()).withSuffix("_tip"));
 		layeredBlock(ESItems.ASHEN_SNOW.get());
+		basicItem(ESItems.ASHEN_SNOWBALL.get());
+		basicItem(ESItems.FROZEN_BOMB.get());
 
 		block(ESItems.NEBULAITE.get());
 		block(ESItems.NEBULAITE_BRICKS.get());
@@ -502,6 +504,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		cubeAll(ESItems.BOULDERSHROOM_BLOCK.get());
 		cubeAll(ESItems.BOULDERSHROOM_STEM.get());
 		flatBlockTexture(ESItems.BOULDERSHROOM_ROOTS.get());
+		basicItem(ESItems.BOULDERSHROOM_STEW.get());
 
 		flatBlockTexture(ESItems.SWAMP_ROSE.get());
 		flatBlockTexture(ESItems.FANTABUD.get());
@@ -556,6 +559,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		block(ESItems.FANTASY_GRASS_BLOCK.get());
 		block(ESItems.FANTASY_GRASS_CARPET.get());
 
+		basicItem(ESItems.CRETEOR_HIDE.get());
 		basicItem(ESItems.RAW_AETHERSENT.get());
 		block(ESItems.RAW_AETHERSENT_BLOCK.get());
 		block(ESItems.AETHERSENT_BLOCK.get());
@@ -567,6 +571,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		basicItem(ESItems.AETHERSENT_CAPE.get());
 		basicItem(ESItems.AETHERSENT_BOTTOMS.get());
 		basicItem(ESItems.AETHERSENT_BOOTS.get());
+		basicItem(ESItems.AETHERSTRIKE_ROCKET.get());
 
 		block(ESItems.SPRINGSTONE.get());
 		block(ESItems.SPRINGSTONE_SLAB.get());

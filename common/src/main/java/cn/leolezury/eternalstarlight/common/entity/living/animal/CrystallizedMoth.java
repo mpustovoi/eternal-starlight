@@ -70,7 +70,7 @@ public class CrystallizedMoth extends TamableAnimal implements FlyingAnimal, Neu
 		this.getEntityData().set(ATTACK_TICKS, attackTicks);
 	}
 
-	public CrystallizedMoth(EntityType<? extends TamableAnimal> entityType, Level level) {
+	public CrystallizedMoth(EntityType<? extends CrystallizedMoth> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new MothMoveControl();
 		this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);

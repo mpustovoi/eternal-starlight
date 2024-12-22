@@ -16,7 +16,6 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
@@ -33,7 +32,7 @@ public class ESChestBoat extends ESBoat implements HasCustomInventoryScreen, Con
 	private ResourceKey<LootTable> lootTable;
 	private long lootTableSeed;
 
-	public ESChestBoat(EntityType<? extends Boat> type, Level level) {
+	public ESChestBoat(EntityType<? extends ESChestBoat> type, Level level) {
 		super(type, level);
 	}
 

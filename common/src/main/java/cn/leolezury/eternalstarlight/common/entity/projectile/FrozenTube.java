@@ -40,7 +40,7 @@ public class FrozenTube extends AbstractArrow implements TrailOwner {
 	private static final ResourceLocation TRAIL_TEXTURE = EternalStarlight.id("textures/entity/concentrated_trail.png");
 	private boolean dealtDamage;
 
-	public FrozenTube(EntityType<? extends AbstractArrow> entityType, Level level) {
+	public FrozenTube(EntityType<? extends FrozenTube> entityType, Level level) {
 		super(entityType, level);
 	}
 

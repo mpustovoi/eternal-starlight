@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 public class LuminoFish extends AbstractSchoolingFish {
-	public LuminoFish(EntityType<? extends AbstractSchoolingFish> entityType, Level level) {
+	public LuminoFish(EntityType<? extends LuminoFish> entityType, Level level) {
 		super(entityType, level);
 	}
 

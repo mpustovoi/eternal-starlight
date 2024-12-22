@@ -1,5 +1,5 @@
 {
-  "parent": "eternal_starlight:enter_starlight",
+  "parent": "eternal_starlight:witness_meteor_shower",
   "criteria": {
     "kill": {
       "conditions": {
@@ -22,7 +22,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "eternal_starlight:raw_aethersent_block"
+      "id": "eternal_starlight:creteor_hide"
     },
     "title": {
       "translate": "advancements.eternal_starlight.kill_creteor.title"

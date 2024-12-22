@@ -9,10 +9,8 @@ import cn.leolezury.eternalstarlight.common.client.book.component.IndexBookCompo
 import cn.leolezury.eternalstarlight.common.client.book.component.TextBookComponent;
 import cn.leolezury.eternalstarlight.common.client.gui.screen.BookScreen;
 import cn.leolezury.eternalstarlight.common.client.gui.screen.CrestSelectionScreen;
-import cn.leolezury.eternalstarlight.common.client.gui.screen.GatekeeperDialogueScreen;
 import cn.leolezury.eternalstarlight.common.client.handler.ClientHandlers;
 import cn.leolezury.eternalstarlight.common.client.particle.advanced.AdvancedParticleOptions;
-import cn.leolezury.eternalstarlight.common.entity.living.boss.gatekeeper.TheGatekeeper;
 import cn.leolezury.eternalstarlight.common.entity.projectile.SoulitSpectator;
 import cn.leolezury.eternalstarlight.common.network.*;
 import cn.leolezury.eternalstarlight.common.registry.ESEntities;
@@ -62,14 +60,6 @@ public class ClientSideHelper implements ClientHelper {
 			}
 		} else {
 			Minecraft.getInstance().setScreen(new CrestSelectionScreen(packet.crests().crests(), packet.ownedCrests().crests()));
-		}
-	}
-
-	@Override
-	public void handleOpenGatekeeperGui(OpenGatekeeperGuiPacket packet) {
-		ClientLevel clientLevel = Minecraft.getInstance().level;
-		if (clientLevel != null && clientLevel.getEntity(packet.id()) instanceof TheGatekeeper gatekeeper) {
-			Minecraft.getInstance().setScreen(new GatekeeperDialogueScreen(gatekeeper, packet.killedDragon(), packet.challenged()));
 		}
 	}
 

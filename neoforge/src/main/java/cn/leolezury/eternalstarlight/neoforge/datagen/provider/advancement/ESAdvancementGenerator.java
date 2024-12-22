@@ -90,6 +90,8 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 
 		AdvancementHolder glaciteShard = addItemObtain(consumer, underPermafrostForest, "obtain_glacite_shard", ESItems.GLACITE_SHARD.get());
 
+		AdvancementHolder frozenBomb = addItemObtain(consumer, underPermafrostForest, "obtain_frozen_bomb", ESItems.FROZEN_BOMB.get());
+
 		AdvancementHolder auroraDeerAntler = addItemObtain(consumer, underPermafrostForest, "obtain_aurora_deer_antler", ESItems.AURORA_DEER_ANTLER.get());
 
 		AdvancementHolder enterCrystallizedDesert = addInBiome(consumer, enterDim, "enter_crystallized_desert", ESItems.BLUE_STARLIGHT_CRYSTAL_SHARD.get(), biomes.getOrThrow(ESBiomes.CRYSTALLIZED_DESERT));
@@ -97,6 +99,16 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 		AdvancementHolder toothOfHunger = addItemObtain(consumer, enterCrystallizedDesert, "obtain_tooth_of_hunger", ESItems.TOOTH_OF_HUNGER.get());
 
 		AdvancementHolder daggerOfHunger = addItemObtain(consumer, toothOfHunger, "obtain_dagger_of_hunger", ESItems.DAGGER_OF_HUNGER.get());
+
+		AdvancementHolder saturateDaggerOfHunger = Advancement.Builder.advancement().parent(daggerOfHunger).display(
+				ESItems.DAGGER_OF_HUNGER.get(),
+				Component.translatable("advancements." + EternalStarlight.ID + ".saturate_dagger_of_hunger.title"),
+				Component.translatable("advancements." + EternalStarlight.ID + ".saturate_dagger_of_hunger.description"),
+				null,
+				AdvancementType.TASK,
+				true, true, false)
+			.addCriterion("saturate", ESCriteriaTriggers.SATURATE_DAGGER_OF_HUNGER.get().createCriterion(new PlayerTrigger.TriggerInstance(Optional.empty())))
+			.save(consumer, EternalStarlight.ID + ":saturate_dagger_of_hunger");
 
 		AdvancementHolder toothOfHungerBlocks = addItemObtain(consumer, toothOfHunger, "obtain_tooth_of_hunger_blocks", ESTags.Items.TOOTH_OF_HUNGER_BLOCKS, ESItems.CHISELED_TOOTH_OF_HUNGER_TILES.get());
 
@@ -128,17 +140,21 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 
 		AdvancementHolder alchemistMask = addItemObtain(consumer, thioquartzShard, "obtain_alchemist_mask", ESItems.ALCHEMIST_MASK.get());
 
-		AdvancementHolder witnessMeteorRain = Advancement.Builder.advancement().parent(enterDim).display(
+		AdvancementHolder witnessMeteorShower = Advancement.Builder.advancement().parent(enterDim).display(
 				ESItems.RAW_AETHERSENT.get(),
-				Component.translatable("advancements." + EternalStarlight.ID + ".witness_meteor_rain.title"),
-				Component.translatable("advancements." + EternalStarlight.ID + ".witness_meteor_rain.description"),
+				Component.translatable("advancements." + EternalStarlight.ID + ".witness_meteor_shower.title"),
+				Component.translatable("advancements." + EternalStarlight.ID + ".witness_meteor_shower.description"),
 				null,
 				AdvancementType.TASK,
 				true, true, false)
-			.addCriterion("witnessed", ESCriteriaTriggers.WITNESS_WEATHER.get().createCriterion(new WitnessWeatherTrigger.TriggerInstance(Optional.empty(), ESWeathers.METEOR_RAIN.asHolder())))
-			.save(consumer, EternalStarlight.ID + ":witness_meteor_rain");
+			.addCriterion("witnessed", ESCriteriaTriggers.WITNESS_WEATHER.get().createCriterion(new WitnessWeatherTrigger.TriggerInstance(Optional.empty(), ESWeathers.METEOR_SHOWER.asHolder())))
+			.save(consumer, EternalStarlight.ID + ":witness_meteor_shower");
 
-		AdvancementHolder aethersentIngot = addItemObtain(consumer, witnessMeteorRain, "obtain_aethersent_ingot", ESItems.AETHERSENT_INGOT.get());
+		AdvancementHolder aethersentIngot = addItemObtain(consumer, witnessMeteorShower, "obtain_aethersent_ingot", ESItems.AETHERSENT_INGOT.get());
+
+		AdvancementHolder killCreteor = addEntityKill(consumer, witnessMeteorShower, "kill_creteor", ESEntities.CRETEOR.get(), ESItems.CRETEOR_HIDE.get());
+
+		AdvancementHolder aetherstrikeRocket = addItemObtain(consumer, killCreteor, "obtain_aetherstrike_rocket", ESItems.AETHERSTRIKE_ROCKET.get());
 
 		AdvancementHolder swampSilverIngot = addItemObtain(consumer, enterDim, "obtain_swamp_silver_ingot", ESItems.SWAMP_SILVER_INGOT.get());
 
@@ -148,9 +164,9 @@ public class ESAdvancementGenerator implements AdvancementProvider.AdvancementGe
 
 		AdvancementHolder stellagmite = addItemObtain(consumer, enterDim, "obtain_stellagmite", ESItems.STELLAGMITE.get());
 
-		AdvancementHolder dustedShard = addItemObtain(consumer, enterDim, "obtain_dusted_shard", ESItems.DUSTED_SHARD.get());
+		AdvancementHolder bouldershroomStew = addItemObtain(consumer, enterDim, "obtain_bouldershroom_stew", ESItems.BOULDERSHROOM_STEW.get());
 
-		AdvancementHolder killCreteor = addEntityKill(consumer, enterDim, "kill_creteor", ESEntities.CRETEOR.get(), ESItems.RAW_AETHERSENT_BLOCK.get());
+		AdvancementHolder dustedShard = addItemObtain(consumer, enterDim, "obtain_dusted_shard", ESItems.DUSTED_SHARD.get());
 
 		Advancement.Builder allStarlightBiomesBuilder = Advancement.Builder.advancement().parent(enterDim).display(
 				ESBlocks.NIGHTFALL_GRASS_BLOCK.get(),

@@ -39,7 +39,7 @@ public class GatekeeperFireball extends Fireball implements TrailOwner {
 
 	private static final ResourceLocation TRAIL_TEXTURE = EternalStarlight.id("textures/entity/trail.png");
 
-	public GatekeeperFireball(EntityType<? extends Fireball> entityType, Level level) {
+	public GatekeeperFireball(EntityType<? extends GatekeeperFireball> entityType, Level level) {
 		super(entityType, level);
 	}
 

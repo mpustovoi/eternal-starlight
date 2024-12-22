@@ -59,7 +59,7 @@ public class AstralGolem extends AbstractGolem implements NeutralMob {
 	private static final String TAG_HOME_Y = "home_y";
 	private static final String TAG_HOME_Z = "home_z";
 
-	public AstralGolem(EntityType<? extends AbstractGolem> golem, Level level) {
+	public AstralGolem(EntityType<? extends AstralGolem> golem, Level level) {
 		super(golem, level);
 		this.moveControl = new FlyingMoveControl(this, 20, true);
 	}

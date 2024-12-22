@@ -35,7 +35,7 @@ public class ESPainting extends Painting {
 		this.direction = Direction.SOUTH;
 	}
 
-	public ESPainting(EntityType<? extends Painting> type, Level level) {
+	public ESPainting(EntityType<? extends ESPainting> type, Level level) {
 		super(type, level);
 	}
 

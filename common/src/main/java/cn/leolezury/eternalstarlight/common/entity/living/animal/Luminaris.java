@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 public class Luminaris extends AbstractSchoolingFish implements Charger {
-	public Luminaris(EntityType<? extends AbstractSchoolingFish> entityType, Level level) {
+	public Luminaris(EntityType<? extends Luminaris> entityType, Level level) {
 		super(entityType, level);
 	}
 

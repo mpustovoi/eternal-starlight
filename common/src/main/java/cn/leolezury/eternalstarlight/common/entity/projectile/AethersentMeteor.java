@@ -2,8 +2,10 @@ package cn.leolezury.eternalstarlight.common.entity.projectile;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.client.ESRenderType;
+import cn.leolezury.eternalstarlight.common.config.ESConfig;
 import cn.leolezury.eternalstarlight.common.data.ESDamageTypes;
 import cn.leolezury.eternalstarlight.common.entity.interfaces.TrailOwner;
+import cn.leolezury.eternalstarlight.common.entity.living.monster.Creteor;
 import cn.leolezury.eternalstarlight.common.registry.ESBlocks;
 import cn.leolezury.eternalstarlight.common.registry.ESEntities;
 import cn.leolezury.eternalstarlight.common.registry.ESItems;
@@ -40,8 +42,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector4f;
@@ -96,7 +97,7 @@ public class AethersentMeteor extends AbstractHurtingProjectile implements Trail
 
 	private boolean natural = true;
 
-	public AethersentMeteor(EntityType<? extends AbstractHurtingProjectile> type, Level level) {
+	public AethersentMeteor(EntityType<? extends AethersentMeteor> type, Level level) {
 		super(type, level);
 	}
 
@@ -170,31 +171,9 @@ public class AethersentMeteor extends AbstractHurtingProjectile implements Trail
 		compoundTag.putBoolean(TAG_NATURAL, natural);
 	}
 
-	private void handleHit() {
-		if (level() instanceof ServerLevel serverLevel) {
-			ScreenShakeVfx.createInstance(level().dimension(), position(), 45, 40, 0.01f, 0.015f, 4.5f, 5).send(serverLevel);
-		}
-		if (natural) {
-			dropAndDiscard();
-		}
-		for (LivingEntity livingEntity : level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(getSize(), 0, getSize()))) {
-			if ((!(getOwner() instanceof Player) || livingEntity instanceof Enemy || !onlyHurtEnemy) && (getOwner() == null || !getOwner().getUUID().equals(livingEntity.getUUID()))) {
-				livingEntity.invulnerableTime = 0;
-				livingEntity.hurt(ESDamageTypes.getEntityDamageSource(level(), ESDamageTypes.METEOR, getOwner()), getSize() * (float) 5 * (getOwner() instanceof LivingEntity ? 0.02f : 1f));
-			}
-		}
-		if (getTarget() != null && getY() < getTarget().getY()) {
-			dropAndDiscard();
-		} else if (getY() < targetPos.y) {
-			dropAndDiscard();
-		}
-	}
-
 	private void dropAndDiscard() {
 		if (!isRemoved()) {
-			playSound(SoundEvents.GENERIC_EXPLODE.value(), getSoundVolume(), getVoicePitch());
 			if (!level().isClientSide) {
-				((ServerLevel) level()).sendParticles(getSize() >= 8 ? ParticleTypes.EXPLOSION_EMITTER : ParticleTypes.EXPLOSION, getX(), getY() + 0.05 * getSize(), getZ(), 1, 0, 0, 0, 0);
 				if (natural && getSize() >= 10) {
 					ItemEntity entity = spawnAtLocation(new ItemStack(ESItems.RAW_AETHERSENT.get(), random.nextInt(5, 9)));
 					for (int x = -3; x <= 3; x++) {
@@ -210,6 +189,12 @@ public class AethersentMeteor extends AbstractHurtingProjectile implements Trail
 					if (entity != null) {
 						entity.setGlowingTag(true);
 					}
+					if (ESConfig.INSTANCE.mobsConfig.creteor.canSpawn() && random.nextFloat() < 0.7 && level().getEntitiesOfClass(Creteor.class, getBoundingBox().inflate(32)).isEmpty()) {
+						Creteor creteor = new Creteor(ESEntities.CRETEOR.get(), level());
+						creteor.setPos(position());
+						creteor.setPersistenceRequired();
+						level().addFreshEntity(creteor);
+					}
 					for (int m = 0; m < ((ServerLevel) level()).players().size(); ++m) {
 						ServerPlayer serverPlayer = ((ServerLevel) level()).players().get(m);
 						((ServerLevel) level()).sendParticles(serverPlayer, ESParticles.AETHERSENT_EXPLOSION.get(), true, getX(), getY(), getZ(), 1, 0, 0, 0, 0);
@@ -221,18 +206,27 @@ public class AethersentMeteor extends AbstractHurtingProjectile implements Trail
 	}
 
 	@Override
-	protected void onHitBlock(BlockHitResult result) {
-		super.onHitBlock(result);
-		handleHit();
-		if (!level().isClientSide && target == null && targetPos == null) {
+	protected void onHit(HitResult hitResult) {
+		super.onHit(hitResult);
+		if (level() instanceof ServerLevel serverLevel) {
+			ScreenShakeVfx.createInstance(level().dimension(), position(), 45, 40, 0.01f, 0.015f, 4.5f, 5).send(serverLevel);
+		}
+		for (LivingEntity livingEntity : level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(getSize(), 0, getSize()))) {
+			if ((!(getOwner() instanceof Player) || livingEntity instanceof Enemy || !onlyHurtEnemy) && (getOwner() == null || !getOwner().getUUID().equals(livingEntity.getUUID()))) {
+				livingEntity.invulnerableTime = 0;
+				livingEntity.hurt(ESDamageTypes.getEntityDamageSource(level(), ESDamageTypes.METEOR, getOwner()), getSize() * (float) 5 * (getOwner() instanceof LivingEntity ? 0.02f : 1f));
+			}
+		}
+		if ((getTarget() != null && getY() < getTarget().getY()) || getY() < targetPos.y) {
+			playSound(SoundEvents.GENERIC_EXPLODE.value(), getSoundVolume(), getVoicePitch());
+			if (!level().isClientSide && level() instanceof ServerLevel serverLevel) {
+				serverLevel.sendParticles(getSize() >= 8 ? ParticleTypes.EXPLOSION_EMITTER : ParticleTypes.EXPLOSION, getX(), getY() + 0.05 * getSize(), getZ(), 1, 0, 0, 0, 0);
+			}
+			discard();
+		}
+		if (natural) {
 			dropAndDiscard();
 		}
-	}
-
-	@Override
-	protected void onHitEntity(EntityHitResult entityHitResult) {
-		super.onHitEntity(entityHitResult);
-		handleHit();
 	}
 
 	@Override

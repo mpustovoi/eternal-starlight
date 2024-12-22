@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "c:gems/atalphaite"
+    },
+    "G": {
+      "tag": "c:gems/glacite"
+    },
+    "N": {
+      "tag": "c:nuggets/swamp_silver"
+    },
+    "S": {
+      "item": "eternal_starlight:ashen_snowball"
+    }
+  },
+  "pattern": [
+    "NSN",
+    "AGA",
+    "NAN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "eternal_starlight:frozen_bomb"
+  }
+}

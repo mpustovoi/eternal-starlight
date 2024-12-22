@@ -14,9 +14,9 @@ version = "${version}"
 displayName = "Eternal Starlight"
 authors = "LeoLezury"
 description = '''
-A Minecraft dimension mod with structures for you to explore and bosses for you to defeat!
+A minecraft mod that adds the magical and mysterious starlight dimension
 '''
-logoFile = "banner.png"
+logoFile = "icon.png"
 
 [[dependencies.eternal_starlight]]
 modId = "neoforge"

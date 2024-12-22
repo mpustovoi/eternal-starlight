@@ -28,7 +28,7 @@ public class ShatteredBlade extends AbstractArrow {
 	private boolean dealtDamage;
 	public int clientSideReturnTickCount;
 
-	public ShatteredBlade(EntityType<? extends AbstractArrow> entityType, Level level) {
+	public ShatteredBlade(EntityType<? extends ShatteredBlade> entityType, Level level) {
 		super(entityType, level);
 	}
 

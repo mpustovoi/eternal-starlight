@@ -19,7 +19,7 @@ public class TangledHatredPart extends Entity {
 		return parent;
 	}
 
-	public TangledHatredPart(EntityType<? extends Entity> entityType, Level level) {
+	public TangledHatredPart(EntityType<? extends TangledHatredPart> entityType, Level level) {
 		super(entityType, level);
 	}
 

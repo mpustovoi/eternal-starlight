@@ -11,8 +11,6 @@ public interface ClientHelper {
 
 	void handleOpenCrestGui(OpenCrestGuiPacket packet);
 
-	void handleOpenGatekeeperGui(OpenGatekeeperGuiPacket packet);
-
 	void handleUpdateCamera(UpdateCameraPacket packet);
 
 	void handleClientMount(ClientMountPacket packet);

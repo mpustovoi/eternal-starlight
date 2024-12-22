@@ -89,6 +89,9 @@ public class CommonSetupHandlers {
 	);
 
 	public static void commonSetup() {
+		DispenserBlock.registerProjectileBehavior(ESItems.ASHEN_SNOWBALL.get());
+		DispenserBlock.registerProjectileBehavior(ESItems.FROZEN_BOMB.get());
+		DispenserBlock.registerProjectileBehavior(ESItems.AETHERSTRIKE_ROCKET.get());
 		DispenserBlock.registerProjectileBehavior(ESItems.AMARAMBER_ARROW.get());
 		DispenserBlock.registerProjectileBehavior(ESItems.VORACIOUS_ARROW.get());
 		DispenserBlock.registerProjectileBehavior(ESItems.FROZEN_TUBE.get());
@@ -211,8 +214,6 @@ public class CommonSetupHandlers {
 		strategy.register(ESPackets.UPDATE_WEATHER);
 		strategy.register(ESPackets.OPEN_CREST_GUI);
 		strategy.register(ESPackets.UPDATE_CRESTS);
-		strategy.register(ESPackets.OPEN_GATEKEEPER_GUI);
-		strategy.register(ESPackets.CLOSE_GATEKEEPER_GUI);
 		strategy.register(ESPackets.UPDATE_CAMERA);
 		strategy.register(ESPackets.CLIENT_MOUNT);
 		strategy.register(ESPackets.CLIENT_DISMOUNT);

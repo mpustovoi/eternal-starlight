@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StarlightGolem extends ESBoss implements RayAttackUser {
-	public StarlightGolem(EntityType<? extends ESBoss> entityType, Level level) {
+	public StarlightGolem(EntityType<? extends StarlightGolem> entityType, Level level) {
 		super(entityType, level);
 	}
 

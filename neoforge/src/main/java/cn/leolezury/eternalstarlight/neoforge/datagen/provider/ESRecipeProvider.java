@@ -40,7 +40,7 @@ public class ESRecipeProvider extends RecipeProvider {
 		addWoodRecipes(recipeOutput);
 		addStoneRecipes(recipeOutput);
 		addAlchemistArmorRecipes(recipeOutput);
-		addAetherSentRecipes(recipeOutput);
+		addAethersentRecipes(recipeOutput);
 		addSwampSilverRecipes(recipeOutput);
 		addThermalSpringstoneRecipes(recipeOutput);
 		addGlaciteRecipes(recipeOutput);
@@ -180,6 +180,7 @@ public class ESRecipeProvider extends RecipeProvider {
 		addShapeless(recipeOutput, ESItems.VELVETUMOSS_BALL.get(), Items.SLIME_BALL, 2, ESItems.VELVETUMOSS_BALL.get());
 		addShapeless(recipeOutput, ESItems.STARLIGHT_MANGROVE_ROOTS.get(), ESItems.MUDDY_STARLIGHT_MANGROVE_ROOTS.get(), 1, ESItems.STARLIGHT_MANGROVE_ROOTS.get(), ESItems.NIGHTFALL_MUD.get());
 		addShapeless(recipeOutput, ESItems.NIGHTFALL_MUD.get(), ESItems.PACKED_NIGHTFALL_MUD.get(), 1, ESItems.NIGHTFALL_MUD.get(), ESItems.LUNAR_BERRIES.get());
+		addShapeless(recipeOutput, ESItems.BOULDERSHROOM.get(), ESItems.BOULDERSHROOM_STEW.get(), 1, ESItems.BOULDERSHROOM.get(), ESItems.GLOWING_MUSHROOM.get(), Items.BOWL);
 		nineBlockStorageCustomUnpacking(recipeOutput, RecipeCategory.MISC, ESItems.LUNARIS_CACTUS_GEL.get(), RecipeCategory.BUILDING_BLOCKS, ESItems.LUNARIS_CACTUS_GEL_BLOCK.get(), "lunaris_cactus_gel_block_from_lunaris_cactus_gel", "lunaris_cactus_gel");
 		addShapeless(recipeOutput, ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get(), ESBlocks.LUNARIS_CACTUS_FRUIT_LANTERN.get(), 1, ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get(), ESBlocks.AMARAMBER_CANDLE.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ESItems.SEEKING_EYE.get())
@@ -254,6 +255,16 @@ public class ESRecipeProvider extends RecipeProvider {
 			.define('N', ESConventionalTags.Items.NUGGETS_SWAMP_SILVER)
 			.define('G', ESItems.SHIVERING_GEL.get())
 			.unlockedBy("has_item", has(ESItems.SHIVERING_GEL.get()))
+			.save(recipeOutput);
+		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.FROZEN_BOMB.get())
+			.pattern("NSN")
+			.pattern("AGA")
+			.pattern("NAN")
+			.define('N', ESConventionalTags.Items.NUGGETS_SWAMP_SILVER)
+			.define('A', ESConventionalTags.Items.GEMS_ATALPHAITE)
+			.define('G', ESConventionalTags.Items.GEMS_GLACITE)
+			.define('S', ESItems.ASHEN_SNOWBALL.get())
+			.unlockedBy("has_item", has(ESItems.ASHEN_SNOWBALL.get()))
 			.save(recipeOutput);
 		addShapeless(recipeOutput, ESItems.TRAPPED_SOUL.get(), ESItems.SOULIT_SPECTATOR.get(), 1, ESItems.TRAPPED_SOUL.get(), ESItems.NIGHTFALL_SPIDER_EYE.get());
 		addSword(recipeOutput, ESItems.DAGGER_OF_HUNGER.get(), ESItems.TOOTH_OF_HUNGER.get());
@@ -896,49 +907,51 @@ public class ESRecipeProvider extends RecipeProvider {
 			.save(recipeOutput);
 	}
 
-	private void addAetherSentRecipes(RecipeOutput recipeOutput) {
+	private void addAethersentRecipes(RecipeOutput recipeOutput) {
 		nineBlockStorageCustomUnpacking(recipeOutput, RecipeCategory.MISC, ESItems.RAW_AETHERSENT.get(), RecipeCategory.BUILDING_BLOCKS, ESItems.RAW_AETHERSENT_BLOCK.get(), "raw_aethersent_from_raw_aethersent_block", "raw_aethersent");
 		nineBlockStorageCustomUnpacking(recipeOutput, RecipeCategory.MISC, ESItems.AETHERSENT_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ESItems.AETHERSENT_BLOCK.get(), "aethersent_ingot_from_aethersent_block", "aethersent_ingot");
 		nineBlockStorageCustomPacking(recipeOutput, RecipeCategory.MISC, ESItems.AETHERSENT_NUGGET.get(), RecipeCategory.MISC, ESItems.AETHERSENT_INGOT.get(), "aethersent_ingot_from_nuggets", "aethersent_ingot");
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.AETHERSENT_HOOD.get())
-			.pattern("###")
+			.pattern("HAH")
 			.pattern("A A")
-			.define('#', Items.LEATHER)
+			.define('H', ESItems.CRETEOR_HIDE.get())
 			.define('A', ESConventionalTags.Items.INGOTS_AETHERSENT)
 			.unlockedBy("has_item", has(ESConventionalTags.Items.INGOTS_AETHERSENT))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.AETHERSENT_CAPE.get())
 			.pattern("A A")
-			.pattern("#A#")
-			.pattern("###")
-			.define('#', Items.LEATHER)
+			.pattern("HAH")
+			.pattern("HHH")
+			.define('H', ESItems.CRETEOR_HIDE.get())
 			.define('A', ESConventionalTags.Items.INGOTS_AETHERSENT)
 			.unlockedBy("has_item", has(ESConventionalTags.Items.INGOTS_AETHERSENT))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.AETHERSENT_BOTTOMS.get())
-			.pattern("###")
+			.pattern("HHH")
 			.pattern("A A")
-			.pattern("# #")
-			.define('#', Items.LEATHER)
+			.pattern("H H")
+			.define('H', ESItems.CRETEOR_HIDE.get())
 			.define('A', ESConventionalTags.Items.INGOTS_AETHERSENT)
 			.unlockedBy("has_item", has(ESConventionalTags.Items.INGOTS_AETHERSENT))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.AETHERSENT_BOOTS.get())
 			.pattern("A A")
-			.pattern("# #")
-			.define('#', Items.LEATHER)
+			.pattern("H H")
+			.define('H', ESItems.CRETEOR_HIDE.get())
 			.define('A', ESConventionalTags.Items.INGOTS_AETHERSENT)
 			.unlockedBy("has_item", has(ESConventionalTags.Items.INGOTS_AETHERSENT))
 			.save(recipeOutput);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.STARFALL_LONGBOW.get())
 			.pattern(" AS")
-			.pattern("A S")
+			.pattern("H S")
 			.pattern(" AS")
 			.define('S', Items.STRING)
 			.define('A', ESConventionalTags.Items.INGOTS_AETHERSENT)
+			.define('H', ESItems.CRETEOR_HIDE.get())
 			.unlockedBy("has_item", has(ESConventionalTags.Items.INGOTS_AETHERSENT))
 			.save(recipeOutput);
 		addSword(recipeOutput, ESItems.RAGE_OF_STARS.get(), ESConventionalTags.Items.INGOTS_AETHERSENT);
+		addShapeless(recipeOutput, RecipeCategory.MISC, ESItems.CRETEOR_HIDE.get(), ESItems.AETHERSTRIKE_ROCKET.get(), 1, ESItems.CRETEOR_HIDE.get(), ESItems.ATALPHAITE.get(), Items.PAPER);
 	}
 
 	private void addSwampSilverRecipes(RecipeOutput recipeOutput) {

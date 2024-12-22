@@ -65,7 +65,7 @@ public class TangledHatred extends ESBoss {
 		new TangledHatredSporePhase()
 	));
 
-	public TangledHatred(EntityType<? extends Monster> type, Level level) {
+	public TangledHatred(EntityType<? extends TangledHatred> type, Level level) {
 		super(type, level);
 		this.chain = createChain();
 		this.oldChain = createChain();

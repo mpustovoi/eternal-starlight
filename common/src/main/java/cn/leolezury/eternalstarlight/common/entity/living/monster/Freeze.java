@@ -52,7 +52,7 @@ public class Freeze extends Monster implements RangedAttackMob {
 		this.getEntityData().set(ATTACK_TICKS, attackTicks);
 	}
 
-	public Freeze(EntityType<? extends Monster> entityType, Level level) {
+	public Freeze(EntityType<? extends Freeze> entityType, Level level) {
 		super(entityType, level);
 		this.xpReward = 10;
 		this.moveControl = new FlyingMoveControl(this, 20, true);

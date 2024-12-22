@@ -2,7 +2,6 @@ package cn.leolezury.eternalstarlight.common.entity.living.boss.gatekeeper;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.config.ESConfig;
-import cn.leolezury.eternalstarlight.common.data.ESCrests;
 import cn.leolezury.eternalstarlight.common.data.ESLootTables;
 import cn.leolezury.eternalstarlight.common.entity.living.boss.ESBoss;
 import cn.leolezury.eternalstarlight.common.entity.living.boss.ESServerBossEvent;
@@ -11,12 +10,10 @@ import cn.leolezury.eternalstarlight.common.entity.living.goal.LookAtTargetGoal;
 import cn.leolezury.eternalstarlight.common.entity.living.phase.BehaviorManager;
 import cn.leolezury.eternalstarlight.common.handler.CommonHandlers;
 import cn.leolezury.eternalstarlight.common.item.component.ResourceKeyComponent;
-import cn.leolezury.eternalstarlight.common.network.OpenGatekeeperGuiPacket;
 import cn.leolezury.eternalstarlight.common.network.ParticlePacket;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.*;
 import cn.leolezury.eternalstarlight.common.util.ESBookUtil;
-import cn.leolezury.eternalstarlight.common.util.ESCrestUtil;
 import cn.leolezury.eternalstarlight.common.util.ESMathUtil;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
@@ -77,7 +74,7 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	private static final String TAG_FIGHT_PLAYER_ONLY = "fight_player_only";
 	private static final String TAG_RESTOCK_COOLDOWN = "restock_cooldown";
 
-	public TheGatekeeper(EntityType<? extends ESBoss> entityType, Level level) {
+	public TheGatekeeper(EntityType<? extends TheGatekeeper> entityType, Level level) {
 		super(entityType, level);
 	}
 
@@ -290,11 +287,6 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	}
 
 	@Override
-	public boolean isActivated() {
-		return super.isActivated() || !fightPlayerOnly;
-	}
-
-	@Override
 	public boolean canAttack(LivingEntity livingEntity) {
 		return super.canAttack(livingEntity) && isActivated();
 	}
@@ -319,7 +311,7 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 
 	@Override
 	protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
-		if (!level().isClientSide && fightPlayerOnly && player instanceof ServerPlayer serverPlayer && serverPlayer.getServer() != null && conversationTarget == null && getTradingPlayer() == null && getTarget() == null && getFightTarget().isEmpty()) {
+		if (!level().isClientSide && player instanceof ServerPlayer serverPlayer && serverPlayer.getServer() != null && getTradingPlayer() == null && getTarget() == null && getFightTarget().isEmpty()) {
 			AdvancementHolder killDragon = serverPlayer.getServer().getAdvancements().get(ResourceLocation.withDefaultNamespace("end/kill_dragon"));
 			boolean killed = killDragon != null && serverPlayer.getAdvancements().getOrStartProgress(killDragon).isDone();
 			boolean challenged = isPlayerPermitted(serverPlayer);
@@ -327,59 +319,55 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 			for (int i = 0; i < serverPlayer.getInventory().getContainerSize(); i++) {
 				if (serverPlayer.getInventory().getItem(i).is(ESItems.ORB_OF_PROPHECY.get())) hasOrb = true;
 			}
-			if (!challenged || !hasOrb) {
-				conversationTarget = serverPlayer;
-				ESPlatform.INSTANCE.sendToClient(serverPlayer, new OpenGatekeeperGuiPacket(getId(), killed, challenged));
+			boolean hasBook = false;
+			for (int i = 0; i < serverPlayer.getInventory().getContainerSize(); i++) {
+				ItemStack inventoryItem = serverPlayer.getInventory().getItem(i);
+				if (inventoryItem.is(ESItems.BOOK.get())) hasBook = true;
+				if (inventoryItem.is(ESItems.LOOT_BAG.get())) {
+					ResourceKeyComponent<LootTable> component = inventoryItem.get(ESDataComponents.LOOT_TABLE.get());
+					if (component != null && component.resourceKey().location().equals(ESLootTables.BOSS_THE_GATEKEEPER.location())) {
+						hasBook = true;
+					}
+				}
+				;
+			}
+			if (!challenged) {
+				if (killed) {
+					permitPlayer(serverPlayer);
+					if (!hasBook) {
+						ItemEntity book = spawnAtLocation(ESItems.BOOK.get());
+						if (book != null) {
+							book.setGlowingTag(true);
+						}
+					}
+					if (!hasOrb) {
+						ItemEntity orb = spawnAtLocation(ESItems.ORB_OF_PROPHECY.get());
+						if (orb != null) {
+							orb.setGlowingTag(true);
+						}
+					}
+				} else {
+					setFightTargetName(serverPlayer.getName().getString());
+					setActivated(true);
+					setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ESItems.SHATTERED_SWORD.get()));
+				}
+			} else if (!hasOrb) {
+				ItemEntity orb = spawnAtLocation(ESItems.ORB_OF_PROPHECY.get());
+				if (orb != null) {
+					orb.setGlowingTag(true);
+				}
+				if (!hasBook) {
+					ItemEntity book = spawnAtLocation(ESItems.BOOK.get());
+					if (book != null) {
+						book.setGlowingTag(true);
+					}
+				}
 			} else if (!getOffers().isEmpty()) {
 				this.setTradingPlayer(serverPlayer);
 				this.openTradingScreen(serverPlayer, this.getDisplayName(), 1);
 			}
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
-		return InteractionResult.CONSUME;
-	}
-
-	public synchronized void handleDialogueClose(int operation) {
-		if (conversationTarget != null) {
-			if (operation == 1) {
-				fightPlayerOnly = true;
-				setFightTargetName(conversationTarget.getName().getString());
-				setActivated(true);
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ESItems.SHATTERED_SWORD.get()));
-			}
-			if (operation == 2) {
-				fightPlayerOnly = true;
-				setFightTargetName("");
-				setActivated(false);
-				ItemStack stack = ESItems.ORB_OF_PROPHECY.get().getDefaultInstance();
-				permitPlayer(conversationTarget);
-				ESCrestUtil.upgradeCrest(conversationTarget, ESCrests.GUIDANCE_OF_STARS);
-				if (!conversationTarget.getInventory().add(stack)) {
-					ItemEntity entity = new ItemEntity(level(), conversationTarget.getX(), conversationTarget.getY(), conversationTarget.getZ(), stack);
-					level().addFreshEntity(entity);
-				}
-				boolean hasBook = false;
-				for (int i = 0; i < conversationTarget.getInventory().getContainerSize(); i++) {
-					ItemStack inventoryItem = conversationTarget.getInventory().getItem(i);
-					if (inventoryItem.is(ESItems.BOOK.get())) hasBook = true;
-					if (inventoryItem.is(ESItems.LOOT_BAG.get())) {
-						ResourceKeyComponent<LootTable> component = inventoryItem.get(ESDataComponents.LOOT_TABLE.get());
-						if (component != null && component.resourceKey().location().equals(ESLootTables.BOSS_THE_GATEKEEPER.location())) {
-							hasBook = true;
-						}
-					}
-					;
-				}
-				if (!hasBook) {
-					ItemStack book = ESItems.BOOK.get().getDefaultInstance();
-					if (!conversationTarget.getInventory().add(book)) {
-						ItemEntity entity = new ItemEntity(level(), conversationTarget.getX(), conversationTarget.getY(), conversationTarget.getZ(), book);
-						level().addFreshEntity(entity);
-					}
-				}
-			}
-			conversationTarget = null;
-		}
+		return InteractionResult.sidedSuccess(level().isClientSide);
 	}
 
 	private void permitPlayer(ServerPlayer player) {
@@ -414,24 +402,22 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	public void die(DamageSource source) {
 		if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			super.die(source);
-		} else {
+		} else if (!level().isClientSide) {
 			getFightTarget().ifPresent(p -> {
 				if (p instanceof ServerPlayer serverPlayer) {
 					permitPlayer(serverPlayer);
 				}
 			});
-			if (!level().isClientSide) {
-				for (Player player : level().players()) {
-					if (player instanceof ServerPlayer serverPlayer) {
-						if (fightParticipants.stream().anyMatch(s -> s.equals(player.getName().getString())) && player.isAlive()) {
-							permitPlayer(serverPlayer);
-						}
+			for (Player player : level().players()) {
+				if (player instanceof ServerPlayer serverPlayer) {
+					if (fightParticipants.stream().anyMatch(s -> s.equals(player.getName().getString())) && player.isAlive()) {
+						permitPlayer(serverPlayer);
 					}
 				}
 			}
 			setHealth(getMaxHealth());
-			fightPlayerOnly = true;
 			setFightTargetName("");
+			setTarget(null);
 			setActivated(false);
 			tryTeleportBack();
 			if (level() instanceof ServerLevel serverLevel) {
@@ -525,13 +511,14 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 	public void aiStep() {
 		super.aiStep();
 		bossEvent.update();
-		if (tickCount % 10 == 0 && !isActivated()) {
+		if (tickCount % 5 == 0 && !isActivated()) {
 			bossEvent.allConvertToUnseen();
 		}
 		if (!level().isClientSide) {
-			if (tickCount % 20 == 0 && (getTarget() == null || !getTarget().isAlive())) {
+			if (isAlive() && tickCount % 5 == 0 && (getTarget() == null || !getTarget().isAlive())) {
 				setHealth(getMaxHealth());
 				setFightTargetName("");
+				setTarget(null);
 				setActivated(false);
 				tryTeleportBack();
 			}
@@ -540,9 +527,6 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 			} else {
 				restockCooldown = 12000;
 				restockAll();
-			}
-			if (conversationTarget != null && conversationTarget.distanceTo(this) > 20) {
-				conversationTarget = null;
 			}
 			if (getTradingPlayer() != null && getTradingPlayer().distanceTo(this) > 16) {
 				setTradingPlayer(null);
@@ -668,7 +652,7 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 
 	@Override
 	public SoundEvent getNotifyTradeSound() {
-		return null;
+		return SoundEvents.PLAYER_LEVELUP;
 	}
 
 	@Override

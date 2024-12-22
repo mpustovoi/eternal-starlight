@@ -2,11 +2,13 @@ package cn.leolezury.eternalstarlight.common.item.weapon;
 
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.data.ESDamageTypes;
+import cn.leolezury.eternalstarlight.common.registry.ESCriteriaTriggers;
 import cn.leolezury.eternalstarlight.common.registry.ESDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -39,6 +41,9 @@ public class DaggerOfHungerItem extends SwordItem {
 		float hungerLevel = stack.getOrDefault(ESDataComponents.HUNGER_LEVEL.get(), 0f);
 		float newHungerLevel = Math.min(1, hungerLevel + 0.05f);
 		stack.applyComponentsAndValidate(DataComponentPatch.builder().set(ESDataComponents.HUNGER_LEVEL.get(), newHungerLevel).build());
+		if (newHungerLevel == 1 && attacker instanceof ServerPlayer player) {
+			ESCriteriaTriggers.SATURATE_DAGGER_OF_HUNGER.get().trigger(player);
+		}
 		return super.hurtEnemy(stack, entity, attacker);
 	}
 

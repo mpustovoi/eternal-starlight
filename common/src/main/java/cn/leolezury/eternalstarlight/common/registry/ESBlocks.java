@@ -7,7 +7,6 @@ import cn.leolezury.eternalstarlight.common.block.spawner.StarlightGolemSpawnerB
 import cn.leolezury.eternalstarlight.common.block.spawner.TangledHatredSpawnerBlock;
 import cn.leolezury.eternalstarlight.common.block.spawner.TheGatekeeperSpawnerBlock;
 import cn.leolezury.eternalstarlight.common.data.ESConfiguredFeatures;
-import cn.leolezury.eternalstarlight.common.data.ESPlacedFeatures;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.platform.registry.RegistrationProvider;
 import cn.leolezury.eternalstarlight.common.platform.registry.RegistryObject;
@@ -672,15 +671,15 @@ public class ESBlocks {
 	public static final RegistryObject<Block, DoublePlantBlock> TALL_GOLDEN_GRASS = BLOCKS.register("tall_golden_grass", () -> new DoublePlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LARGE_FERN).mapColor(MapColor.COLOR_YELLOW)));
 
 	// dirt & grass blocks
-	public static final RegistryObject<Block, ESGrassBlock> FANTASY_GRASS_BLOCK = BLOCKS.register("fantasy_grass_block", () -> new ESGrassBlock(NIGHTFALL_MUD.get(), ESPlacedFeatures.SWAMP_VEGETATION, BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
+	public static final RegistryObject<Block, ESGrassBlock> FANTASY_GRASS_BLOCK = BLOCKS.register("fantasy_grass_block", () -> new ESGrassBlock(NIGHTFALL_MUD.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
 	public static final RegistryObject<Block, CarpetBlock> FANTASY_GRASS_CARPET = BLOCKS.register("fantasy_grass_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_CARPET).mapColor(MapColor.COLOR_PURPLE)));
 	public static final RegistryObject<Block, Block> NIGHTFALL_DIRT = BLOCKS.register("nightfall_dirt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 	public static final RegistryObject<Block, FarmBlock> NIGHTFALL_FARMLAND = BLOCKS.register("nightfall_farmland", () -> new FarmBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND)));
 	public static final RegistryObject<Block, DirtPathBlock> NIGHTFALL_DIRT_PATH = BLOCKS.register("nightfall_dirt_path", () -> new DirtPathBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH)));
-	public static final RegistryObject<Block, ESGrassBlock> NIGHTFALL_GRASS_BLOCK = BLOCKS.register("nightfall_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), ESPlacedFeatures.FOREST_VEGETATION, BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
+	public static final RegistryObject<Block, ESGrassBlock> NIGHTFALL_GRASS_BLOCK = BLOCKS.register("nightfall_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
 	public static final RegistryObject<Block, SnowyDirtBlock> NIGHTFALL_PODZOL = BLOCKS.register("nightfall_podzol", () -> new SnowyDirtBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PODZOL)));
-	public static final RegistryObject<Block, ESGrassBlock> TENACIOUS_NIGHTFALL_GRASS_BLOCK = BLOCKS.register("tenacious_nightfall_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), ESPlacedFeatures.FOREST_VEGETATION, BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
-	public static final RegistryObject<Block, ESGrassBlock> GOLDEN_GRASS_BLOCK = BLOCKS.register("golden_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), ESPlacedFeatures.FOREST_VEGETATION, BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.GOLD)));
+	public static final RegistryObject<Block, ESGrassBlock> TENACIOUS_NIGHTFALL_GRASS_BLOCK = BLOCKS.register("tenacious_nightfall_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
+	public static final RegistryObject<Block, ESGrassBlock> GOLDEN_GRASS_BLOCK = BLOCKS.register("golden_grass_block", () -> new ESGrassBlock(NIGHTFALL_DIRT.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(MapColor.GOLD)));
 
 	// yeti fur
 	public static final RegistryObject<Block, YetiFurBlock> WHITE_YETI_FUR = BLOCKS.register("white_yeti_fur", () -> new YetiFurBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL)));

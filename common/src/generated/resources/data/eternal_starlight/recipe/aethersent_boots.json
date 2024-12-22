@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:leather"
-    },
     "A": {
       "tag": "c:ingots/aethersent"
+    },
+    "H": {
+      "item": "eternal_starlight:creteor_hide"
     }
   },
   "pattern": [
     "A A",
-    "# #"
+    "H H"
   ],
   "result": {
     "count": 1,

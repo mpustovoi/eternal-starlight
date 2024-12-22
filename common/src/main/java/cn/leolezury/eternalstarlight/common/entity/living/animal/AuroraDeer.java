@@ -68,7 +68,7 @@ public class AuroraDeer extends Animal implements Charger {
 		this.getEntityData().set(SNOW, hasSnow);
 	}
 
-	public AuroraDeer(EntityType<? extends Animal> entityType, Level level) {
+	public AuroraDeer(EntityType<? extends AuroraDeer> entityType, Level level) {
 		super(entityType, level);
 	}
 

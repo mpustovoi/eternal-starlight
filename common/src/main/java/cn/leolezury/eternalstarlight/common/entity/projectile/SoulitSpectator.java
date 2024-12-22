@@ -32,7 +32,7 @@ public class SoulitSpectator extends ThrowableItemProjectile {
 	private boolean noMovement;
 	private final List<ChunkPos> loadedChunks = new ArrayList<>();
 
-	public SoulitSpectator(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
+	public SoulitSpectator(EntityType<? extends SoulitSpectator> entityType, Level level) {
 		super(entityType, level);
 	}
 

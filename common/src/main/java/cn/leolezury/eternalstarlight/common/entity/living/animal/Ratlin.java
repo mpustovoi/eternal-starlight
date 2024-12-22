@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class Ratlin extends Animal {
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(ESTags.Items.RATLIN_FOOD);
 
-	public Ratlin(EntityType<? extends Animal> type, Level level) {
+	public Ratlin(EntityType<? extends Ratlin> type, Level level) {
 		super(type, level);
 	}
 

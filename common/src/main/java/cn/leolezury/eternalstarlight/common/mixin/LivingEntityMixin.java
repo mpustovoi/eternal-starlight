@@ -7,8 +7,10 @@ import cn.leolezury.eternalstarlight.common.particle.GlowParticleOptions;
 import cn.leolezury.eternalstarlight.common.platform.ESPlatform;
 import cn.leolezury.eternalstarlight.common.registry.ESAttributes;
 import cn.leolezury.eternalstarlight.common.registry.ESItems;
+import cn.leolezury.eternalstarlight.common.registry.ESMobEffects;
 import cn.leolezury.eternalstarlight.common.util.ESTags;
 import cn.leolezury.eternalstarlight.common.vfx.ScreenShakeVfx;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -65,6 +69,9 @@ public abstract class LivingEntityMixin {
 	@Shadow
 	@NotNull
 	public abstract ItemStack getWeaponItem();
+
+	@Shadow
+	private Optional<BlockPos> lastClimbablePos;
 
 	@Inject(method = "swing(Lnet/minecraft/world/InteractionHand;Z)V", at = @At("HEAD"))
 	private void swing(InteractionHand interactionHand, boolean bl, CallbackInfo ci) {
@@ -143,6 +150,32 @@ public abstract class LivingEntityMixin {
 				if (hasEffect(effect)) {
 					removeEffect(effect);
 				}
+			}
+		}
+	}
+
+	@Inject(method = "onClimbable", at = @At(value = "RETURN"), cancellable = true)
+	private void onClimbable(CallbackInfoReturnable<Boolean> cir) {
+		LivingEntity livingEntity = ((LivingEntity) (Object) this);
+		if (hasEffect(ESMobEffects.STICKY.asHolder())) {
+			boolean climbable = false;
+			AABB box = livingEntity.getBoundingBox();
+			BlockPos fromPos = BlockPos.containing(box.minX - 1.0E-3, box.minY + 1.0E-7, box.minZ - 1.0E-3);
+			BlockPos toPos = BlockPos.containing(box.maxX + 1.0E-3, box.maxY - 1.0E-7, box.maxZ + 1.0E-3);
+			BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+			for (int i = fromPos.getX(); i <= toPos.getX(); ++i) {
+				for (int j = fromPos.getY(); j <= toPos.getY(); ++j) {
+					for (int k = fromPos.getZ(); k <= toPos.getZ(); ++k) {
+						mutableBlockPos.set(i, j, k);
+						if (livingEntity.level().getBlockState(mutableBlockPos).isCollisionShapeFullBlock(livingEntity.level(), mutableBlockPos)) {
+							climbable = true;
+						}
+					}
+				}
+			}
+			if (climbable) {
+				this.lastClimbablePos = Optional.of(livingEntity.blockPosition());
+				cir.setReturnValue(true);
 			}
 		}
 	}

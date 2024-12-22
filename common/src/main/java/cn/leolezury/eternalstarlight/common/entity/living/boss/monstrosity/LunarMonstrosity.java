@@ -53,7 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class LunarMonstrosity extends ESBoss implements RayAttackUser {
-	public LunarMonstrosity(EntityType<? extends ESBoss> entityType, Level level) {
+	public LunarMonstrosity(EntityType<? extends LunarMonstrosity> entityType, Level level) {
 		super(entityType, level);
 	}
 

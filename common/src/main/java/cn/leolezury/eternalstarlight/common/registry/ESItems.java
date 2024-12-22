@@ -280,6 +280,8 @@ public class ESItems {
 	public static final RegistryObject<Item, Item> HAZE_ICE_BRICK_WALL = registerItem("haze_ice_brick_wall", () -> new BlockItem(ESBlocks.HAZE_ICE_BRICK_WALL.get(), new Item.Properties()));
 	public static final RegistryObject<Item, Item> ICICLE = registerItem("icicle", () -> new BlockItem(ESBlocks.ICICLE.get(), new Item.Properties()));
 	public static final RegistryObject<Item, Item> ASHEN_SNOW = registerItem("ashen_snow", () -> new BlockItem(ESBlocks.ASHEN_SNOW.get(), new Item.Properties()));
+	public static final RegistryObject<Item, Item> ASHEN_SNOWBALL = registerItem("ashen_snowball", () -> new AshenSnowballItem(new Item.Properties().stacksTo(16)));
+	public static final RegistryObject<Item, Item> FROZEN_BOMB = registerItem("frozen_bomb", () -> new FrozenBombItem(new Item.Properties().stacksTo(16)));
 
 	// nebulaite
 	public static final RegistryObject<Item, Item> NEBULAITE = registerItem("nebulaite", () -> new BlockItem(ESBlocks.NEBULAITE.get(), new Item.Properties()));
@@ -534,6 +536,7 @@ public class ESItems {
 	public static final RegistryObject<Item, Item> BOULDERSHROOM_BLOCK = registerItem("bouldershroom_block", () -> new BlockItem(ESBlocks.BOULDERSHROOM_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<Item, Item> BOULDERSHROOM_STEM = registerItem("bouldershroom_stem", () -> new BlockItem(ESBlocks.BOULDERSHROOM_STEM.get(), new Item.Properties()));
 	public static final RegistryObject<Item, Item> BOULDERSHROOM_ROOTS = registerItem("bouldershroom_roots", () -> new BlockItem(ESBlocks.BOULDERSHROOM_ROOTS.get(), new Item.Properties()));
+	public static final RegistryObject<Item, Item> BOULDERSHROOM_STEW = registerItem("bouldershroom_stew", () -> new Item(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.6F).effect(new MobEffectInstance(ESMobEffects.STICKY.asHolder(), 2400, 0), 0.8f).usingConvertsTo(Items.BOWL).build())));
 
 	// swamp plant
 	public static final RegistryObject<Item, Item> SWAMP_ROSE = registerItem("swamp_rose", () -> new BlockItem(ESBlocks.SWAMP_ROSE.get(), new Item.Properties()));
@@ -596,6 +599,7 @@ public class ESItems {
 	public static final RegistryObject<Item, Item> FANTASY_GRASS_CARPET = registerItem("fantasy_grass_carpet", () -> new BlockItem(ESBlocks.FANTASY_GRASS_CARPET.get(), new Item.Properties()));
 
 	// aethersent
+	public static final RegistryObject<Item, Item> CRETEOR_HIDE = registerItem("creteor_hide", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item, Item> RAW_AETHERSENT = registerItem("raw_aethersent", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item, Item> RAW_AETHERSENT_BLOCK = registerItem("raw_aethersent_block", () -> new BlockItem(ESBlocks.RAW_AETHERSENT_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<Item, Item> AETHERSENT_BLOCK = registerItem("aethersent_block", () -> new BlockItem(ESBlocks.AETHERSENT_BLOCK.get(), new Item.Properties()));
@@ -611,6 +615,7 @@ public class ESItems {
 		() -> new AethersentArmorItem(ESArmorMaterials.AETHERSENT.asHolder(), ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
 	public static final RegistryObject<Item, Item> AETHERSENT_BOOTS = registerItem("aethersent_boots",
 		() -> new AethersentArmorItem(ESArmorMaterials.AETHERSENT.asHolder(), ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
+	public static final RegistryObject<Item, Item> AETHERSTRIKE_ROCKET = registerItem("aetherstrike_rocket", () -> new AetherstrikeRocketItem(new Item.Properties()));
 
 	// thermal springstone
 	public static final RegistryObject<Item, Item> SPRINGSTONE = registerItem("springstone", () -> new BlockItem(ESBlocks.SPRINGSTONE.get(), new Item.Properties()));

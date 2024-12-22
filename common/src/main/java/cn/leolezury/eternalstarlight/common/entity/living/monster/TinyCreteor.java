@@ -82,7 +82,7 @@ public class TinyCreteor extends Monster implements PowerableMob {
 	public int oldSwell;
 	public float rollAngle, prevRollAngle;
 
-	public TinyCreteor(EntityType<? extends Monster> entityType, Level level) {
+	public TinyCreteor(EntityType<? extends TinyCreteor> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new FlyingMoveControl(this, 20, true);
 		this.setNoGravity(true);

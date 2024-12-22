@@ -15,7 +15,7 @@ public class LunarThorn extends AttackEffect {
 	public float oldClientScale = 0f;
 	public float clientScale = 0f;
 
-	public LunarThorn(EntityType<? extends AttackEffect> type, Level level) {
+	public LunarThorn(EntityType<? extends LunarThorn> type, Level level) {
 		super(type, level);
 	}
 

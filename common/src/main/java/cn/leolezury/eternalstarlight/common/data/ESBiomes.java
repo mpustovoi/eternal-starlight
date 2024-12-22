@@ -296,7 +296,6 @@ public class ESBiomes {
 	private static BiomeGenerationSettings.Builder riverSettings(HolderGetter<PlacedFeature> featureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
 		BiomeGenerationSettings.Builder builder = baseAquaticGenBuilder(featureGetter, carverGetter);
 
-		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.ABYSSAL_KELP);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.WATER_SURFACE_VEGETATION);
 
 		return builder;
@@ -313,7 +312,6 @@ public class ESBiomes {
 	private static BiomeGenerationSettings.Builder oceanSettings(HolderGetter<PlacedFeature> featureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
 		BiomeGenerationSettings.Builder builder = baseAquaticGenBuilder(featureGetter, carverGetter);
 
-		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.ABYSSAL_KELP);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.ORBFLORA);
 		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ESPlacedFeatures.OCEAN_VEGETATION);
 

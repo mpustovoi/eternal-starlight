@@ -47,7 +47,7 @@ public class ESBoss extends Monster implements MultiBehaviorUser {
 
 	protected final List<String> fightParticipants = new ArrayList<>();
 
-	protected ESBoss(EntityType<? extends Monster> type, Level level) {
+	protected ESBoss(EntityType<? extends ESBoss> type, Level level) {
 		super(type, level);
 		if (level.isClientSide) {
 			ClientHandlers.BOSSES.add(this);

@@ -1,8 +1,11 @@
 package cn.leolezury.eternalstarlight.common.mixin;
 
 import cn.leolezury.eternalstarlight.common.entity.interfaces.PersistentDataHolder;
+import cn.leolezury.eternalstarlight.common.registry.ESMobEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,6 +37,14 @@ public abstract class EntityMixin implements PersistentDataHolder {
 	private void load(CompoundTag compoundTag, CallbackInfo info) {
 		if (compoundTag != null && compoundTag.contains("es_data", CompoundTag.TAG_COMPOUND)) {
 			esPersistentData = compoundTag.getCompound("es_data");
+		}
+	}
+
+	@Inject(method = "isStateClimbable", at = @At("RETURN"), cancellable = true)
+	private void isStateClimbable(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
+		Entity entity = (Entity) (Object) this;
+		if (entity instanceof LivingEntity living && living.hasEffect(ESMobEffects.STICKY.asHolder())) {
+			cir.setReturnValue(true);
 		}
 	}
 }

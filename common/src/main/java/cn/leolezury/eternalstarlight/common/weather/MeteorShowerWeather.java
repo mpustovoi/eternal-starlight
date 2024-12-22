@@ -1,10 +1,7 @@
 package cn.leolezury.eternalstarlight.common.weather;
 
 import cn.leolezury.eternalstarlight.common.client.ClientWeatherState;
-import cn.leolezury.eternalstarlight.common.config.ESConfig;
-import cn.leolezury.eternalstarlight.common.entity.living.monster.Creteor;
 import cn.leolezury.eternalstarlight.common.entity.projectile.AethersentMeteor;
-import cn.leolezury.eternalstarlight.common.registry.ESEntities;
 import cn.leolezury.eternalstarlight.common.registry.ESParticles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,14 +12,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class MeteorRainWeather extends AbstractWeather {
-	public MeteorRainWeather(Properties properties) {
+public class MeteorShowerWeather extends AbstractWeather {
+	public MeteorShowerWeather(Properties properties) {
 		super(properties);
 	}
 
@@ -48,21 +42,12 @@ public class MeteorRainWeather extends AbstractWeather {
 			int targetY = pos.getY();
 			int targetZ = pos.getZ();
 			RandomSource random = level.getRandom();
-			if (ESConfig.INSTANCE.mobsConfig.creteor.canSpawn() && random.nextBoolean() && level.getEntitiesOfClass(Creteor.class, new AABB(pos).inflate(32)).isEmpty()) {
-				Creteor creteor = new Creteor(ESEntities.CRETEOR.get(), level);
-				creteor.setPos(targetX + (random.nextFloat() - 0.5) * 3, targetY + 200 + (random.nextFloat() - 0.5) * 5, targetZ + (random.nextFloat() - 0.5) * 3);
-				creteor.setPersistenceRequired();
-				creteor.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100));
-				level.addFreshEntity(creteor);
-				level.sendParticles(ParticleTypes.EXPLOSION, creteor.getX(), creteor.getY(), creteor.getZ(), 2, 0.2D, 0.2D, 0.2D, 0.0D);
-			} else {
-				AethersentMeteor meteor = new AethersentMeteor(level, null, targetX + (random.nextFloat() - 0.5) * 3, targetY + 200 + (random.nextFloat() - 0.5) * 5, targetZ + (random.nextFloat() - 0.5) * 3);
-				meteor.setSize(10);
-				meteor.setTargetPos(new Vec3(targetX, targetY, targetZ));
-				meteor.setOnlyHurtEnemy(false);
-				level.addFreshEntity(meteor);
-				level.sendParticles(ParticleTypes.EXPLOSION, meteor.getX(), meteor.getY(), meteor.getZ(), 2, 0.2D, 0.2D, 0.2D, 0.0D);
-			}
+			AethersentMeteor meteor = new AethersentMeteor(level, null, targetX + (random.nextFloat() - 0.5) * 3, targetY + 200 + (random.nextFloat() - 0.5) * 5, targetZ + (random.nextFloat() - 0.5) * 3);
+			meteor.setSize(10);
+			meteor.setTargetPos(new Vec3(targetX, targetY, targetZ));
+			meteor.setOnlyHurtEnemy(false);
+			level.addFreshEntity(meteor);
+			level.sendParticles(ParticleTypes.EXPLOSION, meteor.getX(), meteor.getY(), meteor.getZ(), 2, 0.2D, 0.2D, 0.2D, 0.0D);
 		}
 	}
 

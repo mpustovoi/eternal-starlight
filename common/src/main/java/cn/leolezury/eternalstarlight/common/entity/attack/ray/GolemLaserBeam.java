@@ -13,11 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class GolemLaserBeam extends RayAttack {
-	public GolemLaserBeam(EntityType<? extends RayAttack> type, Level world) {
+	public GolemLaserBeam(EntityType<? extends GolemLaserBeam> type, Level world) {
 		super(type, world);
 	}
 
-	public GolemLaserBeam(EntityType<? extends RayAttack> type, Level world, LivingEntity caster, double x, double y, double z, float yaw, float pitch) {
+	public GolemLaserBeam(EntityType<? extends GolemLaserBeam> type, Level world, LivingEntity caster, double x, double y, double z, float yaw, float pitch) {
 		super(type, world, caster, x, y, z, yaw, pitch);
 	}
 

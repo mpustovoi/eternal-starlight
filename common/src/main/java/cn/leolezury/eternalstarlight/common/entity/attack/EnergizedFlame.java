@@ -6,7 +6,6 @@ import cn.leolezury.eternalstarlight.common.entity.living.boss.golem.StarlightGo
 import cn.leolezury.eternalstarlight.common.particle.ESSmokeParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -14,7 +13,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
 
 public class EnergizedFlame extends AttackEffect {
-	public EnergizedFlame(EntityType<? extends Entity> type, Level level) {
+	public EnergizedFlame(EntityType<? extends EnergizedFlame> type, Level level) {
 		super(type, level);
 	}
 

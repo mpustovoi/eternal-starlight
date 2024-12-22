@@ -25,7 +25,7 @@ public class GrimstoneGolem extends PathfinderMob {
 	public final AnimationState displayAnimationState = new AnimationState();
 	public final AnimationState lowerArmsAnimationState = new AnimationState();
 
-	public GrimstoneGolem(EntityType<? extends PathfinderMob> entityType, Level level) {
+	public GrimstoneGolem(EntityType<? extends GrimstoneGolem> entityType, Level level) {
 		super(entityType, level);
 	}
 

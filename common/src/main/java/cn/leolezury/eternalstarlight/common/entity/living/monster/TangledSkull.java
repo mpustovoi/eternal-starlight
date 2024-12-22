@@ -97,7 +97,7 @@ public class TangledSkull extends Monster {
 		this.getEntityData().set(SHOT_MOVEMENT, shotMovement.toVector3f());
 	}
 
-	public TangledSkull(EntityType<? extends Monster> entityType, Level level) {
+	public TangledSkull(EntityType<? extends TangledSkull> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new TangledSkullMoveControl(this);
 	}

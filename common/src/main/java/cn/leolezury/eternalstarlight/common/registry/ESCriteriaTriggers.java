@@ -15,6 +15,7 @@ public class ESCriteriaTriggers {
 	public static final RegistryObject<CriterionTrigger<?>, PlayerTrigger> THROW_GLEECH_EGG = TRIGGERS.register("throw_gleech_egg", PlayerTrigger::new);
 	public static final RegistryObject<CriterionTrigger<?>, PlayerTrigger> DEACTIVATE_ENERGY_BLOCK = TRIGGERS.register("deactivate_energy_block", PlayerTrigger::new);
 	public static final RegistryObject<CriterionTrigger<?>, PlayerTrigger> CHAIN_TANGLED_SKULL_EXPLOSION = TRIGGERS.register("chain_tangled_skull_explosion", PlayerTrigger::new);
+	public static final RegistryObject<CriterionTrigger<?>, PlayerTrigger> SATURATE_DAGGER_OF_HUNGER = TRIGGERS.register("saturate_dagger_of_hunger", PlayerTrigger::new);
 
 	public static void loadClass() {
 	}

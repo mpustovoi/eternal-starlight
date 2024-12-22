@@ -29,7 +29,7 @@ public class ESFallingBlock extends Entity {
 	private int duration;
 	private boolean damage;
 
-	public ESFallingBlock(EntityType<ESFallingBlock> type, Level level) {
+	public ESFallingBlock(EntityType<? extends ESFallingBlock> type, Level level) {
 		super(type, level);
 		this.duration = 20;
 	}

@@ -34,7 +34,7 @@ import org.joml.Vector4f;
 public class LunarSpore extends ThrowableProjectile implements TrailOwner {
 	private static final ResourceLocation TRAIL_TEXTURE = EternalStarlight.id("textures/entity/trail.png");
 
-	public LunarSpore(EntityType<? extends ThrowableProjectile> type, Level level) {
+	public LunarSpore(EntityType<? extends LunarSpore> type, Level level) {
 		super(type, level);
 	}
 

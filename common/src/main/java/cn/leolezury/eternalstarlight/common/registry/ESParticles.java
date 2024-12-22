@@ -92,6 +92,7 @@ public class ESParticles {
 	public static final RegistryObject<ParticleType<?>, SimpleParticleType> SMOKE_TRAIL = PARTICLE_TYPES.register("smoke_trail", () -> new SimpleParticleType(false));
 	public static final RegistryObject<ParticleType<?>, SimpleParticleType> AETHERSENT_EXPLOSION = PARTICLE_TYPES.register("aethersent_explosion", () -> new SimpleParticleType(false));
 	public static final RegistryObject<ParticleType<?>, SimpleParticleType> ASHEN_SNOW = PARTICLE_TYPES.register("ashen_snow", () -> new SimpleParticleType(false));
+	public static final RegistryObject<ParticleType<?>, SimpleParticleType> ORBITAL_ASHEN_SNOW = PARTICLE_TYPES.register("orbital_ashen_snow", () -> new SimpleParticleType(false));
 	public static final RegistryObject<ParticleType<?>, ParticleType<ExplosionShockParticleOptions>> EXPLOSION_SHOCK = PARTICLE_TYPES.register("explosion_shock", () -> new ParticleType<>(false) {
 		@Override
 		public MapCodec<ExplosionShockParticleOptions> codec() {

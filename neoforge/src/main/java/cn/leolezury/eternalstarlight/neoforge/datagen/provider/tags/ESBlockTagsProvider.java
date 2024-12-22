@@ -1093,7 +1093,8 @@ public class ESBlockTagsProvider extends BlockTagsProvider {
 			ESBlocks.TENACIOUS_NIGHTFALL_GRASS_BLOCK.get(),
 			ESBlocks.GOLDEN_GRASS_BLOCK.get(),
 			ESBlocks.FANTASY_GRASS_BLOCK.get(),
-			ESBlocks.SWAMP_SILVER_ORE.get()
+			ESBlocks.SWAMP_SILVER_ORE.get(),
+			ESBlocks.ASHEN_SNOW.get()
 		);
 		tag(BlockTags.SWORD_EFFICIENT).add(
 			ESBlocks.MOONLIGHT_LILY_PAD.get(),

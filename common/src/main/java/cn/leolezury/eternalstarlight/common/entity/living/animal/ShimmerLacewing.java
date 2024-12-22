@@ -51,7 +51,7 @@ public class ShimmerLacewing extends Animal implements FlyingAnimal {
 		this.getEntityData().set(VARIANT, variant);
 	}
 
-	public ShimmerLacewing(EntityType<? extends Animal> entityType, Level level) {
+	public ShimmerLacewing(EntityType<? extends ShimmerLacewing> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new LacewingMoveControl();
 		this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);

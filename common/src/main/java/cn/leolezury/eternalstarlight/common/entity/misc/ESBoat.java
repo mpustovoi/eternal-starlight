@@ -18,7 +18,7 @@ public class ESBoat extends Boat {
 
 	private static final EntityDataAccessor<Integer> BOAT_TYPE = SynchedEntityData.defineId(ESBoat.class, EntityDataSerializers.INT);
 
-	public ESBoat(EntityType<? extends Boat> type, Level level) {
+	public ESBoat(EntityType<? extends ESBoat> type, Level level) {
 		super(type, level);
 		this.blocksBuilding = true;
 	}

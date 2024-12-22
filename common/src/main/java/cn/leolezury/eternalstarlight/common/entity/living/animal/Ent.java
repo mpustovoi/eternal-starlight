@@ -40,7 +40,7 @@ public class Ent extends Animal {
 
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(ESTags.Items.ENT_FOOD);
 
-	public Ent(EntityType<? extends Animal> type, Level level) {
+	public Ent(EntityType<? extends Ent> type, Level level) {
 		super(type, level);
 	}
 

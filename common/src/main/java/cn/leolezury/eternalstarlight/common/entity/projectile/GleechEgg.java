@@ -16,7 +16,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class GleechEgg extends ThrowableItemProjectile {
-	public GleechEgg(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
+	public GleechEgg(EntityType<? extends GleechEgg> entityType, Level level) {
 		super(entityType, level);
 	}
 

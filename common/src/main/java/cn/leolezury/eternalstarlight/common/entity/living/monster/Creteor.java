@@ -97,7 +97,7 @@ public class Creteor extends Monster implements PowerableMob {
 	public float rollAngle, prevRollAngle;
 	public float spin, prevSpin;
 
-	public Creteor(EntityType<? extends Monster> type, Level level) {
+	public Creteor(EntityType<? extends Creteor> type, Level level) {
 		super(type, level);
 	}
 

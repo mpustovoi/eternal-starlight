@@ -21,7 +21,7 @@ public class AttackEffect extends Entity {
 	private static final String TAG_SPAWNED_TICKS = "spawned_ticks";
 	private static final String TAG_ATTACK_MODE = "attack_mode";
 
-	public AttackEffect(EntityType<?> type, Level level) {
+	public AttackEffect(EntityType<? extends AttackEffect> type, Level level) {
 		super(type, level);
 	}
 

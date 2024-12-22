@@ -22,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class SonarBomb extends ThrowableItemProjectile {
-	public SonarBomb(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
+	public SonarBomb(EntityType<? extends SonarBomb> entityType, Level level) {
 		super(entityType, level);
 	}
 

@@ -25,9 +25,12 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -281,7 +284,25 @@ public class ESBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(ESBlocks.HAZE_ICE_BRICK_STAIRS.get());
 		dropSelf(ESBlocks.HAZE_ICE_BRICK_WALL.get());
 		dropSelf(ESBlocks.ICICLE.get());
-		add(ESBlocks.ASHEN_SNOW.get(), noDrop());
+		add(ESBlocks.ASHEN_SNOW.get(), (block) -> LootTable.lootTable()
+			.withPool(LootPool.lootPool()
+				.when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
+				.add(AlternativesEntry.alternatives(
+					AlternativesEntry.alternatives(
+						SnowLayerBlock.LAYERS.getPossibleValues(), (i) ->
+							LootItem.lootTableItem(ESItems.ASHEN_SNOWBALL.get())
+								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SnowLayerBlock.LAYERS, i)))
+								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(i)))
+					).when(this.doesNotHaveSilkTouch()),
+					AlternativesEntry.alternatives(
+						SnowLayerBlock.LAYERS.getPossibleValues(), (i) ->
+							LootItem.lootTableItem(ESBlocks.ASHEN_SNOW.get())
+								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SnowLayerBlock.LAYERS, i)))
+								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(i)))
+					)
+				))
+			)
+		);
 
 		dropSelf(ESBlocks.NEBULAITE.get());
 		dropSelf(ESBlocks.NEBULAITE_BRICKS.get());
