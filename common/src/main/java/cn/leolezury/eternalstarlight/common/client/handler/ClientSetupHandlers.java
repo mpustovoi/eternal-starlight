@@ -337,6 +337,8 @@ public class ClientSetupHandlers {
 
 	public static final Map<ModelResourceLocation, BakedModel> BAKED_MODELS = new HashMap<>();
 
+	public static boolean modifiedBakedModels = false;
+
 	public static final String KEY_CATEGORY_ETERNAL_STARLIGHT = "key.categories.eternal_starlight";
 
 	public static final Map<ResourceLocation, KeyMapping> KEY_MAPPINGS = Map.of(
@@ -557,11 +559,14 @@ public class ClientSetupHandlers {
 	}
 
 	public static void modifyBakingResult(Map<ModelResourceLocation, BakedModel> models) {
-		for (ModelResourceLocation id : models.keySet()) {
-			if (id.id().toString().contains(EternalStarlight.ID + ":thermal_springstone_")) {
-				models.put(id, ESPlatform.INSTANCE.getGlowingBakedModel(models.get(id)));
+		if (!modifiedBakedModels) {
+			for (ModelResourceLocation id : models.keySet()) {
+				if (id.id().toString().contains(EternalStarlight.ID + ":thermal_springstone_")) {
+					models.put(id, ESPlatform.INSTANCE.getGlowingBakedModel(models.get(id)));
+				}
+				BAKED_MODELS.put(id, models.get(id));
 			}
-			BAKED_MODELS.put(id, models.get(id));
+			modifiedBakedModels = true;
 		}
 	}
 
