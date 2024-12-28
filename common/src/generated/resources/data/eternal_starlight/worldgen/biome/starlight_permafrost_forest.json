@@ -112,6 +112,12 @@
         "weight": 24
       },
       {
+        "type": "eternal_starlight:shadow_snail",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 18
+      },
+      {
         "type": "eternal_starlight:yeti",
         "maxCount": 6,
         "minCount": 3,

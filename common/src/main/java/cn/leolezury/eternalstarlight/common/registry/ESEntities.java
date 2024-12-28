@@ -158,6 +158,16 @@ public class ESEntities {
 			.clientTrackingRange(8)
 			.build(EternalStarlight.id("ratlin").toString())
 	);
+	public static final RegistryObject<EntityType<?>, EntityType<ShadowSnail>> SHADOW_SNAIL = ENTITIES.register(
+		"shadow_snail",
+		() -> EntityType.Builder.of(ShadowSnail::new, MobCategory.CREATURE)
+			.sized(0.5F, 0.4F)
+			.eyeHeight(0.13F)
+			.passengerAttachments(0.2375F)
+			.ridingOffset(-0.0625F)
+			.clientTrackingRange(8)
+			.build(EternalStarlight.id("shadow_snail").toString())
+	);
 	public static final RegistryObject<EntityType<?>, EntityType<Yeti>> YETI = ENTITIES.register(
 		"yeti",
 		() -> EntityType.Builder.of(Yeti::new, MobCategory.CREATURE)

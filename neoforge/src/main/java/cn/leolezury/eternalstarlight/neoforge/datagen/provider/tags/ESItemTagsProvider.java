@@ -82,11 +82,13 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		);
 		tag(Tags.Items.FOODS_RAW_MEAT).add(
 			ESItems.AURORA_DEER_STEAK.get(),
-			ESItems.RATLIN_MEAT.get()
+			ESItems.RATLIN_MEAT.get(),
+			ESItems.SHADOW_SNAIL_MEAT.get()
 		);
 		tag(Tags.Items.FOODS_COOKED_MEAT).add(
 			ESItems.COOKED_AURORA_DEER_STEAK.get(),
-			ESItems.COOKED_RATLIN_MEAT.get()
+			ESItems.COOKED_RATLIN_MEAT.get(),
+			ESItems.COOKED_SHADOW_SNAIL_MEAT.get()
 		);
 		tag(Tags.Items.FOODS_RAW_FISH).add(
 			ESItems.LUMINOFISH.get(),
@@ -277,6 +279,10 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		tag(ESTags.Items.RATLIN_FOOD).addTag(ItemTags.MEAT).add(
 			ESItems.CAVE_MOSS.get(),
 			Items.GLOW_LICHEN
+		);
+		tag(ESTags.Items.SHADOW_SNAIL_FOOD).addTag(ItemTags.LEAVES).add(
+			ESItems.LUNAR_BERRIES.get(),
+			ESItems.CAVE_MOSS.get()
 		);
 		tag(ESTags.Items.YETI_FOOD).add(
 			ESItems.LUNAR_BERRIES.get(),

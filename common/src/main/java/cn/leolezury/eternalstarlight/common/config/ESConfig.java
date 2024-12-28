@@ -32,6 +32,7 @@ public class ESConfig {
 		public final AttackingMobConfig tinyCreteor = new AttackingMobConfig(5, 0, 2, 48, true);
 		public final MobConfig ent = new MobConfig(10, 0, true);
 		public final MobConfig ratlin = new MobConfig(15, 0, true);
+		public final MobConfig shadowSnail = new MobConfig(8, 6, true);
 		public final MobConfig yeti = new MobConfig(20, 0, true);
 		public final AttackingMobConfig auroraDeer = new AttackingMobConfig(20, 0, 3, 16, true);
 		public final AttackingMobConfig crystallizedMoth = new AttackingMobConfig(20, 0, 1.5, 64, true);

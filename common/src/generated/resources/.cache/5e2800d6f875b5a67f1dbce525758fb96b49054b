@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-13T11:10:28.9992409	Tags for minecraft:item mod id eternal_starlight
+// 1.21.1	2024-12-28T18:54:03.025548	Tags for minecraft:item mod id eternal_starlight
 4e42849c79b21f7d80bc0c6ff216ffa705bb94aa data/c/tags/item/budding_blocks.json
 f2d1fdc1f3d6da57f00e708893a3bde6703c4d8f data/c/tags/item/buds.json
 49d6be28d9b8da6ebe3d7246980fb4a6109f43df data/c/tags/item/campfires.json
@@ -28,10 +28,10 @@ c462e321b14ff979ddd095a4c5db297e753978d7 data/c/tags/item/fence_gates.json
 9925ad8b2e2a120964ba09037b254f9ee222cd59 data/c/tags/item/foods.json
 3882da4518e1948fefadf9df045f74d7cc48a977 data/c/tags/item/foods/berry.json
 116ffed57cee4ddc2c46b14178918e2809039cbe data/c/tags/item/foods/cooked_fish.json
-682db6d80f2c583a164dc905ebd73105373dd6d4 data/c/tags/item/foods/cooked_meat.json
+084ad8dbc79a7d0d8f2f57e350049d370de37e07 data/c/tags/item/foods/cooked_meat.json
 31f478f66273e06d01d92fd6d38dc69281692846 data/c/tags/item/foods/fruit.json
 1b358a5ddc4e169992763bf5c406a16124be40eb data/c/tags/item/foods/raw_fish.json
-9641843c3572e2757ea567b9930a2323551af8b9 data/c/tags/item/foods/raw_meat.json
+3681265f3d1a2dfdc0c9a9ae36fc139b00550cdc data/c/tags/item/foods/raw_meat.json
 05a32cac42475b4cc1a04113de32c355c72ba126 data/c/tags/item/gems.json
 f1a281472a393646e9431d2f44844770ef27bd98 data/c/tags/item/gems/atalphaite.json
 66ff992b2f3b1a07bf922f1caeb8fce665e1c4d2 data/c/tags/item/gems/glacite.json
@@ -115,6 +115,7 @@ f8bbc0e2015a44ff2d12ee735aa6f77e4f7ffaae data/eternal_starlight/tags/item/northl
 4c1d8bbce7c883f739a73eb0374620a15297b159 data/eternal_starlight/tags/item/ratlin_food.json
 7d3229a4651301184129cc8ba07d10d7fe7312ad data/eternal_starlight/tags/item/scarlet_logs.json
 8b585eddd3fd280fb21e9853850a8b93de508c48 data/eternal_starlight/tags/item/scythes.json
+3f7463541ec3cd793c5301595a7f9d4b6dbf7275 data/eternal_starlight/tags/item/shadow_snail_food.json
 428c1a50e9f05d9bca76d6e96a6f195d66f41e64 data/eternal_starlight/tags/item/sickles.json
 7de9617000473e9e307ca001cd1ecff23381eb6a data/eternal_starlight/tags/item/small_shields.json
 02b4718a535a53099ca721e871ef76e71f3b572f data/eternal_starlight/tags/item/starlight_mangrove_logs.json

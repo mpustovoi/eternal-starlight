@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-21T20:25:20.3095445	Loot Tables
+// 1.21.1	2024-12-28T18:14:29.0835336	Loot Tables
 2b18f4ee4964de853f965809175e41672c73f2a3 data/eternal_starlight/loot_table/blocks/abyssal_fire.json
 188b8614ef4815c81bb45c3a918877795892cf25 data/eternal_starlight/loot_table/blocks/abyssal_geyser.json
 77967e1af1e01fc2bbf8f97dd52c510df8648a4c data/eternal_starlight/loot_table/blocks/abyssal_kelp.json
@@ -579,7 +579,7 @@ e7a4432f13c78aadaee5cb60b6c6ec9a2131bbf5 data/eternal_starlight/loot_table/bosse
 bc2493e565d71ed3e74eba0f15d898e53a8864c3 data/eternal_starlight/loot_table/bosses/lunar_monstrosity.json
 5473339dfc001a271974c32f5b14eae56ca6f613 data/eternal_starlight/loot_table/bosses/starlight_golem.json
 52da11c8fd6b033f3dc6f777959d6b16c137cbb1 data/eternal_starlight/loot_table/bosses/tangled_hatred.json
-5fe4cca36fee9213f0af897597b3911e8d23203c data/eternal_starlight/loot_table/bosses/the_gatekeeper.json
+6380412171da1e0ce630b80d5567c48f105919c2 data/eternal_starlight/loot_table/bosses/the_gatekeeper.json
 817f9a82cca0cb3344de3bb32e8bde62c3aae487 data/eternal_starlight/loot_table/chests/cursed_garden.json
 a17c39e100a98bcc3ecff5dd8c27bed6ec49668c data/eternal_starlight/loot_table/chests/golem_forge.json
 1442470af1ba183d4bc6465dd5ed996ce6e730da data/eternal_starlight/loot_table/chests/music_discs.json
@@ -598,6 +598,7 @@ e84177efa08c636a037bd1a440289d31e3c42fc0 data/eternal_starlight/loot_table/entit
 7434a091afba605f14251db73d338adfbd887bfd data/eternal_starlight/loot_table/entities/lunar_monstrosity.json
 85fdae1bf87df8234c5cfe199bc1caee0bb8a248 data/eternal_starlight/loot_table/entities/nightfall_spider.json
 318be7f64d350c9f5cd183325a91a5ab456b2dda data/eternal_starlight/loot_table/entities/ratlin.json
+e250ca10b16bd4a2c083a9fd16ff9aa5006a543f data/eternal_starlight/loot_table/entities/shadow_snail.json
 876793df6ca04dce0b1bd2d60ed8976f29797a03 data/eternal_starlight/loot_table/entities/shimmer_lacewing.json
 d11b744e9604cb530323d11c95d7f6301f6acef4 data/eternal_starlight/loot_table/entities/starlight_golem.json
 1805ae6df3c00f65f8820d5326763dcb235137f5 data/eternal_starlight/loot_table/entities/tangled.json

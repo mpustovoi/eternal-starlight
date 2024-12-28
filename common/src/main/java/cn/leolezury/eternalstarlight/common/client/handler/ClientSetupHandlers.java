@@ -628,6 +628,7 @@ public class ClientSetupHandlers {
 		strategy.register(ESEntities.TINY_CRETEOR.get(), TinyCreteorRenderer::new);
 		strategy.register(ESEntities.ENT.get(), EntRenderer::new);
 		strategy.register(ESEntities.RATLIN.get(), RatlinRenderer::new);
+		strategy.register(ESEntities.SHADOW_SNAIL.get(), ShadowSnailRenderer::new);
 		strategy.register(ESEntities.YETI.get(), YetiRenderer::new);
 		strategy.register(ESEntities.AURORA_DEER.get(), AuroraDeerRenderer::new);
 		strategy.register(ESEntities.CRYSTALLIZED_MOTH.get(), CrystallizedMothRenderer::new);
@@ -703,6 +704,7 @@ public class ClientSetupHandlers {
 		strategy.register(TinyCreteorModel.ARMOR_LOCATION, () -> TinyCreteorModel.createBodyLayer(new CubeDeformation(2.0f)));
 		strategy.register(EntModel.LAYER_LOCATION, EntModel::createBodyLayer);
 		strategy.register(RatlinModel.LAYER_LOCATION, RatlinModel::createBodyLayer);
+		strategy.register(ShadowSnailModel.LAYER_LOCATION, ShadowSnailModel::createBodyLayer);
 		strategy.register(YetiModel.LAYER_LOCATION, YetiModel::createBodyLayer);
 		strategy.register(AuroraDeerModel.LAYER_LOCATION, AuroraDeerModel::createBodyLayer);
 		strategy.register(CrystallizedMothModel.LAYER_LOCATION, CrystallizedMothModel::createBodyLayer);

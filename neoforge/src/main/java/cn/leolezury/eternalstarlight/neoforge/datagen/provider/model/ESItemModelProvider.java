@@ -32,6 +32,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		spawnEgg(ESItems.TINY_CRETEOR_SPAWN_EGG.get());
 		spawnEgg(ESItems.ENT_SPAWN_EGG.get());
 		spawnEgg(ESItems.RATLIN_SPAWN_EGG.get());
+		spawnEgg(ESItems.SHADOW_SNAIL_SPAWN_EGG.get());
 		spawnEgg(ESItems.YETI_SPAWN_EGG.get());
 		spawnEgg(ESItems.AURORA_DEER_SPAWN_EGG.get());
 		spawnEgg(ESItems.CRYSTALLIZED_MOTH_SPAWN_EGG.get());
@@ -727,6 +728,11 @@ public class ESItemModelProvider extends ItemModelProvider {
 
 		basicItem(ESItems.RATLIN_MEAT.get());
 		basicItem(ESItems.COOKED_RATLIN_MEAT.get());
+
+		basicItem(ESItems.SHADOW_SNAIL_MEAT.get());
+		basicItem(ESItems.COOKED_SHADOW_SNAIL_MEAT.get());
+		basicItem(ESItems.SHADOW_SNAIL_SHELL.get());
+		basicItem(ESItems.SHADOW_SNAIL_SHELL_POWDER.get());
 
 		basicItem(ESItems.FROZEN_TUBE.get());
 

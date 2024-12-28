@@ -66,24 +66,22 @@ public class YetiModel<T extends Yeti> extends AnimatedEntityModel<T> {
 			root.yScale = 0.8f;
 			root.zScale = 0.8f;
 		}
-		if (entity.getRollState() != 0) {
-			switch (entity.getRollState()) {
-				case 1 -> {
-					this.animate(entity.rollStartAnimationState, YetiAnimation.ROLL_START, ageInTicks);
-					float rollAngle = Mth.rotLerp(Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), entity.prevRollAngle, entity.rollAngle);
-					this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
-				}
-				case 2 -> {
-					this.animate(entity.rollAnimationState, YetiAnimation.ROLL, ageInTicks);
-					float rollAngle = Mth.rotLerp(Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), entity.prevRollAngle, entity.rollAngle);
-					this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
-				}
-				case 3 -> {
-					this.animate(entity.rollEndAnimationState, YetiAnimation.ROLL_END, ageInTicks);
-					float progress = Math.min(10f, entity.rollEndAnimationState.getAccumulatedTime() / 1000f * 20f) / 10f;
-					float rollAngle = Mth.rotLerp(progress, entity.rollAngle, 0);
-					this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
-				}
+		switch (entity.getRollState()) {
+			case 1 -> {
+				this.animate(entity.rollStartAnimationState, YetiAnimation.ROLL_START, ageInTicks);
+				float rollAngle = Mth.rotLerp(Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), entity.prevRollAngle, entity.rollAngle);
+				this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
+			}
+			case 2 -> {
+				this.animate(entity.rollAnimationState, YetiAnimation.ROLL, ageInTicks);
+				float rollAngle = Mth.rotLerp(Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(Minecraft.getInstance().level != null && Minecraft.getInstance().level.tickRateManager().runsNormally()), entity.prevRollAngle, entity.rollAngle);
+				this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
+			}
+			case 3 -> {
+				this.animate(entity.rollEndAnimationState, YetiAnimation.ROLL_END, ageInTicks);
+				float progress = Math.min(10f, entity.rollEndAnimationState.getAccumulatedTime() / 1000f * 20f) / 10f;
+				float rollAngle = Mth.rotLerp(progress, entity.rollAngle, 0);
+				this.root.xRot = rollAngle * Mth.DEG_TO_RAD;
 			}
 		}
 		// from GuardianModel

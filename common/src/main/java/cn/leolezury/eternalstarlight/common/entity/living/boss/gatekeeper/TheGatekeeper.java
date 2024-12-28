@@ -351,17 +351,6 @@ public class TheGatekeeper extends ESBoss implements Npc, Merchant {
 					setActivated(true);
 					setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ESItems.SHATTERED_SWORD.get()));
 				}
-			} else if (!hasOrb) {
-				ItemEntity orb = spawnAtLocation(ESItems.ORB_OF_PROPHECY.get());
-				if (orb != null) {
-					orb.setGlowingTag(true);
-				}
-				if (!hasBook) {
-					ItemEntity book = spawnAtLocation(ESItems.BOOK.get());
-					if (book != null) {
-						book.setGlowingTag(true);
-					}
-				}
 			} else if (!getOffers().isEmpty()) {
 				this.setTradingPlayer(serverPlayer);
 				this.openTradingScreen(serverPlayer, this.getDisplayName(), 1);
