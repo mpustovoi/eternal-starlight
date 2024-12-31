@@ -104,6 +104,7 @@ public class ESParticles {
 			return ExplosionShockParticleOptions.STREAM_CODEC;
 		}
 	});
+	public static final RegistryObject<ParticleType<?>, SimpleParticleType> TOWER_SQUID_INK = PARTICLE_TYPES.register("tower_squid_ink", () -> new SimpleParticleType(false));
 	public static final RegistryObject<ParticleType<?>, SimpleParticleType> ADVANCED_GLOW = PARTICLE_TYPES.register("advanced_glow", () -> new SimpleParticleType(false));
 	public static final RegistryObject<ParticleType<?>, SimpleParticleType> SHINE = PARTICLE_TYPES.register("shine", () -> new SimpleParticleType(false));
 

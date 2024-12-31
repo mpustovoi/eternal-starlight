@@ -81,11 +81,13 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.ABYSSAL_FRUIT.get()
 		);
 		tag(Tags.Items.FOODS_RAW_MEAT).add(
+			ESItems.TOWER_SQUID.get(),
 			ESItems.AURORA_DEER_STEAK.get(),
 			ESItems.RATLIN_MEAT.get(),
 			ESItems.SHADOW_SNAIL_MEAT.get()
 		);
 		tag(Tags.Items.FOODS_COOKED_MEAT).add(
+			ESItems.COOKED_TOWER_SQUID.get(),
 			ESItems.COOKED_AURORA_DEER_STEAK.get(),
 			ESItems.COOKED_RATLIN_MEAT.get(),
 			ESItems.COOKED_SHADOW_SNAIL_MEAT.get()
@@ -617,6 +619,8 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		);
 		tag(ItemTags.MEAT).add(
 			ESItems.DOOMEDEN_CARRION.get(),
+			ESItems.TOWER_SQUID.get(),
+			ESItems.COOKED_TOWER_SQUID.get(),
 			ESItems.LUMINOFISH.get(),
 			ESItems.COOKED_LUMINOFISH.get(),
 			ESItems.LUMINARIS.get(),
@@ -624,7 +628,9 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.AURORA_DEER_STEAK.get(),
 			ESItems.COOKED_AURORA_DEER_STEAK.get(),
 			ESItems.RATLIN_MEAT.get(),
-			ESItems.COOKED_RATLIN_MEAT.get()
+			ESItems.COOKED_RATLIN_MEAT.get(),
+			ESItems.SHADOW_SNAIL_MEAT.get(),
+			ESItems.COOKED_SHADOW_SNAIL_MEAT.get()
 		);
 		tag(ItemTags.HEAD_ARMOR).add(
 			ESItems.ALCHEMIST_MASK.get(),

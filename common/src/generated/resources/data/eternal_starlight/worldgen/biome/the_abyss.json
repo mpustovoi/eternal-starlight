@@ -113,6 +113,12 @@
     ],
     "water_creature": [
       {
+        "type": "eternal_starlight:tower_squid",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 16
+      },
+      {
         "type": "eternal_starlight:twilight_gaze",
         "maxCount": 6,
         "minCount": 3,

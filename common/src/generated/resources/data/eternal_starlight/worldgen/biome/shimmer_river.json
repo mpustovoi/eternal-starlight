@@ -103,7 +103,14 @@
     ],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "water_creature": [
+      {
+        "type": "eternal_starlight:tower_squid",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 16
+      }
+    ]
   },
   "temperature": 0.5
 }

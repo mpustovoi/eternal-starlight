@@ -91,6 +91,7 @@ public class ESRecipeProvider extends RecipeProvider {
 		// food
 		addCookingRecipes(recipeOutput, "smoking", RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, 100);
 		addCookingRecipes(recipeOutput, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, 600);
+		addSmelt(recipeOutput, 200, ESItems.TOWER_SQUID.get(), ESItems.COOKED_TOWER_SQUID.get(), ESItems.TOWER_SQUID.get());
 		addSmelt(recipeOutput, 200, ESItems.LUMINOFISH.get(), ESItems.COOKED_LUMINOFISH.get(), ESItems.LUMINOFISH.get());
 		addSmelt(recipeOutput, 200, ESItems.LUMINARIS.get(), ESItems.COOKED_LUMINARIS.get(), ESItems.LUMINARIS.get());
 		addSmelt(recipeOutput, 200, ESItems.AURORA_DEER_STEAK.get(), ESItems.COOKED_AURORA_DEER_STEAK.get(), ESItems.AURORA_DEER_STEAK.get());
@@ -249,6 +250,7 @@ public class ESRecipeProvider extends RecipeProvider {
 			.define('V', ESItems.TENACIOUS_VINE.get())
 			.unlockedBy("has_item", has(ESItems.TENACIOUS_PETAL.get()))
 			.save(recipeOutput);
+		addShapeless(recipeOutput, ESItems.COOKED_TOWER_SQUID.get(), ESItems.TOWER_SQUID_SKEWER.get(), 3, ESItems.COOKED_TOWER_SQUID.get(), Items.STICK, Items.STICK, Items.STICK);
 		addShapeless(recipeOutput, ESItems.SHADOW_SNAIL_SHELL.get(), ESItems.SHADOW_SNAIL_SHELL_POWDER.get(), 4, ESItems.SHADOW_SNAIL_SHELL.get());
 		addSingleConversion(recipeOutput, Items.BLACK_DYE, ESItems.SHADOW_SNAIL_SHELL_POWDER.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ESItems.SONAR_BOMB.get())
@@ -295,6 +297,7 @@ public class ESRecipeProvider extends RecipeProvider {
 	}
 
 	private <T extends AbstractCookingRecipe> void addCookingRecipes(RecipeOutput recipeOutput, String name, RecipeSerializer<T> recipeSerializer, AbstractCookingRecipe.Factory<T> factory, int time) {
+		simpleCooking(recipeOutput, name, recipeSerializer, factory, time, ESItems.TOWER_SQUID.get(), ESItems.COOKED_TOWER_SQUID.get(), 0.35F);
 		simpleCooking(recipeOutput, name, recipeSerializer, factory, time, ESItems.LUMINOFISH.get(), ESItems.COOKED_LUMINOFISH.get(), 0.35F);
 		simpleCooking(recipeOutput, name, recipeSerializer, factory, time, ESItems.LUMINARIS.get(), ESItems.COOKED_LUMINARIS.get(), 0.35F);
 		simpleCooking(recipeOutput, name, recipeSerializer, factory, time, ESItems.AURORA_DEER_STEAK.get(), ESItems.COOKED_AURORA_DEER_STEAK.get(), 0.35F);

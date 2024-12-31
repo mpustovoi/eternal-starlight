@@ -57,6 +57,7 @@ public class ESItems {
 	public static final RegistryObject<Item, Item> CRYSTALLIZED_MOTH_SPAWN_EGG = registerItem("crystallized_moth_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.CRYSTALLIZED_MOTH::get, 0x361d20, 0xff5cbb, new Item.Properties()));
 	public static final RegistryObject<Item, Item> SHIMMER_LACEWING_SPAWN_EGG = registerItem("shimmer_lacewing_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.SHIMMER_LACEWING::get, 0x061d85, 0x15c3cd, new Item.Properties()));
 	public static final RegistryObject<Item, Item> GRIMSTONE_GOLEM_SPAWN_EGG = registerItem("grimstone_golem_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.GRIMSTONE_GOLEM::get, 0x51525c, 0xf7a2ff, new Item.Properties()));
+	public static final RegistryObject<Item, Item> TOWER_SQUID_SPAWN_EGG = registerItem("tower_squid_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.TOWER_SQUID::get, 0x1d2223, 0x55605a, new Item.Properties()));
 	public static final RegistryObject<Item, Item> LUMINOFISH_SPAWN_EGG = registerItem("luminofish_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.LUMINOFISH::get, 0x35293a, 0xf1ffc8, new Item.Properties()));
 	public static final RegistryObject<Item, Item> LUMINARIS_SPAWN_EGG = registerItem("luminaris_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.LUMINARIS::get, 0x3e3a46, 0x91807c, new Item.Properties()));
 	public static final RegistryObject<Item, Item> TWILIGHT_GAZE_SPAWN_EGG = registerItem("twilight_gaze_spawn_egg", () -> ESPlatform.INSTANCE.createSpawnEgg(ESEntities.TWILIGHT_GAZE::get, 0x1e135a, 0x8f56ec, new Item.Properties()));
@@ -761,6 +762,11 @@ public class ESItems {
 	public static final RegistryObject<Item, Item> SEEKING_EYE = registerItem("seeking_eye", () -> new SeekingEyeItem(new Item.Properties()));
 
 	// mob stuff
+	public static final RegistryObject<Item, Item> TOWER_SQUID_BUCKET = registerItem("tower_squid_bucket", () -> new MobBucketItem(ESEntities.TOWER_SQUID.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item, Item> TOWER_SQUID = registerItem("tower_squid", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.1F).build())));
+	public static final RegistryObject<Item, Item> COOKED_TOWER_SQUID = registerItem("cooked_tower_squid", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.3F).build())));
+	public static final RegistryObject<Item, Item> TOWER_SQUID_SKEWER = registerItem("tower_squid_skewer", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.3F).usingConvertsTo(Items.STICK).build())));
+
 	public static final RegistryObject<Item, Item> LUMINOFISH_BUCKET = registerItem("luminofish_bucket", () -> new MobBucketItem(ESEntities.LUMINOFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item, Item> LUMINOFISH = registerItem("luminofish", () -> new Item(new Item.Properties().food(Foods.SALMON)));
 	public static final RegistryObject<Item, Item> COOKED_LUMINOFISH = registerItem("cooked_luminofish", () -> new Item(new Item.Properties().food(Foods.COOKED_SALMON)));

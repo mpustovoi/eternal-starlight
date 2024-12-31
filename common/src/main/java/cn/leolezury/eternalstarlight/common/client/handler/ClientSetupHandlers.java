@@ -15,6 +15,7 @@ import cn.leolezury.eternalstarlight.common.client.model.item.CrescentSpearModel
 import cn.leolezury.eternalstarlight.common.client.model.item.GlaciteShieldModel;
 import cn.leolezury.eternalstarlight.common.client.particle.advanced.AdvancedParticle;
 import cn.leolezury.eternalstarlight.common.client.particle.effect.*;
+import cn.leolezury.eternalstarlight.common.client.particle.effect.GlowParticle;
 import cn.leolezury.eternalstarlight.common.client.particle.environment.AshenSnowParticle;
 import cn.leolezury.eternalstarlight.common.client.particle.environment.FallingLeavesParticle;
 import cn.leolezury.eternalstarlight.common.client.particle.environment.FireflyParticle;
@@ -50,9 +51,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.EndRodParticle;
-import net.minecraft.client.particle.FlameParticle;
-import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.*;
@@ -65,7 +64,9 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -79,6 +80,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
@@ -604,6 +607,12 @@ public class ClientSetupHandlers {
 		strategy.register(ESParticles.ASHEN_SNOW.get(), AshenSnowParticle.Provider::new);
 		strategy.register(ESParticles.ORBITAL_ASHEN_SNOW.get(), OrbitalAshenSnowParticle.Provider::new);
 		strategy.register(ESParticles.EXPLOSION_SHOCK.get(), ExplosionShockParticle.Provider::new);
+		strategy.register(ESParticles.TOWER_SQUID_INK.get(), spriteSet -> new ParticleProvider<>() {
+			@Override
+			public @NotNull Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double dx, double dy, double dz) {
+				return new SquidInkParticle(level, x, y, z, dx, dy, dz, FastColor.ARGB32.color(255, 255 - 51, 255 - 61, 255 - 58), spriteSet);
+			}
+		});
 		strategy.register(ESParticles.ADVANCED_GLOW.get(), AdvancedParticle.Provider::new);
 		strategy.register(ESParticles.SHINE.get(), AdvancedParticle.Provider::new);
 	}
@@ -634,6 +643,7 @@ public class ClientSetupHandlers {
 		strategy.register(ESEntities.CRYSTALLIZED_MOTH.get(), CrystallizedMothRenderer::new);
 		strategy.register(ESEntities.SHIMMER_LACEWING.get(), ShimmerLacewingRenderer::new);
 		strategy.register(ESEntities.GRIMSTONE_GOLEM.get(), GrimstoneGolemRenderer::new);
+		strategy.register(ESEntities.TOWER_SQUID.get(), TowerSquidRenderer::new);
 		strategy.register(ESEntities.LUMINOFISH.get(), LuminoFishRenderer::new);
 		strategy.register(ESEntities.LUMINARIS.get(), LuminarisRenderer::new);
 		strategy.register(ESEntities.TWILIGHT_GAZE.get(), TwilightGazeRenderer::new);
@@ -710,6 +720,7 @@ public class ClientSetupHandlers {
 		strategy.register(CrystallizedMothModel.LAYER_LOCATION, CrystallizedMothModel::createBodyLayer);
 		strategy.register(ShimmerLacewingModel.LAYER_LOCATION, ShimmerLacewingModel::createBodyLayer);
 		strategy.register(GrimstoneGolemModel.LAYER_LOCATION, GrimstoneGolemModel::createBodyLayer);
+		strategy.register(TowerSquidModel.LAYER_LOCATION, TowerSquidModel::createBodyLayer);
 		strategy.register(LuminoFishModel.LAYER_LOCATION, LuminoFishModel::createBodyLayer);
 		strategy.register(LuminarisModel.LAYER_LOCATION, LuminarisModel::createBodyLayer);
 		strategy.register(TwilightGazeModel.LAYER_LOCATION, TwilightGazeModel::createBodyLayer);

@@ -6,6 +6,7 @@ import cn.leolezury.eternalstarlight.common.client.sound.BossMusicSoundInstance;
 import cn.leolezury.eternalstarlight.common.client.visual.DelayedMultiBufferSource;
 import cn.leolezury.eternalstarlight.common.client.visual.ScreenShake;
 import cn.leolezury.eternalstarlight.common.client.visual.WorldVisualEffect;
+import cn.leolezury.eternalstarlight.common.config.ESConfig;
 import cn.leolezury.eternalstarlight.common.crest.Crest;
 import cn.leolezury.eternalstarlight.common.data.ESBiomes;
 import cn.leolezury.eternalstarlight.common.data.ESDimensions;
@@ -268,6 +269,9 @@ public class ClientHandlers {
 	}
 
 	public static float getScreenShakeYawOffset() {
+		if (!ESConfig.INSTANCE.enableScreenShake) {
+			return 0;
+		}
 		float sum = 0;
 		for (ScreenShake screenShake : SCREEN_SHAKES) {
 			sum += screenShake.getYawOffset();
@@ -276,6 +280,9 @@ public class ClientHandlers {
 	}
 
 	public static float getScreenShakePitchOffset() {
+		if (!ESConfig.INSTANCE.enableScreenShake) {
+			return 0;
+		}
 		float sum = 0;
 		for (ScreenShake screenShake : SCREEN_SHAKES) {
 			sum += screenShake.getPitchOffset();

@@ -38,6 +38,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		spawnEgg(ESItems.CRYSTALLIZED_MOTH_SPAWN_EGG.get());
 		spawnEgg(ESItems.SHIMMER_LACEWING_SPAWN_EGG.get());
 		spawnEgg(ESItems.GRIMSTONE_GOLEM_SPAWN_EGG.get());
+		spawnEgg(ESItems.TOWER_SQUID_SPAWN_EGG.get());
 		spawnEgg(ESItems.LUMINOFISH_SPAWN_EGG.get());
 		spawnEgg(ESItems.LUMINARIS_SPAWN_EGG.get());
 		spawnEgg(ESItems.TWILIGHT_GAZE_SPAWN_EGG.get());
@@ -679,6 +680,11 @@ public class ESItemModelProvider extends ItemModelProvider {
 		chainOfSouls(ESItems.CHAIN_OF_SOULS.get());
 		inventoryHandheld(ESItems.CRESCENT_SPEAR.get());
 		basicItem(ESItems.SEEKING_EYE.get());
+
+		basicItem(ESItems.TOWER_SQUID_BUCKET.get());
+		basicItem(ESItems.TOWER_SQUID.get());
+		basicItem(ESItems.COOKED_TOWER_SQUID.get());
+		basicItem(ESItems.TOWER_SQUID_SKEWER.get());
 
 		basicItem(ESItems.LUMINOFISH_BUCKET.get());
 		basicItem(ESItems.LUMINOFISH.get());
