@@ -35,7 +35,7 @@ public class ESJukeboxSongs {
 		register(context, ATLANTIS, ESSoundEvents.MUSIC_DISC_ATLANTIS.asHolder(), 94, 5);
 		register(context, SACRED_DESERT, ESSoundEvents.MUSIC_DISC_SACRED_DESERT.asHolder(), 105, 6);
 		register(context, SPIRIT, ESSoundEvents.MUSIC_DISC_SPIRIT.asHolder(), 98, 9);
-		register(context, BRISK, ESSoundEvents.MUSIC_DISC_BRISK.asHolder(), 34, 10);
+		register(context, BRISK, ESSoundEvents.MUSIC_DISC_BRISK.asHolder(), 67, 10);
 	}
 
 	private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, Holder<SoundEvent> sound, int lengthInSeconds, int comparatorOutput) {
