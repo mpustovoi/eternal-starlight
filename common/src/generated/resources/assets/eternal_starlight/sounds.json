@@ -746,6 +746,10 @@
       {
         "name": "eternal_starlight:music/dimension/dusk_o_ereyesterday",
         "stream": true
+      },
+      {
+        "name": "eternal_starlight:music/dimension/nest",
+        "stream": true
       }
     ]
   },
@@ -757,10 +761,26 @@
       }
     ]
   },
+  "music_disc.brisk": {
+    "sounds": [
+      {
+        "name": "eternal_starlight:music/disc/brisk",
+        "stream": true
+      }
+    ]
+  },
   "music_disc.dusk_o_ereyesterday": {
     "sounds": [
       {
         "name": "eternal_starlight:music/dimension/dusk_o_ereyesterday",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.nest": {
+    "sounds": [
+      {
+        "name": "eternal_starlight:music/dimension/nest",
         "stream": true
       }
     ]

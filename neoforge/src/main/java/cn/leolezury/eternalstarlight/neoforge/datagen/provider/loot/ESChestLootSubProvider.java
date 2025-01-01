@@ -39,6 +39,7 @@ public class ESChestLootSubProvider implements LootTableSubProvider {
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_WHISPER_OF_THE_STARS.get()))
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_DUSK_O_EREYESTERDAY.get()))
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_TRANQUILITY.get()))
+					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_NEST.get()))
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_POSTERITY.get()))
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_THE_THORNY_REIGN.get()))
 					.add(LootItem.lootTableItem(ESItems.MUSIC_DISC_PROFUNDITY.get()))

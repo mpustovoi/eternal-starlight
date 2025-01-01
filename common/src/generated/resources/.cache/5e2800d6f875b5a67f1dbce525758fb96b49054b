@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-31T19:33:52.4953212	Tags for minecraft:item mod id eternal_starlight
+// 1.21.1	2025-01-01T14:23:59.8508788	Tags for minecraft:item mod id eternal_starlight
 4e42849c79b21f7d80bc0c6ff216ffa705bb94aa data/c/tags/item/budding_blocks.json
 f2d1fdc1f3d6da57f00e708893a3bde6703c4d8f data/c/tags/item/buds.json
 49d6be28d9b8da6ebe3d7246980fb4a6109f43df data/c/tags/item/campfires.json
@@ -110,7 +110,7 @@ e556e6b2620b503ab019a5885f8ec600d31ed458 data/eternal_starlight/tags/item/greats
 81ed6ad2793cb1d8917128fe90e42e05734c823e data/eternal_starlight/tags/item/lunar_monstrosity_igniters.json
 eae704d1da56bc1aca7a40c4ab1fdace1a24d54e data/eternal_starlight/tags/item/mana_crystals.json
 9abefef68b045d834c5be44bac87859d26f50ca2 data/eternal_starlight/tags/item/mana_crystal_ingredients.json
-3c1c6c5705efaff3d72e3c08277e2783fc7214c0 data/eternal_starlight/tags/item/music_discs.json
+8a392722535527291c5b63b71009cc792497dd9d data/eternal_starlight/tags/item/music_discs.json
 f8bbc0e2015a44ff2d12ee735aa6f77e4f7ffaae data/eternal_starlight/tags/item/northland_logs.json
 4c1d8bbce7c883f739a73eb0374620a15297b159 data/eternal_starlight/tags/item/ratlin_food.json
 7d3229a4651301184129cc8ba07d10d7fe7312ad data/eternal_starlight/tags/item/scarlet_logs.json

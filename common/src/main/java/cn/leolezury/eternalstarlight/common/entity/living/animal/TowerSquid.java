@@ -9,12 +9,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -90,6 +93,14 @@ public class TowerSquid extends Squid implements Bucketable {
 	public void readAdditionalSaveData(CompoundTag compoundTag) {
 		super.readAdditionalSaveData(compoundTag);
 		this.setFromBucket(compoundTag.getBoolean(TAG_FROM_BUCKET));
+	}
+
+	@Override
+	protected void dropCustomDeathLoot(ServerLevel serverLevel, DamageSource damageSource, boolean bl) {
+		super.dropCustomDeathLoot(serverLevel, damageSource, bl);
+		if (damageSource.is(DamageTypes.DROWN) && serverLevel.getRandom().nextInt(10) == 0) {
+			spawnAtLocation(ESItems.MUSIC_DISC_BRISK.get());
+		}
 	}
 
 	public static boolean checkTowerSquidSpawnRules(EntityType<? extends TowerSquid> type, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {

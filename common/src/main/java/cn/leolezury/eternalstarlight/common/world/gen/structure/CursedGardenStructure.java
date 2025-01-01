@@ -49,8 +49,8 @@ public class CursedGardenStructure extends Structure {
 					for (int y = piecesBox.minY(); y <= piecesBox.maxY(); y++) {
 						pos.set(x, y, z);
 						if (piecesBox.isInside(pos) && piecesContainer.isInsidePiece(pos)) {
-							if ((level.isEmptyBlock(pos) || level.getBlockState(pos).is(Blocks.VINE)) && (level.isEmptyBlock(pos.above()) || level.getBlockState(pos.above()).is(Blocks.VINE)) && level.getBlockState(pos.below()).is(ESBlocks.SHADEGRIEVE.get())) {
-								if (random.nextInt(250) == 0) {
+							if ((level.isEmptyBlock(pos) || level.getBlockState(pos).is(Blocks.VINE)) && (level.isEmptyBlock(pos.above()) || level.getBlockState(pos.above()).is(Blocks.VINE)) && level.getBlockState(pos.below()).is(ESBlocks.TENACIOUS_NIGHTFALL_GRASS_BLOCK.get())) {
+								if (random.nextInt(150) == 0) {
 									Tangled tangled = new Tangled(ESEntities.TANGLED.get(), level.getLevel());
 									tangled.setPos(pos.getBottomCenter());
 									tangled.setPersistenceRequired();
