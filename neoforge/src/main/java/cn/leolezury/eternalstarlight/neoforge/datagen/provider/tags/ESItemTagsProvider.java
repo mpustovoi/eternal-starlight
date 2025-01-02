@@ -119,7 +119,19 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.GLOWING_MUSHROOM.get(),
 			ESItems.BOULDERSHROOM.get()
 		);
-		tag(Tags.Items.MUSIC_DISCS).addTag(ESTags.Items.MUSIC_DISCS);
+		tag(Tags.Items.MUSIC_DISCS).add(
+			ESItems.MUSIC_DISC_WHISPER_OF_THE_STARS.get(),
+			ESItems.MUSIC_DISC_DUSK_O_EREYESTERDAY.get(),
+			ESItems.MUSIC_DISC_TRANQUILITY.get(),
+			ESItems.MUSIC_DISC_NEST.get(),
+			ESItems.MUSIC_DISC_POSTERITY.get(),
+			ESItems.MUSIC_DISC_THE_THORNY_REIGN.get(),
+			ESItems.MUSIC_DISC_PROFUNDITY.get(),
+			ESItems.MUSIC_DISC_ATLANTIS.get(),
+			ESItems.MUSIC_DISC_SACRED_DESERT.get(),
+			ESItems.MUSIC_DISC_SPIRIT.get(),
+			ESItems.MUSIC_DISC_BRISK.get()
+		);
 		tag(Tags.Items.NUGGETS).add(
 			ESItems.AMARAMBER_NUGGET.get(),
 			ESItems.AETHERSENT_NUGGET.get(),
@@ -459,19 +471,6 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.LIGHT_CRYSTAL.get(),
 			ESItems.MANA_CRYSTAL.get()
 		);
-		tag(ESTags.Items.MUSIC_DISCS).add(
-			ESItems.MUSIC_DISC_WHISPER_OF_THE_STARS.get(),
-			ESItems.MUSIC_DISC_DUSK_O_EREYESTERDAY.get(),
-			ESItems.MUSIC_DISC_TRANQUILITY.get(),
-			ESItems.MUSIC_DISC_NEST.get(),
-			ESItems.MUSIC_DISC_POSTERITY.get(),
-			ESItems.MUSIC_DISC_THE_THORNY_REIGN.get(),
-			ESItems.MUSIC_DISC_PROFUNDITY.get(),
-			ESItems.MUSIC_DISC_ATLANTIS.get(),
-			ESItems.MUSIC_DISC_SACRED_DESERT.get(),
-			ESItems.MUSIC_DISC_SPIRIT.get(),
-			ESItems.MUSIC_DISC_BRISK.get()
-		);
 		tag(ESTags.Items.WIP).add(
 			ESItems.BROKEN_DOOMEDEN_BONE.get(),
 			ESItems.BONEMORE.get(),
@@ -531,7 +530,6 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 			ESItems.CHISELED_FLARE_PILLAR.get(),
 			ESItems.GOLDEN_GRASS.get(),
 			ESItems.TALL_GOLDEN_GRASS.get(),
-			ESItems.TENACIOUS_NIGHTFALL_GRASS_BLOCK.get(),
 			ESItems.GOLDEN_GRASS_BLOCK.get(),
 			ESItems.STELLAR_RACK.get(),
 			ESItems.ENCHANTED_GRIMSTONE_BRICKS.get(),

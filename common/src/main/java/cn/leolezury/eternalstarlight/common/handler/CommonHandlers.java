@@ -203,7 +203,7 @@ public class CommonHandlers {
 		Level level = entity.level();
 		if (entity instanceof ItemEntity item) {
 			if (!item.level().isClientSide) {
-				if (item.tickCount % 100 == 0 && item.getItem().is(ESTags.Items.MUSIC_DISCS) && !item.getItem().is(ESItems.MUSIC_DISC_SPIRIT.get()) && ESBlockUtil.isEntityInBlock(item, ESBlocks.ETHER.get())) {
+				if (item.tickCount % 100 == 0 && item.getItem().is(ConventionalTags.Items.MUSIC_DISCS) && !item.getItem().is(ESItems.MUSIC_DISC_SPIRIT.get()) && ESBlockUtil.isEntityInBlock(item, ESBlocks.ETHER.get())) {
 					item.setItem(ESItems.MUSIC_DISC_SPIRIT.get().getDefaultInstance());
 					item.addDeltaMovement(new Vec3(0, 0.25, 0));
 				}
