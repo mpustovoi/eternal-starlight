@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-01T22:56:08.6100435	Registries
+// 1.21.1	2025-01-04T00:15:30.248527739	Registries
 cdffa512172252fd00a692126bdb2d7e298e84a3 data/eternal_starlight/damage_type/bite.json
 7e028d9111c471543bdd218b17976d7a541b1f8b data/eternal_starlight/damage_type/crystalline_infection.json
 87798293859822fe3e1c8906d4575bc782e7977f data/eternal_starlight/damage_type/dagger_of_hunger.json
@@ -174,7 +174,7 @@ c64b583fa9c7f9aa1dbbbe67c3324a67a1a42ec7 data/eternal_starlight/worldgen/configu
 9194d27aacd267a2ca92abb592692a7e23d1f480 data/eternal_starlight/worldgen/configured_feature/voidstone_saltpeter_ore.json
 47822cf086e88bc38e89c92e416371978372cdb6 data/eternal_starlight/worldgen/configured_feature/waterside_vegetation.json
 fb7da92300b9f32412414a80e4b8194171642d8d data/eternal_starlight/worldgen/configured_feature/water_surface_plant.json
-a5d8979e3464ded8277525f6e570212cdb579236 data/eternal_starlight/worldgen/noise_settings/starlight.json
+f42ab1d3ed9a3f64f382ec4e6f73612effd01c98 data/eternal_starlight/worldgen/noise_settings/starlight.json
 d57ac474b708e97ffef972aea47c6ad7d0466c53 data/eternal_starlight/worldgen/placed_feature/abyssal_kelp.json
 0db106d6bc0831e0fdb95f9b551c2a479d18ba79 data/eternal_starlight/worldgen/placed_feature/abysslate_patch.json
 b80954db0b2372eb69ee23427b202fcc2b2a0ee9 data/eternal_starlight/worldgen/placed_feature/ashen_snow.json

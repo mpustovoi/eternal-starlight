@@ -85,7 +85,7 @@ public class ESDimensions {
 				-64,
 				384,
 				1,
-				2
+				4
 			),
 			ESBlocks.GRIMSTONE.get().defaultBlockState(),
 			Blocks.WATER.defaultBlockState(),
