@@ -87,7 +87,7 @@ public class WorldGenProvider {
 		int areaZ = z >> 10;
 		long areaPos = posAsLong(areaX, areaZ);
 		synchronized (generatedAreas) {
-			WorldArea area = generatedAreas.get(areaPos);
+			WorldArea area = generatedAreas.getAndMoveToFirst(areaPos);
 			if (area != null) {
 				return area;
 			} else {
@@ -101,9 +101,9 @@ public class WorldGenProvider {
 					area.transformHeights(transformer.transformer().value(), transformer.seedAddition);
 				}
 				area.finalizeAll(dataTransformerRegistry);
-				generatedAreas.put(areaPos, area);
+				generatedAreas.putAndMoveToFirst(areaPos, area);
 				while (generatedAreas.size() > cacheSize) {
-					generatedAreas.removeFirst();
+					generatedAreas.removeLast();
 				}
 			}
 			return area;
