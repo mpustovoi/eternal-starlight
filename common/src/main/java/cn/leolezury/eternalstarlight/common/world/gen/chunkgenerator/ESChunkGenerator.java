@@ -1,19 +1,17 @@
 package cn.leolezury.eternalstarlight.common.world.gen.chunkgenerator;
 
 import cn.leolezury.eternalstarlight.common.world.gen.biomesource.ESBiomeSource;
+import cn.leolezury.eternalstarlight.common.world.gen.biomesource.IESBiomeSource;
 import cn.leolezury.eternalstarlight.common.world.gen.structure.placement.LandmarkStructurePlacement;
 import cn.leolezury.eternalstarlight.common.world.gen.system.BiomeData;
-import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
-import net.minecraft.Util;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
@@ -37,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 public class ESChunkGenerator extends NoiseBasedChunkGenerator {
@@ -87,38 +84,8 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 		return CODEC;
 	}
 
-	// Copied from vanilla NoiseBasedChunkGenerator, only to use our custom doFill
 	@Override
-	public CompletableFuture<ChunkAccess> fillFromNoise(Blender blender, RandomState randomState, StructureManager structureManager, ChunkAccess chunkAccess) {
-		if (biomeSource instanceof ESBiomeSource source) {
-			source.setRegistryAccess(structureManager.registryAccess());
-		}
-		NoiseSettings noiseSettings = generatorSettings().value().noiseSettings().clampToHeightAccessor(chunkAccess.getHeightAccessorForGeneration());
-		int i = noiseSettings.minY();
-		int j = Mth.floorDiv(i, 16);
-		int k = Mth.floorDiv(noiseSettings.height(), 16);
-		if (k <= 0) {
-			return CompletableFuture.completedFuture(chunkAccess);
-		} else {
-			int l = chunkAccess.getSectionIndex(k * 16 - 1 + i);
-			int m = chunkAccess.getSectionIndex(i);
-			Set<LevelChunkSection> set = Sets.newHashSet();
-
-			for (int n = l; n >= m; --n) {
-				LevelChunkSection levelChunkSection = chunkAccess.getSection(n);
-				levelChunkSection.acquire();
-				set.add(levelChunkSection);
-			}
-
-			return CompletableFuture.supplyAsync(Util.wrapThreadWithTaskName("wgen_fill_noise", () -> this.doFill(structureManager, chunkAccess, j)), Util.backgroundExecutor()).whenCompleteAsync((access, throwable) -> {
-				for (LevelChunkSection levelChunkSection : set) {
-					levelChunkSection.release();
-				}
-			});
-		}
-	}
-
-	private ChunkAccess doFill(StructureManager structureManager, ChunkAccess chunkAccess, int minYSec) {
+	protected ChunkAccess doFill(Blender blender, StructureManager structureManager, RandomState randomState, ChunkAccess chunkAccess, int i, int j) {
 		ChunkPos chunkPos = chunkAccess.getPos();
 		Beardifier beardifier = Beardifier.forStructuresInChunk(structureManager, chunkPos);
 		Heightmap oceanFloorMap = chunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);
@@ -126,10 +93,13 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 		int minBlockX = chunkPos.getMinBlockX();
 		int minBlockZ = chunkPos.getMinBlockZ();
 		int minY = getMinY();
+		int minYSec = Math.floorDiv(minY, 16);
 		BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
 		int cellWidth = 16;
 		int cellHeight = 16;
 		int numSec = chunkAccess.getSections().length;
+
+		IESBiomeSource cachedBiomeSource = this.biomeSource instanceof ESBiomeSource source ? source.cache() : null;
 
 		for (int secY = numSec - 1; secY >= 0; --secY) {
 			LevelChunkSection levelChunkSection = chunkAccess.getSection(secY);
@@ -145,8 +115,8 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 						int worldZ = minBlockZ + cellBlockZ;
 						int blockZInCell = worldZ & 15;
 
-						int surfaceHeight = getSurfaceHeight(worldX, worldZ);
-						BlockState blockState = getStateAt(worldY, surfaceHeight, getBiomeDataAt(worldX, worldZ));
+						int surfaceHeight = getSurfaceHeight(cachedBiomeSource, worldX, worldZ);
+						BlockState blockState = getStateAt(worldY, surfaceHeight, getBiomeDataAt(cachedBiomeSource, worldX, worldZ));
 
 						double noiseVal = noise.getValue(worldX / 50d, worldY / 30d, worldZ / 50d);
 						if (worldY < surfaceHeight - 15 && worldY > minY + 2 && (worldY > minY + 4 || (int) (noiseVal * 200) % 5 == 0) && noiseVal < -0.3) {
@@ -174,22 +144,26 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 		return chunkAccess;
 	}
 
-	// From the vanilla ChunkGenerator, NoiseBasedChunkGenerator is doing something useless for us
 	@Override
-	public CompletableFuture<ChunkAccess> createBiomes(RandomState randomState, Blender blender, StructureManager structureManager, ChunkAccess chunkAccess) {
+	protected void doCreateBiomes(Blender blender, RandomState randomState, StructureManager structureManager, ChunkAccess chunkAccess) {
 		if (biomeSource instanceof ESBiomeSource source) {
 			source.setRegistryAccess(structureManager.registryAccess());
-		}
-		return CompletableFuture.supplyAsync(Util.wrapThreadWithTaskName("init_biomes", () -> {
+			chunkAccess.fillBiomesFromNoise(source.cache(), randomState.sampler());
+		} else {
 			chunkAccess.fillBiomesFromNoise(this.biomeSource, randomState.sampler());
-			return chunkAccess;
-		}), Util.backgroundExecutor());
+		}
 	}
 
 	@Override
 	public void buildSurface(WorldGenRegion worldGenRegion, StructureManager structureManager, RandomState randomState, ChunkAccess chunkAccess) {
 		if (randomState.surfaceSystem() instanceof StarlightSurfaceSystem system) {
 			system.setStarlightChunkGenerator(this);
+			if (biomeSource instanceof ESBiomeSource source) {
+				randomState = ((IRandomState) (Object) randomState).clone();
+				SurfaceSystem clonedSurfaceSystem = ((StarlightSurfaceSystem) randomState.surfaceSystem()).clone();
+				((IRandomState) (Object) randomState).setSurfaceSystem(clonedSurfaceSystem);
+				((StarlightSurfaceSystem) clonedSurfaceSystem).setCachedStarlightBiomeSource(source.cache());
+			}
 		}
 		super.buildSurface(worldGenRegion, structureManager, randomState, chunkAccess);
 	}
@@ -242,8 +216,22 @@ public class ESChunkGenerator extends NoiseBasedChunkGenerator {
 		return 0;
 	}
 
+	public int getSurfaceHeight(IESBiomeSource source, int x, int z) {
+		if (source != null) {
+			return source.getHeight(x, z);
+		}
+		return 0;
+	}
+
 	private BiomeData getBiomeDataAt(int x, int z) {
 		if (biomeSource instanceof ESBiomeSource source) {
+			return source.getBiomeData(x, z);
+		}
+		return null;
+	}
+
+	private BiomeData getBiomeDataAt(IESBiomeSource source, int x, int z) {
+		if (source != null) {
 			return source.getBiomeData(x, z);
 		}
 		return null;

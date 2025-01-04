@@ -21,6 +21,7 @@
     "PlayerMixin",
     "ProjectileMixin",
     "ProjectileWeaponItemMixin",
+    "RandomStateMixin",
     "ServerLevelMixin",
     "ServerPlayerMixin",
     "SignBlockMixin",
