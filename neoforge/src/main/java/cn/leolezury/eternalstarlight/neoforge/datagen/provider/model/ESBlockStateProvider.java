@@ -127,7 +127,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		campfire(ESBlocks.TORREYA_CAMPFIRE.get());
 
 		// stones
-		simpleBlock(ESBlocks.GRIMSTONE.get());
+		stone(ESBlocks.GRIMSTONE.get());
 		simpleBlock(ESBlocks.CHISELED_GRIMSTONE.get());
 		stoneSet(ESBlocks.COBBLED_GRIMSTONE.get(), ESBlocks.COBBLED_GRIMSTONE_SLAB.get(), ESBlocks.COBBLED_GRIMSTONE_STAIRS.get(), ESBlocks.COBBLED_GRIMSTONE_WALL.get());
 		stoneSet(ESBlocks.GRIMSTONE_BRICKS.get(), ESBlocks.GRIMSTONE_BRICK_SLAB.get(), ESBlocks.GRIMSTONE_BRICK_STAIRS.get(), ESBlocks.GRIMSTONE_BRICK_WALL.get());
@@ -135,7 +135,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		stoneSet(ESBlocks.GRIMSTONE_TILES.get(), ESBlocks.GRIMSTONE_TILE_SLAB.get(), ESBlocks.GRIMSTONE_TILE_STAIRS.get(), ESBlocks.GRIMSTONE_TILE_WALL.get());
 		simpleBlock(ESBlocks.GLOWING_GRIMSTONE.get());
 
-		simpleBlock(ESBlocks.VOIDSTONE.get());
+		stone(ESBlocks.VOIDSTONE.get());
 		simpleBlock(ESBlocks.CHISELED_VOIDSTONE.get());
 		stoneSet(ESBlocks.COBBLED_VOIDSTONE.get(), ESBlocks.COBBLED_VOIDSTONE_SLAB.get(), ESBlocks.COBBLED_VOIDSTONE_STAIRS.get(), ESBlocks.COBBLED_VOIDSTONE_WALL.get());
 		stoneSet(ESBlocks.VOIDSTONE_BRICKS.get(), ESBlocks.VOIDSTONE_BRICK_SLAB.get(), ESBlocks.VOIDSTONE_BRICK_STAIRS.get(), ESBlocks.VOIDSTONE_BRICK_WALL.get());
@@ -227,7 +227,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		wallBlock(ESBlocks.CUT_TWILIGHT_SANDSTONE_WALL.get(), blockTexture(ESBlocks.TWILIGHT_SANDSTONE.get()).withSuffix("_top"));
 		simpleBlock(ESBlocks.CHISELED_TWILIGHT_SANDSTONE.get(), models().cubeColumn(name(ESBlocks.CHISELED_TWILIGHT_SANDSTONE.get()), blockTexture(ESBlocks.CHISELED_TWILIGHT_SANDSTONE.get()), blockTexture(ESBlocks.TWILIGHT_SANDSTONE.get()).withSuffix("_top")));
 
-		simpleBlock(ESBlocks.DUSTED_GRAVEL.get());
+		sand(ESBlocks.DUSTED_GRAVEL.get());
 		stoneSet(ESBlocks.DUSTED_BRICKS.get(), ESBlocks.DUSTED_BRICK_SLAB.get(), ESBlocks.DUSTED_BRICK_STAIRS.get(), ESBlocks.DUSTED_BRICK_WALL.get());
 
 		simpleBlock(ESBlocks.GOLEM_STEEL_BLOCK.get());
@@ -356,7 +356,7 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		pottedPlant(ESBlocks.POTTED_SUNSET_THORNBLOOM.get(), blockTexture(ESBlocks.SUNSET_THORNBLOOM.get()));
 		cross(ESBlocks.AMETHYSIA_GRASS.get());
 		lunarisCactus(ESBlocks.LUNARIS_CACTUS.get());
-		translucentCubeAll(ESBlocks.LUNARIS_CACTUS_GEL_BLOCK.get());
+		simpleExisting(ESBlocks.LUNARIS_CACTUS_GEL_BLOCK.get());
 		horizontalBlock(ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get(), models().orientableWithBottom(name(ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get()), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit"), blockTexture(ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get()), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit_bottom"), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit_top")));
 		horizontalBlock(ESBlocks.LUNARIS_CACTUS_FRUIT_LANTERN.get(), models().orientableWithBottom(name(ESBlocks.LUNARIS_CACTUS_FRUIT_LANTERN.get()), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit"), blockTexture(ESBlocks.LUNARIS_CACTUS_FRUIT_LANTERN.get()), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit_bottom"), blockTexture(ESBlocks.LUNARIS_CACTUS.get()).withSuffix("_fruit_top")));
 
@@ -456,6 +456,11 @@ public class ESBlockStateProvider extends BlockStateProvider {
 		spawner(ESBlocks.TANGLED_HATRED_SPAWNER.get());
 		spawner(ESBlocks.LUNAR_MONSTROSITY_SPAWNER.get());
 		portal(ESBlocks.STARLIGHT_PORTAL.get());
+	}
+
+	private void simpleExisting(Block block) {
+		ModelFile modelFile = models().getExistingFile(key(block));
+		simpleBlock(block, modelFile);
 	}
 
 	private void woodSet(RotatedPillarBlock log, RotatedPillarBlock wood, Block planks, RotatedPillarBlock strippedLog, RotatedPillarBlock strippedWood, DoorBlock door, boolean cutoutDoor, TrapDoorBlock trapdoor, boolean cutoutTrapdoor, PressurePlateBlock pressurePlate, ButtonBlock button, FenceBlock fence, FenceGateBlock fenceGate, SlabBlock slab, StairBlock stairs, Block sign, Block wallSign, Block hangingSign, Block wallHangingSign) {
@@ -658,11 +663,6 @@ public class ESBlockStateProvider extends BlockStateProvider {
 	private void geyser(Block stone, Block geyser) {
 		ModelFile modelFile = models().cubeBottomTop(name(geyser), blockTexture(stone), blockTexture(stone), blockTexture(geyser));
 		simpleBlock(geyser, modelFile);
-	}
-
-	private void cubeBottomTop(Block block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-		ModelFile modelFile = models().cubeBottomTop(name(block), side, bottom, top);
-		simpleBlock(block, modelFile);
 	}
 
 	private void waterlily(Block lily) {
@@ -872,6 +872,25 @@ public class ESBlockStateProvider extends BlockStateProvider {
 					.rotationY(90).modelFile(modelNormal).build();
 			}
 		});
+	}
+
+	private void sand(Block sand) {
+		ModelFile modelFile = models().cubeAll(name(sand), blockTexture(sand));
+		getVariantBuilder(sand).forAllStates(state -> ConfiguredModel.builder()
+			.modelFile(modelFile).nextModel()
+			.rotationY(270).modelFile(modelFile).nextModel()
+			.rotationY(180).modelFile(modelFile).nextModel()
+			.rotationY(90).modelFile(modelFile).build());
+	}
+
+	private void stone(Block stone) {
+		ModelFile normal = models().cubeAll(name(stone), blockTexture(stone));
+		ModelFile mirrored = models().singleTexture(name(stone) + "_mirrored", ResourceLocation.withDefaultNamespace("block/cube_mirrored_all"), "all", blockTexture(stone));
+		getVariantBuilder(stone).forAllStates(state -> ConfiguredModel.builder()
+			.modelFile(normal).nextModel()
+			.modelFile(mirrored).nextModel()
+			.rotationY(180).modelFile(normal).nextModel()
+			.rotationY(180).modelFile(mirrored).build());
 	}
 
 	private void farmland(Block farmland, Block dirt) {
@@ -1121,10 +1140,6 @@ public class ESBlockStateProvider extends BlockStateProvider {
 	private void cubeColumn(Block block, ResourceLocation end, ResourceLocation side, ResourceLocation renderType) {
 		ModelFile modelFile = models().cubeColumn(name(block), side, end).renderType(renderType);
 		simpleBlock(block, modelFile);
-	}
-
-	private void translucentCubeAll(Block block) {
-		simpleBlock(block, models().cubeAll(name(block), blockTexture(block)).renderType(TRANSLUCENT));
 	}
 
 	private void tintedCubeAll(Block block, ResourceLocation texture, ResourceLocation renderType) {

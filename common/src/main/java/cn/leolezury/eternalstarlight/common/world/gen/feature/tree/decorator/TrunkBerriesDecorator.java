@@ -36,7 +36,7 @@ public class TrunkBerriesDecorator extends TreeDecorator {
 		if (lowest.isPresent()) {
 			int lowestY = lowest.get().getY();
 			context.logs().forEach((pos) -> {
-				if (pos.getY() > lowestY) {
+				if (pos.getY() > lowestY + 5) {
 					int l = length.sample(random);
 					for (int i = 1; i <= l; i++) {
 						if (context.isAir(pos.below(i))) {

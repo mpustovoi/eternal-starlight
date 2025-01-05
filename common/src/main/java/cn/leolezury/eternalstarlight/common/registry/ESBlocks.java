@@ -368,7 +368,7 @@ public class ESBlocks {
 
 	// solar
 	public static final RegistryObject<Block, AtalphaiteBlock> ATALPHAITE_BLOCK = BLOCKS.register("atalphaite_block", () -> new AtalphaiteBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_ORANGE).lightLevel(state -> 10)));
-	public static final RegistryObject<Block, Block> BLAZING_ATALPHAITE_BLOCK = BLOCKS.register("blazing_atalphaite_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_ORANGE).lightLevel(state -> 12)));
+	public static final RegistryObject<Block, BlazingAtalphaiteBlock> BLAZING_ATALPHAITE_BLOCK = BLOCKS.register("blazing_atalphaite_block", () -> new BlazingAtalphaiteBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_ORANGE).lightLevel(state -> 12)));
 	public static final RegistryObject<Block, Block> ATALPHAITE_LIGHT = BLOCKS.register("atalphaite_light", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OCHRE_FROGLIGHT).sound(SoundType.STONE).lightLevel(state -> 15)));
 	public static final RegistryObject<Block, DropExperienceBlock> GRIMSTONE_ATALPHAITE_ORE = BLOCKS.register("grimstone_atalphaite_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_ORE).lightLevel(state -> 8)));
 	public static final RegistryObject<Block, DropExperienceBlock> VOIDSTONE_ATALPHAITE_ORE = BLOCKS.register("voidstone_atalphaite_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE).lightLevel(state -> 4)));

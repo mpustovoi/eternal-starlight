@@ -3,7 +3,7 @@ package cn.leolezury.eternalstarlight.neoforge.datagen.provider;
 import cn.leolezury.eternalstarlight.common.EternalStarlight;
 import cn.leolezury.eternalstarlight.common.item.recipe.GeyserSmokingRecipe;
 import cn.leolezury.eternalstarlight.common.item.recipe.ManaCrystalRecipe;
-import cn.leolezury.eternalstarlight.common.item.recipe.MatchboxTorchRecipe;
+import cn.leolezury.eternalstarlight.common.item.recipe.ToolModificationRecipe;
 import cn.leolezury.eternalstarlight.common.registry.ESBlocks;
 import cn.leolezury.eternalstarlight.common.registry.ESItems;
 import cn.leolezury.eternalstarlight.common.spell.ManaType;
@@ -50,7 +50,10 @@ public class ESRecipeProvider extends RecipeProvider {
 
 		smithingTrims().forEach((template) -> trimSmithing(recipeOutput, template.template(), template.id()));
 		copySmithingTemplate(recipeOutput, ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.GRIMSTONE.get(), ESConventionalTags.Items.INGOTS_SWAMP_SILVER);
-		copySmithingTemplate(recipeOutput, ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.VOIDSTONE.get(), ESConventionalTags.Items.INGOTS_GOLEM_STEEL);
+		copySmithingTemplate(recipeOutput, ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.VOIDSTONE.get(), ESConventionalTags.Items.INGOTS_SWAMP_SILVER);
+		copySmithingTemplate(recipeOutput, ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.GRIMSTONE.get(), ESConventionalTags.Items.INGOTS_AMARAMBER);
+		copySmithingTemplate(recipeOutput, ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.GRIMSTONE.get(), ESConventionalTags.Items.INGOTS_AMARAMBER);
+		SpecialRecipeBuilder.special(category -> new ToolModificationRecipe(category, Items.SHEARS, ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), new ItemStack(ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get()))).save(recipeOutput, EternalStarlight.id("blooming_trim_from_twining_trim"));
 
 		// yeti fur
 		List<Item> dyeList = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE, Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE, Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
@@ -1065,23 +1068,6 @@ public class ESRecipeProvider extends RecipeProvider {
 		addBlast(recipeOutput, 150, ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.ETERNAL_ICE_ATALPHAITE_ORE.get());
 		addSmelt(recipeOutput, 300, ESItems.HAZE_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.HAZE_ICE_ATALPHAITE_ORE.get());
 		addBlast(recipeOutput, 150, ESItems.HAZE_ICE_ATALPHAITE_ORE.get(), ESItems.ATALPHAITE.get(), ESItems.HAZE_ICE_ATALPHAITE_ORE.get());
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ESItems.BLAZING_ATALPHAITE_BLOCK.get())
-			.pattern("TAT")
-			.pattern("ABA")
-			.pattern("TAT")
-			.define('B', ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE)
-			.define('A', ESConventionalTags.Items.GEMS_ATALPHAITE)
-			.define('T', ESConventionalTags.Items.INGOTS_THERMAL_SPRINGSTONE)
-			.unlockedBy("has_item", has(ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE))
-			.save(recipeOutput);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ESItems.ATALPHAITE_LIGHT.get())
-			.pattern(" G ")
-			.pattern("GBG")
-			.pattern(" G ")
-			.define('B', ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE)
-			.define('G', ESItems.DUSK_GLASS.get())
-			.unlockedBy("has_item", has(ESConventionalTags.Items.STORAGE_BLOCKS_ATALPHAITE))
-			.save(recipeOutput);
 	}
 
 	private void addSaltpeterRecipes(RecipeOutput recipeOutput) {
@@ -1102,7 +1088,7 @@ public class ESRecipeProvider extends RecipeProvider {
 			.define('P', ESConventionalTags.Items.DUSTS_SALTPETER)
 			.unlockedBy("has_item", has(ESConventionalTags.Items.DUSTS_SALTPETER))
 			.save(recipeOutput);
-		SpecialRecipeBuilder.special(MatchboxTorchRecipe::new).save(recipeOutput, EternalStarlight.id("torch_from_saltpeter_matchbox"));
+		SpecialRecipeBuilder.special(category -> new ToolModificationRecipe(category, ESItems.SALTPETER_MATCHBOX.get(), Items.STICK, new ItemStack(Items.TORCH, 4))).save(recipeOutput, EternalStarlight.id("torch_from_saltpeter_matchbox"));
 	}
 
 	private void addAmaramberRecipes(RecipeOutput recipeOutput) {
@@ -1531,7 +1517,7 @@ public class ESRecipeProvider extends RecipeProvider {
 	}
 
 	public static Stream<VanillaRecipeProvider.TrimTemplate> smithingTrims() {
-		return Stream.of(ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get()).map((item) -> new VanillaRecipeProvider.TrimTemplate(item, EternalStarlight.id(getItemName(item) + "_smithing_trim")));
+		return Stream.of(ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get()).map((item) -> new VanillaRecipeProvider.TrimTemplate(item, EternalStarlight.id(getItemName(item) + "_smithing_trim")));
 	}
 
 	protected final String name(ItemLike item) {

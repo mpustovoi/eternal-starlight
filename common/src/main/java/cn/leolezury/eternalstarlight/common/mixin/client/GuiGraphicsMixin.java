@@ -28,7 +28,7 @@ public abstract class GuiGraphicsMixin {
 		if (itemStack.is(ESTags.Items.WIP)) {
 			this.pose.pushPose();
 			this.pose.translate(0.0F, 0.0F, 200.0F);
-			blit(ClientHandlers.WIP, i, j, 0.0F, 0.0F, 16, 16, 16, 16);
+			blit(ClientHandlers.WIP_LOCATION, i, j, 0.0F, 0.0F, 16, 16, 16, 16);
 			this.pose.popPose();
 		}
 	}

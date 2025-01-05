@@ -855,6 +855,8 @@ public class ESItems {
 	// trim
 	public static final RegistryObject<Item, Item> KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("keeper_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EternalStarlight.id("keeper")));
 	public static final RegistryObject<Item, Item> FORGE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("forge_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EternalStarlight.id("forge")));
+	public static final RegistryObject<Item, Item> BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("blooming_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EternalStarlight.id("blooming")));
+	public static final RegistryObject<Item, Item> TWINING_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("twining_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EternalStarlight.id("twining")));
 
 	// music discs
 	public static final RegistryObject<Item, Item> MUSIC_DISC_WHISPER_OF_THE_STARS = registerItem("music_disc_whisper_of_the_stars", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ESJukeboxSongs.WHISPER_OF_THE_STARS)));

@@ -684,7 +684,7 @@ public class ESItemModelProvider extends ItemModelProvider {
 		basicItem(ESItems.TOWER_SQUID_BUCKET.get());
 		basicItem(ESItems.TOWER_SQUID.get());
 		basicItem(ESItems.COOKED_TOWER_SQUID.get());
-		basicItem(ESItems.TOWER_SQUID_SKEWER.get());
+		handheld(ESItems.TOWER_SQUID_SKEWER.get());
 
 		basicItem(ESItems.LUMINOFISH_BUCKET.get());
 		basicItem(ESItems.LUMINOFISH.get());
@@ -772,6 +772,8 @@ public class ESItemModelProvider extends ItemModelProvider {
 
 		basicItem(ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 		basicItem(ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get());
+		basicItem(ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
+		basicItem(ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 
 		basicItem(ESItems.MUSIC_DISC_WHISPER_OF_THE_STARS.get());
 		basicItem(ESItems.MUSIC_DISC_DUSK_O_EREYESTERDAY.get());

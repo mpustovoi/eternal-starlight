@@ -16,15 +16,21 @@ import java.util.List;
 public class ESTrimPatterns {
 	public static final ResourceKey<TrimPattern> KEEPER = create("keeper");
 	public static final ResourceKey<TrimPattern> FORGE = create("forge");
+	public static final ResourceKey<TrimPattern> BLOOMING = create("blooming");
+	public static final ResourceKey<TrimPattern> TWINING = create("twining");
 
 	public static final List<ResourceKey<TrimPattern>> TRIM_PATTERNS = List.of(
 		KEEPER,
-		FORGE
+		FORGE,
+		BLOOMING,
+		TWINING
 	);
 
 	public static void bootstrap(BootstrapContext<TrimPattern> context) {
 		register(context, ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get(), KEEPER);
 		register(context, ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get(), FORGE);
+		register(context, ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), BLOOMING);
+		register(context, ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get(), TWINING);
 	}
 
 	private static void register(BootstrapContext<TrimPattern> context, Item item, ResourceKey<TrimPattern> resourceKey) {

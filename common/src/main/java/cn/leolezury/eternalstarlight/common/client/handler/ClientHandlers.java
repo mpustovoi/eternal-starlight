@@ -78,8 +78,8 @@ public class ClientHandlers {
 	private static final ResourceLocation ORB_OF_PROPHECY_USE = EternalStarlight.id("textures/misc/orb_of_prophecy_use.png");
 	private static final ResourceLocation CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("hud/crosshair_attack_indicator_background");
 	private static final ResourceLocation CROSSHAIR_ATTACK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.withDefaultNamespace("hud/crosshair_attack_indicator_progress");
-	private static final ResourceLocation PUMPKIN_BLUR_LOCATION = ResourceLocation.withDefaultNamespace("textures/misc/pumpkinblur.png");
-	public static final ResourceLocation WIP = EternalStarlight.id("textures/gui/wip.png");
+	private static final ResourceLocation LUNARIS_CACTUS_BLUR_LOCATION = EternalStarlight.id("textures/misc/lunaris_cactus_blur.png");
+	public static final ResourceLocation WIP_LOCATION = EternalStarlight.id("textures/gui/wip.png");
 	private static final Map<ResourceKey<Crest>, GuiCrest> GUI_CRESTS = new HashMap<>();
 	private static final List<DreamCatcherText> DREAM_CATCHER_TEXTS = new ArrayList<>();
 	public static int clientTickCount = 0;
@@ -527,7 +527,7 @@ public class ClientHandlers {
 		if (Minecraft.getInstance().options.getCameraType().isFirstPerson() && Minecraft.getInstance().player != null) {
 			ItemStack itemStack = Minecraft.getInstance().player.getInventory().getArmor(3);
 			if (itemStack.is(ESBlocks.CARVED_LUNARIS_CACTUS_FRUIT.get().asItem())) {
-				renderTextureOverlay(guiGraphics, PUMPKIN_BLUR_LOCATION, 1.0F);
+				renderTextureOverlay(guiGraphics, LUNARIS_CACTUS_BLUR_LOCATION, 1.0F);
 			}
 		}
 	}

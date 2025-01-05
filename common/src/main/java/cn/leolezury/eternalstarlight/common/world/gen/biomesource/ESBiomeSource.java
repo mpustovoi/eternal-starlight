@@ -83,7 +83,6 @@ public class ESBiomeSource extends BiomeSource implements IESBiomeSource {
 	 * Only meant to be used for a single thread
 	 */
 	public class Cached extends BiomeSource implements IESBiomeSource {
-
 		private final Long2ReferenceArrayMap<WorldArea> cachedAreas = new Long2ReferenceArrayMap<>(); // using array map because it usually only contain one element
 		private final Long2ReferenceFunction<WorldArea> getWorldAreaUncachedFunction = this::getWorldAreaUncached;
 
@@ -129,7 +128,5 @@ public class ESBiomeSource extends BiomeSource implements IESBiomeSource {
 		public int getHeight(int x, int z) {
 			return this.getWorldArea(x, z).getHeight(x, z);
 		}
-
 	}
-
 }

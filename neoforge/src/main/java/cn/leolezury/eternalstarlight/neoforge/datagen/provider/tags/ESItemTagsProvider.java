@@ -715,7 +715,9 @@ public class ESItemTagsProvider extends ItemTagsProvider {
 		);
 		tag(ItemTags.TRIM_TEMPLATES).add(
 			ESItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get(),
-			ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get()
+			ESItems.FORGE_ARMOR_TRIM_SMITHING_TEMPLATE.get(),
+			ESItems.BLOOMING_ARMOR_TRIM_SMITHING_TEMPLATE.get(),
+			ESItems.TWINING_ARMOR_TRIM_SMITHING_TEMPLATE.get()
 		);
 		tag(ItemTags.STONE_TOOL_MATERIALS).add(
 			ESItems.GRIMSTONE.get(),

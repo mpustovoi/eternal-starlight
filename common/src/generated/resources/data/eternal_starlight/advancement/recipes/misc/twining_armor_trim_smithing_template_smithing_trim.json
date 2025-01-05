@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_smithing_trim_template": {
       "conditions": {
         "items": [
           {
-            "items": "#c:storage_blocks/atalphaite"
+            "items": "eternal_starlight:twining_armor_trim_smithing_template"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "eternal_starlight:blazing_atalphaite_block"
+        "recipe": "eternal_starlight:twining_armor_trim_smithing_template_smithing_trim"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item"
+      "has_smithing_trim_template"
     ]
   ],
   "rewards": {
     "recipes": [
-      "eternal_starlight:blazing_atalphaite_block"
+      "eternal_starlight:twining_armor_trim_smithing_template_smithing_trim"
     ]
   }
 }
