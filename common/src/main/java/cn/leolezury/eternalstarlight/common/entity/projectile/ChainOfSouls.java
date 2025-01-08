@@ -238,7 +238,7 @@ public class ChainOfSouls extends Projectile implements Grappling {
 		if (target != null) {
 			compoundTag.putUUID(TAG_TARGET, target.getUUID());
 		}
-		if (this.firedFromWeapon != null) {
+		if (this.firedFromWeapon != null && !this.firedFromWeapon.isEmpty()) {
 			compoundTag.put(TAG_WEAPON, firedFromWeapon.save(registryAccess(), new CompoundTag()));
 		}
 	}
